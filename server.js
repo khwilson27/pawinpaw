@@ -2,14 +2,16 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
-var mongoose = require("mongoose");
 
-// Require Schemas
-// var Article = require("./server/model");
+// Requiring our models for syncing
+var db = require("./models");
 
-// Create Instance of Express
+
+
+// Create a new express app
 var app = express();
-var PORT = process.env.PORT || 3000; // Sets an initial port. We'll use this later in our listener
+// Sets an initial port. We'll use this later in our listener
+var PORT = process.env.PORT || 3000;
 
 // Run Morgan for Logging
 app.use(logger("dev"));
@@ -20,23 +22,16 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 app.use(express.static("public"));
 
-// -------------------------------------------------
-
-// MongoDB Configuration configuration
-mongoose.connect("mongodb://admin:reactrocks@ds023593.mlab.com:23593/heroku_pg676kmk");
-var db = mongoose.connection;
-
-db.on("error", function(err) {
-  console.log("Mongoose Error: ", err);
-});
-
-db.once("open", function() {
-  console.log("Mongoose connection successful.");
-});
 
 
-// -------------------------------------------------
+require("./routes/api-routes.js")(app);
+require("./routes/html-routes.js")(app);
 
-app.listen(PORT, function() {
-  console.log("App listening on PORT: " + PORT);
+
+
+// Starting our express server
+db.sequelize.sync({ force: true }).then(function() {
+    app.listen(PORT, function() {
+        console.log("App listening on PORT " + PORT);
+    });
 });

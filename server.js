@@ -6,6 +6,8 @@ var logger = require("morgan");
 // Requiring our models for syncing
 var db = require("./models");
 
+
+
 // Create a new express app
 var app = express();
 // Sets an initial port. We'll use this later in our listener
@@ -20,17 +22,15 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 app.use(express.static("public"));
 
+
+
 require("./routes/api-routes.js")(app);
 require("./routes/html-routes.js")(app);
 
 
 
 // Starting our express server
-<<<<<<< HEAD
-db.sequelize.sync().then(function() {
-=======
 db.sequelize.sync({ force: true }).then(function() {
->>>>>>> 075ca5712a665ae9813fb945636064c72d8b238c
     app.listen(PORT, function() {
         console.log("App listening on PORT " + PORT);
     });

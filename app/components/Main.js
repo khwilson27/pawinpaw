@@ -4,6 +4,30 @@ var React = require("react");
 // https://github.com/ReactTraining/react-router/blob/master/docs/API.md#link
 var Link = require("react-router").Link;
 
+<<<<<<< HEAD
+=======
+//Main Component Style
+
+const mainComponentStyle = {
+  width: "414px",
+  height: "736px",
+  margin: "auto",
+  color: "#009191"
+} 
+
+const headerStyle = {
+  width:  "414px",
+  height: "150px",
+
+}
+
+const middleStyle = {
+  width:  "414px",
+  height: "600px",
+  color: "#009191"
+}
+
+>>>>>>> 075ca5712a665ae9813fb945636064c72d8b238c
 // Create the Main component
 var Main = React.createClass({
 
@@ -14,7 +38,11 @@ var Main = React.createClass({
       <div className="main-container">
         <div className="container">
           {/* Navbar */}
+<<<<<<< HEAD
           <nav className="navbar navbar-default" role="navigation">
+=======
+          <nav className="navbar navbar-default" role="navigation" style = {headerStyle}>
+>>>>>>> 075ca5712a665ae9813fb945636064c72d8b238c
             <div className="container-fluid">
               <div className="navbar-header">
                 <button

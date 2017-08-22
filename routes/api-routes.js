@@ -9,26 +9,18 @@ module.exports = function (app) {
 
         db.User.findOne({
             where: {
-                email: user.email
+                email: req.body.email
             }
         }).then(function (data) {
             if (data) {
                 console.log("this email is used before do you like to login");
-                res.send("this email is used before do you like to login")
+                res.json({message: "this email is used before do you like to login"})
             } else {
 
                 //Create new user 
                 var newUser = {
                     email: req.body.email,
-                    password: req.body.password,
-                    name: req.body.name,
-                    photo: req.body.photo,
-                    age: req.body.age,
-                    zipcode: req.body.zipcode,
-                    breed: req.body.breed,
-                    likes: req.body.likes,
-                    dislikes: req.body.dislikes,
-                    favTreat: req.body.favTreat,
+                    password: req.body.password
                 }
 
                 Passsalthash.register(newUser).then(function (result) {
@@ -52,6 +44,7 @@ module.exports = function (app) {
             email: req.body.email,
             password: req.body.password
         }
+
         Passsalthash.logIn(logginginUser, res);
 
     });
@@ -72,11 +65,12 @@ module.exports = function (app) {
 
 
     //Get all unmatched potential users for main user to pick from 
-    app.get("/api/users/nearby", function (req, res) {
+    app.get("/api/users/nearby/:zipcode/:email", function (req, res) {
 
         db.User.findAll({
             where: {
-                zipcode: req.body.zipcode
+                zipcode: req.params.zipcode,
+                email: {$ne: req.params.email}
             },
             attributes: { exclude: ['password', 'salt'] }
         }).then(function (data) {
@@ -87,7 +81,7 @@ module.exports = function (app) {
     });
 
     //Get all existing matches for user to view
-    app.get("/api/users/nearby", function (req, res) {
+    app.get("/api/users/matches", function (req, res) {
 
         db.Match.findAll({
             where: {
@@ -108,7 +102,8 @@ module.exports = function (app) {
                 for (const i = 0; i < userAction.length; i++) {
                     for (const j = 0; j < matchAction.length; j++) {
                         if (userAction[i].matchId == matchAction[j].UserId && userAction[i].request && matchAction[j].request) {
-                            matchArr.push()
+                            matchArr.push();
+                            break;
                         }
                     }
                     
@@ -144,7 +139,12 @@ module.exports = function (app) {
                     email: req.body.email
                 }
             }).then(function (data) {
-                res.json(data);
+                if (data) {
+                    res.json({message: "Successful update!"});
+                } else {
+                    res.json({message: "Unsuccessful..."});
+                }
+ 
             });
 
     });

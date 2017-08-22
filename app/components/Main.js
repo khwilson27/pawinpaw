@@ -4,28 +4,26 @@ var React = require("react");
 // https://github.com/ReactTraining/react-router/blob/master/docs/API.md#link
 var Link = require("react-router").Link;
 
-
 //Main Component Style
 
 const mainComponentStyle = {
-      width: "414",
-      height: "736",
-      margin: "auto",
-      color: "#009191"
-    } 
+  width: "414px",
+  height: "736px",
+  margin: "auto",
+  color: "#009191"
+} 
 
 const headerStyle = {
-      width:  "414px",
-      height: "150px",
+  width:  "414px",
+  height: "150px",
 
 }
-    
+
 const middleStyle = {
-      width:  "414px",
-      height: "600px",
-      color: "#009191"
+  width:  "414px",
+  height: "600px",
+  color: "#009191"
 }
-
 
 // Create the Main component
 var Main = React.createClass({
@@ -37,9 +35,9 @@ var Main = React.createClass({
       <div className="main-container" style = {mainComponentStyle}>
         <div className="">
           {/* Navbar */}
-          <nav className="navbar navbar-default" role="navigation" style ={headerStyle} color="#009191">
+          <nav className="navbar navbar-default" role="navigation" style = {headerStyle}>
             <div className="container-fluid">
-              <div className="navbar-header" color="#009191">
+              <div className="navbar-header">
                 <button
                   type="button"
                   className="navbar-toggle"

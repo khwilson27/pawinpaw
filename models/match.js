@@ -19,7 +19,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     matchdate: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       len: [1]
     }
   });

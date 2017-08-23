@@ -16,7 +16,9 @@ const mainComponentStyle = {
 const headerStyle = {
   width:  "414px",
   height: "150px",
-
+  color: "#009191",
+  bgColor: "#009191",
+  image: "../images/logo.png"
 }
 
 const middleStyle = {
@@ -49,7 +51,7 @@ var Main = React.createClass({
                   <span className="icon-bar"></span>
                   <span className="icon-bar"></span>
                 </button>
-               
+               <img className="image" src={"images/logo.png" + this.props.image} />
               </div>
 
               <div className="collapse navbar-collapse navbar-ex1-collapse">

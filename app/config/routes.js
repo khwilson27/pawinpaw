@@ -18,23 +18,23 @@ var Router = router.Router;
 var browserHistory = router.browserHistory;
 
 // Reference the high-level components
-var Main = require("../components/Main");
-var Search = require("../components/Search");
-var Saved = require("../components/Saved");
+// var Main = require("../components/Main");
+// var Search = require("../components/Search");
+var Login = require("../components/Login");
 
 
 // Export the Routes
 module.exports = (
   // High level component is the Router component.
   <Router history={browserHistory}>
-    <Route path="/" component={Main}>
+    <Route path="/" component={Login}>
 
       {/* If user selects Search or Saved show the appropriate component */}
-      <Route path="Search" component={Search} />
-      <Route path="Saved" component={Saved} />
+      {/* <Route path="Search" component={Search} /> */}
+     
 
       {/* If user selects any other path... we get the Home Route */}
-      <IndexRoute component={Search} />
+      <IndexRoute component={Login} />
 
     </Route>
   </Router>

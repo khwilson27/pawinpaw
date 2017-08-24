@@ -9,8 +9,8 @@ var Login = React.createClass({
 
   // Our render method. Utilizing a few helper methods to keep this logic clean
   render: function () {
-
-    <div class="mainContainer">
+    return (
+    <div className="mainContainer">
       {/* Navigation bar */}
       <div className="row">
         <div className="navBar col-sm-12 col-xs-12">navBar here</div>
@@ -19,11 +19,11 @@ var Login = React.createClass({
       <div className="row">
         <form>
           <div className="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email"/>
+            <label htmlFor="exampleInputEmail1">Email address</label>
+            <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Email"/>
           </div>
             <div className="form-group">
-              <label for="exampleInputPassword1">Password</label>
+              <label htmlFor="exampleInputPassword1">Password</label>
               <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"/>
             </div>
               <button type="submit" className="btn btn-default">Login</button>
@@ -33,8 +33,9 @@ var Login = React.createClass({
         </form>
           </div>
     </div>
+    )
   }
 });
 
 // Export the module back to the route
-module.exports = Main;
+module.exports = Login;

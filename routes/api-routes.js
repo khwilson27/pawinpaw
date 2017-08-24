@@ -58,7 +58,6 @@ module.exports = function (app) {
             console.log(data);
             //JSON of all users
             return res.json(data);
-
         })
 
     });
@@ -80,40 +79,46 @@ module.exports = function (app) {
 
     });
 
-    //Get all existing matches for user to view
-    app.get("/api/users/matches", function (req, res) {
+    // Get all existing matches for user to view
+    // 1. Query all matches where the logged-in user is the UserId (author of it)
+    // 2. Query all of the matches where the logged-in user is the matchId (receiver of a request)
+    // 3. Compare the matches where they sender and receiver are the same 2 parties, then evaluate if they're both true (both like)
+    // 4. Push matchIds of successful matches into an array and respond to api request
+    app.get("/api/users/matches/:userid", function (req, res) {
 
         db.Match.findAll({
             where: {
-                UserId: req.body.id
+                UserId: req.params.userid
             },
-        }).then(function (userAction) {
-            // console.log(data);
-            // res.json(data);
+        }).then(function (userActionData) {
+
+            // console.log("==========================USERACTION=======================");
+            // console.log(userActionData);
 
             db.Match.findAll({
                 where: {
-                    matchId: req.body.id
+                    matchId: req.params.userid
                 },
-            }).then(function (matchAction) {
+            }).then(function (matchActionData) {
 
-                const matchArr = [];
+                // console.log("==========================MATCHACTION=======================");
+                // console.log(matchActionData);
 
-                for (const i = 0; i < userAction.length; i++) {
-                    for (const j = 0; j < matchAction.length; j++) {
-                        if (userAction[i].matchId == matchAction[j].UserId && userAction[i].request && matchAction[j].request) {
-                            matchArr.push();
+                var matchArr = [];
+
+                for (var i = 0; i < userActionData.length; i++) {
+                    for (var j = 0; j < matchActionData.length; j++) {
+                        if (userActionData[i].matchId == matchActionData[j].UserId && userActionData[i].request && matchActionData[j].request) {
+                            matchArr.push(userActionData[i].matchId);
                             break;
                         }
                     }
-                    
                 }
 
-                const data = {
-                    matches: matchArr
+                var data = {
+                    matchId: matchArr
                 }
 
-                console.log(data);
                 res.json(data);
             })
 
@@ -155,7 +160,7 @@ module.exports = function (app) {
         db.Match.create({
             UserId: req.body.id,
             matchId: req.body.matchId,
-            request: req.body.request,
+            request: req.body.request
         }).then(function (data) {
             res.json(data);
         });

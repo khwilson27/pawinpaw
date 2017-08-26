@@ -18,23 +18,28 @@ var Router = router.Router;
 var browserHistory = router.browserHistory;
 
 // Reference the high-level components
-// var Main = require("../components/Main");
+var Main = require("../components/Main");
 var Login = require("../components/Login.js");
+var Registration = require("../components/Registration.js");
 var EditProfile = require("../components/EditProfile.js");
+var Nearby = require("../components/Nearby.js");
+
 
 
 // Export the Routes
 module.exports = (
   // High level component is the Router component.
   <Router history={browserHistory}>
-    <Route path="/" component={EditProfile}>
+    <Route path="/" component={Main}>
     
       {/* If user selects Search or Saved show the appropriate component */}
-      {/* <Route path="Search" component={Search} /> */}
+      <Route path="Login" component={Login} />
+      <Route path="Registration" component={Registration} />
+
      
 
       {/* If user selects any other path... we get the Home Route */}
-      <IndexRoute component={EditProfile} />
+      <IndexRoute component={Login} />
 
     </Route>
   </Router>

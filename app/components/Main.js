@@ -13,8 +13,7 @@ class Main extends React.Component{
     return (
       // We can only render a single div. So we need to group everything inside of this main-container one
       <div className="main-container" style = {mainComponentStyle}>
-        <div className="">
-          {/* Navbar */}
+          Navbar
           <nav className="navbar navbar-default" role="navigation" style = {headerStyle}>
             <div className="container-fluid">
               <div className="navbar-header">
@@ -43,7 +42,7 @@ class Main extends React.Component{
           </nav>
           {/* Here we will deploy the sub components (Search or Saved */}
           {/* These sub-components are getting passed as this.props.children */}
-          {this.props.children}
+          {/* {this.props.children} */}
 
           <footer>
             <hr />
@@ -52,11 +51,11 @@ class Main extends React.Component{
               Paw in Paw &copy; 2017
             </p>
           </footer>
-        </div>
+        
       </div>
     );
   }
-});
+};
 
 // Export the module back to the route
 export default Main;

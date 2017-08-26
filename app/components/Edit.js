@@ -6,7 +6,7 @@ import helpers from "../utils/helpers.js";
 var Link = require("react-router").Link;
 
 // Create the Main component
-class EditProfile extends React.Component{
+class Edit extends React.Component{
 
   // Our render method. Utilizing a few helper methods to keep this logic clean
   render () {
@@ -77,4 +77,4 @@ class EditProfile extends React.Component{
 };
 
 // Export the module back to the route
-export default EditProfile;
+export default Edit;

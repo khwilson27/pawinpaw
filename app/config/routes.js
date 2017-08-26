@@ -1,17 +1,17 @@
-// Inclue the React library
-var React = require("react");
+// Include the React library
+import React from "react";
 
 // Include the react-router module
-var router = require("react-router");
+import Router from "react-router";
 
 // Include the Route component
-var Route = router.Route;
+import Route from router.Route;
 
 //  Include the IndexRoute (catch-all route)
-var IndexRoute = router.IndexRoute;
+import IndexRoute from router.IndexRoute;
 
 // Include the Router component
-var Router = router.Router;
+import Router from router.Router;
 
 // Include the browserHistory prop to configure client side routing
 // https://github.com/ReactTraining/react-router/blob/master/docs/guides/Histories.md#browserhistory
@@ -19,8 +19,8 @@ var browserHistory = router.browserHistory;
 
 // Reference the high-level components
 // var Main = require("../components/Main");
-var Login = require("../components/Login.js");
-var EditProfile = require("../components/EditProfile.js");
+import Login from "/Login.js";
+import EditProfile from "../components/EditProfile.js";
 
 
 // Export the Routes

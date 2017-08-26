@@ -1,14 +1,15 @@
 // Include React as a dependency
-var React = require("react");
+import React from "react";
+import ReactDOM from "react-dom"; 
+import helpers from "../utils/helpers.js";
 
-// Include the Helper (for the saved recall)
-// var helpers = require("../utils/helpers");
+var Link = require("react-router").Link;
 
 // Create the Main component
-var Nearby = React.createClass({
+class Nearby extends React.Component{
 
   // Our render method. Utilizing a few helper methods to keep this logic clean
-  render: function () {
+  render() {
     return (
       <div className="mainContainer">
         {/* Navigation bar */}
@@ -50,7 +51,7 @@ var Nearby = React.createClass({
       </div>
     )
   }
-});
+};
 
 // Export the module back to the route
-module.exports = Nearby;
+export default Nearby;

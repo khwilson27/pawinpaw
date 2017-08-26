@@ -7,6 +7,7 @@ import GoogleLogin from 'react-google-login';
 
 //Just for testing!!!!!!!!!!!!!!!
 import Login from "./Login.js";
+var Link = require("react-router").Link;
 
 
 

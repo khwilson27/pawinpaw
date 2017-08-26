@@ -19,8 +19,8 @@ var browserHistory = router.browserHistory;
 
 // Reference the high-level components
 // var Main = require("../components/Main");
-// var Search = require("../components/Search");
-var Registration = require("../components/Registration");
+var Login = require("../components/Login.js");
+var Registration = require("../components/Registration.js");
 
 
 // Export the Routes
@@ -28,7 +28,7 @@ module.exports = (
   // High level component is the Router component.
   <Router history={browserHistory}>
     <Route path="/" component={Registration}>
-
+    
       {/* If user selects Search or Saved show the appropriate component */}
       {/* <Route path="Search" component={Search} /> */}
      

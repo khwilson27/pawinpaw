@@ -39,7 +39,7 @@ var Passsalthash = {
 
                 } else {
                     console.log("Wrong Password!");
-                    res.json({message: "Wrong Password!"})
+                    res.json({ message: "Wrong Email Or Password!" })
                 }
             }
         })

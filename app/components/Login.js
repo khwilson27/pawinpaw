@@ -3,6 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 // Include the Helper (for the saved recall)
 import helpers from "../utils/helpers.js";
+var Link = require("react-router").Link;
 
 // Create the Main component
  class Login extends React.Component{

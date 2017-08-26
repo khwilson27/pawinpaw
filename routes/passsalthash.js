@@ -12,46 +12,36 @@ var Passsalthash = {
             //key value pair goes here.
             email: user.email,
             password: user.generateHash,
-            salt: user.salt,
-            name: user.name,
-            photo: user.photo,
-            age: user.age,
-            zipcode: user.zipcode,
-            breed: user.breed,
-            likes: user.likes,
-            dislikes: user.dislikes,
-            favTreat: user.favTreat,
+            salt: user.salt
 
         })
     },
 
-    logIn: function(user) {
+    logIn: function(user, res) {
 
         db.User.findOne({
             where: {
                 email: user.email
-
             }
         }).then(function(data) {
 
+            console.log(data);
 
             if (!data) { console.log("please check your email and password"); } else {
-                var hashToCheckAgainst = data.hash;
+                var hashToCheckAgainst = data.password;
                 var saltToUse = data.salt;
                 var providedHash = crypto.pbkdf2Sync(user.password, saltToUse, 1000, 512, 'sha512').toString('hex');
 
                 if (hashToCheckAgainst === providedHash) {
 
-                    console.log(" good job");
+                    console.log("good job, login successful!");
                     res.json(data);
 
                 } else {
                     console.log("Wrong Password!");
-                    res.send("Wrong Password!")
+                    res.json({ message: "Wrong Email Or Password!" })
                 }
             }
-
-            return data;
         })
 
     }

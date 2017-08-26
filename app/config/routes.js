@@ -1,28 +1,23 @@
-// Inclue the React library
-var React = require("react");
-
+// Include the React library
+import React from "react";
 // Include the react-router module
-var router = require("react-router");
-
+import router from "react-router";
 // Include the Route component
 var Route = router.Route;
-
 //  Include the IndexRoute (catch-all route)
 var IndexRoute = router.IndexRoute;
-
 // Include the Router component
 var Router = router.Router;
-
 // Include the browserHistory prop to configure client side routing
 // https://github.com/ReactTraining/react-router/blob/master/docs/guides/Histories.md#browserhistory
 var browserHistory = router.browserHistory;
-
 // Reference the high-level components
-var Main = require("../components/Main");
-var Login = require("../components/Login.js");
-var Registration = require("../components/Registration.js");
-var Edit = require("../components/Edit.js");
-var Nearby = require("../components/Nearby.js");
+// var Main = require("../components/Main");
+import Login from "../components/Login.js";
+import EditProfile from "../components/Edit.js";
+import Main from "../components/Main";
+import Registration from "../components/Registration.js";
+import Nearby from "../components/Nearby.js";
 
 
 

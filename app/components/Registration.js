@@ -16,13 +16,14 @@ class Registration extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-  
+
     this.state = {
       email: " "
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSignup = this.handleSignup.bind(this);
+    this.responseGoogle = this.responseGoogle.bind(this);
   }
 
   //Getting The Inputs Values & Use It To Update The State.
@@ -41,64 +42,49 @@ class Registration extends React.Component {
       helpers.regNewuser(this.state.email.toLowerCase(), this.state.password).then((Response) => {
         //Getting the new user data through the Response & Use It To Update The State.
         console.log(Response);
+
         this.setState({
           id: Response.data.id,
           email: Response.data.email,
-          message:Response.data.message
+          message: Response.data.message
         });
       });
     } else {
       console.log("The password not matches please try again");
     }
   }
- 
+
   //Google Response Here!!!
-  responseGoogle(response){
-  console.log(response);
-  }
-
-  componentDidMount(){
-    window.fbAsyncInit = function() {
-            FB.init({
-                appId: '915773281910101',
-                cookie: true,
-                xfbml: true,
-                version: 'v2.7'
-            });
-            FB.AppEvents.logPageView();
-            console.log("Here!!!!!!!!!!!!!!!!!")
-    FB.getLoginStatus(function (response) {
-      console.log(response);
-      if (response.status === 'connected') {
-        FB.api('/me', 'GET', {
-          fields: 'first_name,last_name,name,id, email'
-        }, function (data) {
-          console.log(data);
-          $(".here").append("<br/> <br/>" + JSON.stringify(data) + "<br/> <br/>");
-        });
-      } else {
-        console.log("not loggedin");
-      }
-
+  responseGoogle(response) {
+    console.log(response.profileObj.email);
+    console.log(response.profileObj.googleId);
+    this.setState({
+      email: response.profileObj.email,
+      g_id: response.profileObj.googleId
     });
-        };
-
-
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=915773281910101";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-  }
-
-
-  //Facebook Here!!!
-
-  faceBook() {
-
+    //Sending The User's email and password using helpers file.
+    helpers.regNewuser(response.profileObj.email, response.profileObj.googleId).then((Response) => {
+      //Getting the new user data through the Response & Use It To Update The State.
+      console.log(Response);
+      if (!Response.data.message) {
+        this.setState({
+          id: Response.data.id,
+          email: Response.data.email,
+        });
+        //redirect to "EditProfile"
+      } else {
+        //Sending The User's email and password using helpers file.
+        helpers.userLogin(response.profileObj.email, response.profileObj.googleId).then((logResponse) => {
+          //Getting the new user data through the Response & Use It To Update The State.
+          console.log(logResponse);
+          this.setState({
+            id: logResponse.data.id,
+            email: logResponse.data.email,
+          });
+          //redirect to Nearby
+        });
+      }
+    });
 
   }
 
@@ -123,7 +109,7 @@ class Registration extends React.Component {
                   <label htmlFor="email">Email address</label>
                   <input type="email" value={this.state.email} className="form-control" id="email" placeholder="Email" onChange={this.handleChange} />
                   {/*error message*/}
-                  {this.state.message ? (<div className="alert alert-danger" role="alert">{this.state.message}</div>) : "Move to next"}
+                  {this.state.message ? (<div className="alert alert-danger" role="alert">{this.state.message}</div>) : "redirect to EditProfile"}
                 </div>
                 <div className="form-group">
                   <label htmlFor="password">Password</label>
@@ -135,18 +121,14 @@ class Registration extends React.Component {
                 </div>
                 <button onClick={this.handleSignup} className="btn btn-default">Register</button>
                 <br></br>
-              {/*Google LogIn*/}
-                <GoogleLogin  clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+                {/*Google LogIn*/}
+                <GoogleLogin clientId="280548920560-u13cbso5e0b21ouc0aqokmf7rlfvt4po.apps.googleusercontent.com"
                   buttonText="Login"
                   onSuccess={this.responseGoogle}
                   onFailure={this.responseGoogle}
                 ></GoogleLogin>
-
-
-    <br/>
-    <div className="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true" onlogin={this.faceBook()}></div>
-    <div id="fb-root"></div>
-    <br/>
+                <br />
+                <br />
                 <br />
                 <p>Already have an account?</p>
                 <a className="btn btn-default">Login</a>

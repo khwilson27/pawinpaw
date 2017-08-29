@@ -8,13 +8,17 @@ import GoogleLogin from 'react-google-login';
 
 var Link = require("react-router").Link;
 
+var router  = require("react-router") ;
+var browserHistory = router.browserHistory;
 // Create the Main component
 class Login extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      email: " "
+      email: " ",
+      password: " ",
+      loggedin:false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -27,19 +31,31 @@ class Login extends React.Component {
     let state = {};
     state[event.target.id] = $.trim(event.target.value);
     this.setState(state);
+    console.log(state)
   }
 
   handleSignin(event) {
     event.preventDefault();
     //Sending The User's email and password using helpers file.
     helpers.userLogin(this.state.email.toLowerCase(), this.state.password).then((Response) => {
+      console.log("state")
       //Getting the new user data through the Response & Use It To Update The State.
       console.log(Response);
-      this.setState({
-        id: Response.data.id,
-        email: Response.data.email,
-        message: Response.data.message
-      });
+      if(Response.data.message){
+        this.setState({
+          message: Response.data.message,
+          loggedin: false
+        });
+      }else if(Response.data.id){
+        this.setState({
+          id: Response.data.id,
+          email: Response.data.email,
+          loggedin: true
+
+        });
+        this.handleRedirect();
+      }
+      
     });
   }
 
@@ -59,8 +75,10 @@ class Login extends React.Component {
         this.setState({
           id: Response.data.id,
           email: Response.data.email,
+          registered: true
         });
         //redirect to "EditProfile"
+        this.handleRedirect();
       } else {
         //Sending The User's email and password using helpers file.
         helpers.userLogin(response.profileObj.email, response.profileObj.googleId).then((logResponse) => {
@@ -69,16 +87,33 @@ class Login extends React.Component {
           this.setState({
             id: logResponse.data.id,
             email: logResponse.data.email,
+            loggedin:true
           });
           //redirect to Nearby
+          this.handleRedirect()
         });
       }
     });
 
   }
 
+  handleRedirect(){
+    if (this.state.registered){
+      browserHistory.replace("/Edit")
+    }else if(this.state.loggedin){
+      browserHistory.replace("/Edit")
+    }
+    
+  }
+
+  handelErrors(){
+    if(this.state.message) { return <div className="alert alert-danger" role="alert">{this.state.message}</div>} 
+  }
+
   // Our render method. Utilizing a few helper methods to keep this logic clean
   render() {
+    console.log(this.state.message)
+    
     return (
       <div className="mainContainer">
         {/* Navigation bar */}
@@ -95,7 +130,7 @@ class Login extends React.Component {
                   <label htmlFor="password">Password</label>
                   <input type="password" className="form-control" id="password" placeholder="Password" onChange={this.handleChange} />
                   {/*error message*/}
-                  {this.state.message ? (<div className="alert alert-danger" role="alert">{this.state.message}</div>) : "Move to next"}
+                  {this.handelErrors()}
                 </div>
                 <button type="submit" onClick={this.handleSignin} className="btn btn-default">Login</button>
                 <br/>

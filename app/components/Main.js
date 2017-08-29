@@ -13,7 +13,6 @@ class Main extends React.Component{
     return (
       // We can only render a single div. So we need to group everything inside of this main-container one
       <div className="main-container">
-          Navbar
           <nav className="navbar navbar-default" role="navigation">
             <div className="container-fluid">
               <div className="navbar-header">

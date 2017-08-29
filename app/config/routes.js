@@ -18,7 +18,7 @@ import EditProfile from "../components/Edit.js";
 import Main from "../components/Main";
 import Registration from "../components/Registration.js";
 import Nearby from "../components/Nearby.js";
-
+import Edit from "../components/Edit.js";
 
 
 // Export the Routes
@@ -30,6 +30,8 @@ module.exports = (
       {/* If user selects Search or Saved show the appropriate component */}
       <Route path="Login" component={Login} />
       <Route path="Registration" component={Registration} />
+      <Route path="Edit" component={Edit} />
+      {/* <Route path="Nearby" component={Nearby} /> */}
 
      
 

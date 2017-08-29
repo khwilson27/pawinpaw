@@ -1,6 +1,9 @@
 // Include React as a dependency
 import React from "react";
 
+var router = require("react-router");
+var browserHistory = router.browserHistory;
+
 // Include the Helper (for the saved recall)
 import helpers from "../utils/helpers.js";
 import GoogleLogin from 'react-google-login';
@@ -48,6 +51,8 @@ class Registration extends React.Component {
           email: Response.data.email,
           message: Response.data.message
         });
+
+        browserHistory.push("/Login");
       });
     } else {
       console.log("The password not matches please try again");

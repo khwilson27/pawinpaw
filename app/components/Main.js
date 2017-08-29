@@ -12,9 +12,9 @@ class Main extends React.Component{
 
     return (
       // We can only render a single div. So we need to group everything inside of this main-container one
-      <div className="main-container" style = {mainComponentStyle}>
+      <div className="main-container">
           Navbar
-          <nav className="navbar navbar-default" role="navigation" style = {headerStyle}>
+          <nav className="navbar navbar-default" role="navigation">
             <div className="container-fluid">
               <div className="navbar-header">
                 <button
@@ -42,7 +42,7 @@ class Main extends React.Component{
           </nav>
           {/* Here we will deploy the sub components (Search or Saved */}
           {/* These sub-components are getting passed as this.props.children */}
-          {/* {this.props.children} */}
+          {this.props.children}
 
           <footer>
             <hr />

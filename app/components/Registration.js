@@ -1,6 +1,6 @@
 // Include React as a dependency
 import React from "react";
-import ReactDOM from "react-dom";
+
 // Include the Helper (for the saved recall)
 import helpers from "../utils/helpers.js";
 import GoogleLogin from 'react-google-login';
@@ -134,8 +134,6 @@ class Registration extends React.Component {
                 <a className="btn btn-default">Login</a>
               </form>
             </div>
-            <p>____________________________________Login__________________________________________________</p>
-            <Login />
           </div>
           {/* Footer */}
           <div className="row">

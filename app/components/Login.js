@@ -103,14 +103,14 @@ class Login extends React.Component {
                   {this.state.message ? (<div className="alert alert-danger" role="alert">{this.state.message}</div>) : "Move to next"}
                 </div>
                 <button type="submit" onClick={this.handleSignin} className="btn btn-default">Login</button>
-                <br>
+                <br/>
                   {/*Google LogIn*/}
                   <GoogleLogin clientId="280548920560-u13cbso5e0b21ouc0aqokmf7rlfvt4po.apps.googleusercontent.com"
                     buttonText="Login"
                     onSuccess={this.responseGoogle}
                     onFailure={this.responseGoogle}
                   ></GoogleLogin>
-                </br>
+                <br/>
                 <p>Don't have an account?</p>
                 <button type="submit" className="btn btn-default">Register</button>
                 <br />

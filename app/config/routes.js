@@ -1,7 +1,7 @@
 // Include the React library
 import React from "react";
 // Include the react-router module
-import router from "react-router";
+var router = require("react-router");
 // Include the Route component
 var Route = router.Route;
 //  Include the IndexRoute (catch-all route)
@@ -28,13 +28,13 @@ module.exports = (
     <Route path="/" component={Main}>
     
       {/* If user selects Search or Saved show the appropriate component */}
-      {/* <Route path="Login" component={Login} />
-      <Route path="Registration" component={Registration} /> */}
+      <Route path="Login" component={Login} />
+      <Route path="Registration" component={Registration} />
 
      
 
       {/* If user selects any other path... we get the Home Route */}
-      {/* <IndexRoute component={Login} /> */}
+      <IndexRoute component={Login} />
 
     </Route>
   </Router>

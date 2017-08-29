@@ -82,11 +82,6 @@ class Login extends React.Component {
     return (
       <div className="mainContainer">
         {/* Navigation bar */}
-        <div className="row">
-          <div className="col-sm-12 col-xs-12">
-            <div className="navBar">navBar here</div>
-          </div>
-        </div>
         <div className="container">
           {/* Login fields */}
           <div className="row">
@@ -118,18 +113,6 @@ class Login extends React.Component {
               </form>
             </div>
 
-          </div>
-          {/* Footer */}
-          <div className="row">
-            <div className="col-sm-12 col-xs-12">
-              <footer>
-                <hr />
-                <p className="pull-right">
-                  <i className="fa fa-github" aria-hidden="true"></i>
-                  Paw in Paw &copy; 2017
-            </p>
-              </footer>
-            </div>
           </div>
         </div>
       </div>

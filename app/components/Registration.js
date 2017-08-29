@@ -94,12 +94,6 @@ class Registration extends React.Component {
     console.log(this.state.id + " && " + this.state.email);
     return (
       <div className="mainContainer">
-        {/* Navigation bar */}
-        <div className="row">
-          <div className="col-sm-12 col-xs-12">
-            <div className="navBar">navBar here</div>
-          </div>
-        </div>
         <div className="container">
           {/* Login fields */}
           <div className="row">
@@ -133,18 +127,6 @@ class Registration extends React.Component {
                 <p>Already have an account?</p>
                 <a className="btn btn-default">Login</a>
               </form>
-            </div>
-          </div>
-          {/* Footer */}
-          <div className="row">
-            <div className="col-sm-12 col-xs-12">
-              <footer>
-                <hr />
-                <p className="pull-right">
-                  <i className="fa fa-github" aria-hidden="true"></i>
-                  Paw in Paw &copy; 2017
-            </p>
-              </footer>
             </div>
           </div>
         </div>

@@ -11,23 +11,35 @@ var Link = require("react-router").Link;
 class Edit extends React.Component {
   constructor() {
     super()
-    this.state = { 
+    this.state = {
       files: [],
       accepted: [],
-      rejected: []
-     }
+      rejected: [],
+      blob: []
+    }
+  }
+
+  create_blob(file, callback) {
+    var reader = new FileReader();
+    reader.onload = function () { callback(reader.result) };
+    reader.readAsDataURL(file);
   }
 
   onDrop(files) {
-    this.setState({
-      files
+    create_blob(files, function (blob_string) {
+      alert(blob_string);
+      this.setState({
+        blob: blob_string
+      })
     });
 
-    console.log(this.state.files);
   }
 
   // Our render method. Utilizing a few helper methods to keep this logic clean
   render() {
+    console.log(this.state.accepted[0]);
+    console.log(this.state.blob);
+
     return (
       <div className="mainContainer">
         {/* Navigation bar */}
@@ -89,6 +101,13 @@ class Edit extends React.Component {
                     }
                   </ul>
                 </aside>
+
+                {/* <p>---------------------------------------------------------------------------------------------</p>
+
+
+                <input type="file" onChange={this.previewFile()} />
+                <br />
+                <img src="" height="200" alt="Image preview..." /> */}
 
 
                 <button type="submit" className="btn btn-default">Edit</button>

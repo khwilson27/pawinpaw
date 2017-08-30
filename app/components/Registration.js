@@ -76,7 +76,7 @@ class Registration extends React.Component {
           id: Response.data.id,
           email: Response.data.email,
         });
-        //redirect to "EditProfile"
+        browserHistory.push("/Edit");
       } else {
         //Sending The User's email and password using helpers file.
         helpers.userLogin(response.profileObj.email, response.profileObj.googleId).then((logResponse) => {
@@ -108,7 +108,7 @@ class Registration extends React.Component {
                   <label htmlFor="email">Email address</label>
                   <input type="email" value={this.state.email} className="form-control" id="email" placeholder="Email" onChange={this.handleChange} />
                   {/*error message*/}
-                  {this.state.message ? (<div className="alert alert-danger" role="alert">{this.state.message}</div>) : "redirect to EditProfile"}
+                  {this.state.message ? (<div className="alert alert-danger" role="alert">{this.state.message}</div>) : "no errors"}
                 </div>
                 <div className="form-group">
                   <label htmlFor="password">Password</label>

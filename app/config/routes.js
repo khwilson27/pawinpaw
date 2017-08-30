@@ -14,7 +14,7 @@ var browserHistory = router.browserHistory;
 // Reference the high-level components
 // var Main = require("../components/Main");
 import Login from "../components/Login.js";
-import EditProfile from "../components/Edit.js";
+import Edit from "../components/Edit.js";
 import Main from "../components/Main";
 import Registration from "../components/Registration.js";
 import Nearby from "../components/Nearby.js";
@@ -30,11 +30,12 @@ module.exports = (
       {/* If user selects Search or Saved show the appropriate component */}
       <Route path="Login" component={Login} />
       <Route path="Registration" component={Registration} />
+      <Route path="Edit" component={Edit} />
 
      
 
       {/* If user selects any other path... we get the Home Route */}
-      <IndexRoute component={Login} />
+      <IndexRoute component={Edit} />
 
     </Route>
   </Router>

@@ -1,6 +1,9 @@
 // Include React as a dependency
 import React from "react";
-import ReactDOM from "react-dom";
+
+var router = require("react-router");
+var browserHistory = router.browserHistory;
+
 // Include the Helper (for the saved recall)
 import helpers from "../utils/helpers.js";
 
@@ -14,7 +17,8 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: " "
+      email: " ",
+      message: null
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -40,6 +44,10 @@ class Login extends React.Component {
         email: Response.data.email,
         message: Response.data.message
       });
+
+      
+
+  
     });
   }
 
@@ -95,7 +103,7 @@ class Login extends React.Component {
                   <label htmlFor="password">Password</label>
                   <input type="password" className="form-control" id="password" placeholder="Password" onChange={this.handleChange} />
                   {/*error message*/}
-                  {this.state.message ? (<div className="alert alert-danger" role="alert">{this.state.message}</div>) : "Move to next"}
+                  {this.state.message ? (<div className="alert alert-danger" role="alert">{this.state.message}</div>) : "no errors"}
                 </div>
                 <button type="submit" onClick={this.handleSignin} className="btn btn-default">Login</button>
                 <br/>

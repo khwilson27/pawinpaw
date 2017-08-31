@@ -8,7 +8,7 @@ import GoogleLogin from 'react-google-login';
 
 var Link = require("react-router").Link;
 
-var router  = require("react-router") ;
+var router = require("react-router");
 var browserHistory = router.browserHistory;
 // Create the Main component
 class Login extends React.Component {
@@ -18,9 +18,8 @@ class Login extends React.Component {
     this.state = {
       email: " ",
       password: " ",
-      loggedin:false
+      loggedin: false
     };
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSignin = this.handleSignin.bind(this);
     this.responseGoogle = this.responseGoogle.bind(this);
@@ -33,7 +32,6 @@ class Login extends React.Component {
     this.setState(state);
     console.log(state)
   }
-
   handleSignin(event) {
     event.preventDefault();
     //Sending The User's email and password using helpers file.
@@ -41,21 +39,20 @@ class Login extends React.Component {
       console.log("state")
       //Getting the new user data through the Response & Use It To Update The State.
       console.log(Response);
-      if(Response.data.message){
+      if (Response.data.message) {
         this.setState({
           message: Response.data.message,
           loggedin: false
         });
-      }else if(Response.data.id){
+      } else if (Response.data.id) {
         this.setState({
           id: Response.data.id,
           email: Response.data.email,
           loggedin: true
-
         });
+        this.props.setParent(this.state)
         this.handleRedirect();
       }
-      
     });
   }
 
@@ -71,12 +68,13 @@ class Login extends React.Component {
     helpers.regNewuser(response.profileObj.email, response.profileObj.googleId).then((Response) => {
       //Getting the new user data through the Response & Use It To Update The State.
       console.log(Response);
-      if (!Response.data.message) {
+      if (Response.data.id) {
         this.setState({
           id: Response.data.id,
           email: Response.data.email,
           registered: true
         });
+        this.props.setParent(this.state)
         //redirect to "EditProfile"
         this.handleRedirect();
       } else {
@@ -87,33 +85,28 @@ class Login extends React.Component {
           this.setState({
             id: logResponse.data.id,
             email: logResponse.data.email,
-            loggedin:true
+            loggedin: true
           });
+          this.props.setParent(this.state)
           //redirect to Nearby
           this.handleRedirect()
         });
       }
     });
-
   }
-
-  handleRedirect(){
-    if (this.state.registered){
+  handleRedirect() {
+    if (this.state.registered) {
       browserHistory.replace("/Edit")
-    }else if(this.state.loggedin){
-      browserHistory.replace("/Edit")
+    } else if (this.state.loggedin) {
+      browserHistory.replace("/Nearby")
     }
-    
   }
-
-  handelErrors(){
-    if(this.state.message) { return <div className="alert alert-danger" role="alert">{this.state.message}</div>} 
+  handelErrors() {
+    if (this.state.message) { return (<div className="alert alert-danger" role="alert">{this.state.message}</div>) }
   }
-
   // Our render method. Utilizing a few helper methods to keep this logic clean
   render() {
     console.log(this.state.message)
-    
     return (
       <div className="mainContainer">
         {/* Navigation bar */}
@@ -133,21 +126,19 @@ class Login extends React.Component {
                   {this.handelErrors()}
                 </div>
                 <button type="submit" onClick={this.handleSignin} className="btn btn-default">Login</button>
-                <br/>
-                  {/*Google LogIn*/}
-                  <GoogleLogin clientId="280548920560-u13cbso5e0b21ouc0aqokmf7rlfvt4po.apps.googleusercontent.com"
-                    buttonText="Login"
-                    onSuccess={this.responseGoogle}
-                    onFailure={this.responseGoogle}
-                  ></GoogleLogin>
-                <br/>
+                <br />
+                {/*Google LogIn*/}
+                <GoogleLogin clientId="280548920560-u13cbso5e0b21ouc0aqokmf7rlfvt4po.apps.googleusercontent.com"
+                  buttonText="Continue With Google"
+                  onSuccess={this.responseGoogle}
+                  onFailure={this.responseGoogle}
+                ></GoogleLogin>
+                <br />
                 <p>Don't have an account?</p>
                 <button type="submit" className="btn btn-default">Register</button>
                 <br />
-
               </form>
             </div>
-
           </div>
         </div>
       </div>

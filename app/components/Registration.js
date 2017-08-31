@@ -1,7 +1,7 @@
 // Include React as a dependency
 import React from "react";
 
-var router  = require("react-router") ;
+var router = require("react-router");
 var browserHistory = router.browserHistory;
 
 // Include the Helper (for the saved recall)
@@ -46,25 +46,27 @@ class Registration extends React.Component {
       helpers.regNewuser(this.state.email.toLowerCase(), this.state.password).then((Response) => {
         //Getting the new user data through the Response & Use It To Update The State.
         console.log(Response);
-        if(Response.data.message){
-        this.setState({
-          message: Response.data.message,
-          registered: false
-        });
-      }else if(Response.data.id){
-        this.setState({
-          id: Response.data.id,
-          email: Response.data.email,
-          registered: true
+        if (Response.data.message) {
+          this.setState({
+            message: Response.data.message,
+            registered: false
+          });
+        } else if (Response.data.id) {
+          this.setState({
+            id: Response.data.id,
+            email: Response.data.email,
+            registered: true
 
-        });
-        this.handleRedirect();
-      }
-        
+          });
+          this.props.setParent(this.state);
+          console.log("state here!!!!!!!!!!!!!" + this.state)
+          this.handleRedirect();
+        }
+
       });
     } else {
       console.log("The password not matches please try again");
-      this.setState({error: "The password not matches please try again"})
+      this.setState({ error: "The password not matches please try again" })
     }
   }
 
@@ -86,6 +88,7 @@ class Registration extends React.Component {
           email: Response.data.email,
           registered: true
         });
+        this.props.setParent(this.state)
         this.handleRedirect();
         // browserHistory.push("/Login");
       } else {
@@ -98,8 +101,9 @@ class Registration extends React.Component {
             email: logResponse.data.email,
             loggedin: true
           });
+          this.props.setParent(this.state)
           this.handleRedirect();
-          
+
         });
       }
     });
@@ -107,21 +111,21 @@ class Registration extends React.Component {
   }
 
 
-  handleRedirect(){
-    if (this.state.registered){
+  handleRedirect() {
+    if (this.state.registered) {
       browserHistory.replace("/Edit")
-    }else if(this.state.loggedin){
+    } else if (this.state.loggedin) {
       browserHistory.replace("/Nearby")
     }
-    
+
   }
 
-  handelErrors(){
-    if(this.state.message) { return(<div className="alert alert-danger" role="alert">{this.state.message}</div>)}
-    if(this.state.error){return(<div className="alert alert-danger" role="alert">{this.state.error}</div>)} 
+  handelErrors() {
+    if (this.state.message) { return (<div className="alert alert-danger" role="alert">{this.state.message}</div>) }
+    if (this.state.error) { return (<div className="alert alert-danger" role="alert">{this.state.error}</div>) }
   }
 
-  // Our render method. Utilizing a few helper methods to keep this logic clean
+  //Our render method. Utilizing a few helper methods to keep this logic clean
   render() {
     console.log(this.state.id + " && " + this.state.email);
 
@@ -131,13 +135,12 @@ class Registration extends React.Component {
           {/* Login fields */}
           <div className="row">
             <div className="col-sm-8 col-xs-8">
-                                {/*error message*/}
-                                {this.handelErrors()}
+              {/*error message*/}
+              {this.handelErrors()}
               <form onSubmit={this.handleSignup}>
                 <div className="form-group">
                   <label htmlFor="email">Email address</label>
                   <input type="email" value={this.state.email} className="form-control" id="email" placeholder="Email" onChange={this.handleChange} />
-
                 </div>
                 <div className="form-group">
                   <label htmlFor="password">Password</label>
@@ -151,7 +154,7 @@ class Registration extends React.Component {
                 <br></br>
                 {/*Google LogIn*/}
                 <GoogleLogin clientId="280548920560-u13cbso5e0b21ouc0aqokmf7rlfvt4po.apps.googleusercontent.com"
-                  buttonText="Login"
+                  buttonText="Continue With Google"
                   onSuccess={this.responseGoogle}
                   onFailure={this.responseGoogle}
                 ></GoogleLogin>
@@ -164,6 +167,7 @@ class Registration extends React.Component {
             </div>
           </div>
         </div>
+
       </div>
     )
   }

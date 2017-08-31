@@ -8,6 +8,10 @@ module.exports = {
         filename: "public/bundle.js"
     },
 
+    node: {
+        fs: "empty"
+    },
+
     // This section desribes the transformations we will perform
     module: {
         loaders: [{

@@ -24,14 +24,18 @@ const helpers = {
                 return response;
             });
     },
+    userData(data) {
+        console.log(data)
+        return axios.put("/api/profile", data)
+    },
     //Find Nearby 
     findNear(zipcode, email) {
         axios.get('/api/users/nearby', {
-                params: {
-                    zipcode,
-                    email
-                }
-            })
+            params: {
+                zipcode,
+                email
+            }
+        })
             .then((response) => {
                 console.log(response);
                 return response;

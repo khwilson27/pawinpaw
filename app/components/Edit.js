@@ -1,120 +1,214 @@
 // Include React as a dependency
 import React from "react";
-
 import helpers from "../utils/helpers.js";
-
-import Dropzone from 'react-dropzone'
+import Dropzone from 'react-dropzone';
 
 var Link = require("react-router").Link;
 
 // Create the Main component
 class Edit extends React.Component {
-  constructor() {
-    super()
+
+  constructor(props) {
+    super(props);
+
     this.state = {
-      files: [],
+      name: " ",
+      age: " ",
+      breed: " ",
+      likes: " ",
+      dislikes: " ",
+      favTreat: " ",
+      zipcode: " ",
+      photo: " ",
+      editClicked: true,
+      saveClicked: false,
+
+      // blob files accepted and rejected from file upload dropzone
       accepted: [],
-      rejected: [],
-      blob: []
-    }
+      rejected: []
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    // this.displayForm  = this.displayForm.bind(this);
   }
 
-  create_blob(file, callback) {
-    var reader = new FileReader();
-    reader.onload = function () { callback(reader.result) };
-    reader.readAsDataURL(file);
+  handleChange(event) { 
+    let state = {};
+    state[event.target.id] = $.trim(event.target.value);
+    this.setState(state);
+    console.log(state);
+  }
+
+  handleUpdate(event) {
+    event.preventDefault();
+    const data = {
+      // id: this.props.id,
+      id: 1,
+      name: this.state.name,
+      age: this.state.age,
+      breed: this.state.breed,
+      likes: this.state.likes,
+      dislikes: this.state.dislikes,
+      favTreat: this.state.favTreat,
+      zipcode: this.state.zipcode,
+      photo: this.state.accepted[0]
+    }
+    console.log(data);
+    helpers.userData(data).then(() => {
+      this.setState({
+        saveClicked: true,
+        editClicked: false
+      });
+    });
   }
 
   onDrop(files) {
-    create_blob(files, function (blob_string) {
-      alert(blob_string);
-      this.setState({
-        blob: blob_string
-      })
-    });
+
+    // console.log("files: ");
+    // console.log(this.state.accepted[0]);
+
+    // // data = {
+    // //   photo: files
+    // // }
+
+    // // helpers.userData(data).then(() => {
+    // //   console.log("saved image");
+    // // });
+
 
   }
 
-  // Our render method. Utilizing a few helper methods to keep this logic clean
-  render() {
-    console.log(this.state.accepted[0]);
-    console.log(this.state.blob);
+  renderForm() {
+    return (
+      <form onSubmit={this.handleUpdate}>
+        <div className="form-group">
+          <label htmlFor="name">Name</label>
+          <input type="email" value={this.state.name} className="form-control" id="name" placeholder="Enter Name" onChange={this.handleChange} />
+        </div>
+        <div className="form-group">
+          <label htmlFor="age">Age</label>
+          <input type="text" value={this.state.age} className="form-control" id="age" placeholder="Age" onChange={this.handleChange} />
+        </div>
+        <div className="form-group">
+          <label htmlFor="breed"> Breed</label>
+          <input type="text" value={this.state.breed} className="form-control" id="breed" placeholder="Breed" onChange={this.handleChange} />
+        </div>
+        <div className="form-group">
+          <label htmlFor="likes"> Likes</label>
+          <input type="text" value={this.state.likes} className="form-control" id="likes" placeholder="Likes" onChange={this.handleChange} />
+        </div>
+        <div className="form-group">
+          <label htmlFor="dislikes"> Dislikes</label>
+          <input type="text" value={this.state.dislikes} className="form-control" id="dislikes" placeholder="Dislikes" onChange={this.handleChange} />
+        </div>
+        <div className="form-group">
+          <label htmlFor="favTreat"> Favorite Treats</label>
+          <input type="text" value={this.state.favTreat} className="form-control" id="favTreat" placeholder="Favorite Treats" onChange={this.handleChange} />
+        </div>
+        <div className="form-group">
+          <label htmlFor="zipcode"> Zip Code</label>
+          <input type="text" value={this.state.zipcode} className="form-control" id="zipcode" placeholder="Zip Code" onChange={this.handleChange} />
+        </div>
+
+        <div className="dropzone">
+          <Dropzone
+            accept="image/jpeg, image/png"
+            onDrop={(accepted, rejected) => { this.setState({ accepted, rejected }); }}
+          >
+            <p>Try dropping some files here, or click to select files to upload.</p>
+            <p>Only *.jpeg and *.png images will be accepted</p>
+          </Dropzone>
+        </div>
+
+        <aside>
+          <h2>Dropped files</h2>
+          <ul>
+            {
+              this.state.accepted.map(f => <li key={f.name}>{f.name} - {f.size} bytes</li>)
+            }
+          </ul>
+        </aside>
+
+
+      </form>
+    )
+  }
+
+  renderData() {
+
+    
 
     return (
+      <form>
+        <div className="form-group">
+          <label htmlFor="name">Name: </label>
+          {this.state.name}
+        </div>
+        <div className="form-group">
+          <label htmlFor="age">Age: </label>
+          {this.state.age}
+        </div>
+        <div className="form-group">
+          <label htmlFor="breed"> Breed: </label>
+          {this.state.breed}
+        </div>
+        <div className="form-group">
+          <label htmlFor="likes"> Likes: </label>
+          {this.state.likes}
+        </div>
+        <div className="form-group">
+          <label htmlFor="dislikes"> Dislikes: </label>
+          {this.state.dislikes}
+        </div>
+        <div className="form-group">
+          <label htmlFor="favTreat"> Favorite Treats: </label>
+          {this.state.favTreat}
+        </div>
+        <div className="form-group">
+          <label htmlFor="zipcode"> Zip Code: </label>
+          {this.state.zipcode}
+        </div>
+
+      </form>
+    )
+  }
+
+  handleClick() {
+    this.setState({
+      editClicked: true,
+      saveClicked: false
+    })
+  }
+
+  handleRedirect() {
+    browserHistory.replace("/Nearby")
+  }
+  // Our render method. Utilizing a few helper methods to keep this logic clean
+  render() {
+    console.log(this.props.id + "  " + this.props.email);
+    return (
+
       <div className="mainContainer">
-        {/* Navigation bar */}
         <div className="row">
           <div className="col-sm-12 col-xs-12">
             <div className="navBar">navBar here</div>
           </div>
         </div>
-
         <div className="container">
           {/* Login fields */}
           <div className="row">
             <div className="col-sm-8 col-xs-8">
-              <form>
-                <div className="form-group">
-                  <label htmlFor="exampleInputEmail1">Name</label>
-                  <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter Name" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="exampleInputPassword1">Age</label>
-                  <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Age" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="exampleInputPassword1"> Breed</label>
-                  <input type="password" className="form-control" id="exampleInputPassword2" placeholder="Breed" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="exampleInputPassword1"> Likes</label>
-                  <input type="password" className="form-control" id="exampleInputPassword2" placeholder="Likes" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="exampleInputPassword1"> Dislikes</label>
-                  <input type="password" className="form-control" id="exampleInputPassword2" placeholder="Dislikes" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="exampleInputPassword1"> Favorite Treats</label>
-                  <input type="password" className="form-control" id="exampleInputPassword2" placeholder="Favorite Treats" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="exampleInputPassword1"> Zip Code</label>
-                  <input type="password" className="form-control" id="exampleInputPassword2" placeholder="Zip Code" />
-                </div>
-
-                <div className="dropzone">
-                  <Dropzone
-                    accept="image/jpeg, image/png"
-                    onDrop={(accepted, rejected) => { this.setState({ accepted, rejected }); }}
-                  >
-                    <p>Try dropping some files here, or click to select files to upload.</p>
-                    <p>Only *.jpeg and *.png images will be accepted</p>
-                  </Dropzone>
-                </div>
-
-                <aside>
-                  <h2>Dropped files</h2>
-                  <ul>
-                    {
-                      this.state.accepted.map(f => <li key={f.name}>{f.name} - {f.size} bytes</li>)
-                    }
-                  </ul>
-                </aside>
-
-                {/* <p>---------------------------------------------------------------------------------------------</p>
-
-
-                <input type="file" onChange={this.previewFile()} />
-                <br />
-                <img src="" height="200" alt="Image preview..." /> */}
-
-
-                <button type="submit" className="btn btn-default">Edit</button>
-                <br></br>
-                <button type="submit" className="btn btn-default">Save</button>
-              </form>
+              {this.state.saveClicked ? this.renderData() : this.state.editClicked ? this.renderForm() : "Some Thing Wrong"}
             </div>
+          </div>
+          <div>
+            <button type="submit" onClick={this.handleClick} className="btn btn-default">Edit</button>
+            <br />
+            <button type="submit" onClick={this.handleUpdate} className="btn btn-default">Save</button>
+            <br />
+            <button type="submit" onClick={this.handleRedirect} className="btn btn-default">Done</button>
           </div>
           {/* Footer */}
           <div className="row">

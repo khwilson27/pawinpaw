@@ -18,7 +18,6 @@ class Nearby extends React.Component{
             <div className="navBar">navBar here</div>
           </div>
         </div>
-        
         <div className="container">
         {/* Login fields */}
         <div class="row">

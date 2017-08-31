@@ -14,11 +14,11 @@ var browserHistory = router.browserHistory;
 // Reference the high-level components
 // var Main = require("../components/Main");
 import Login from "../components/Login.js";
-import Edit from "../components/Edit.js";
+import EditProfile from "../components/Edit.js";
 import Main from "../components/Main";
 import Registration from "../components/Registration.js";
 import Nearby from "../components/Nearby.js";
-
+import Edit from "../components/Edit.js";
 
 
 // Export the Routes
@@ -31,6 +31,7 @@ module.exports = (
       <Route path="Login" component={Login} />
       <Route path="Registration" component={Registration} />
       <Route path="Edit" component={Edit} />
+      {/* <Route path="Nearby" component={Nearby} /> */}
 
      
 

@@ -26,9 +26,12 @@ const helpers = {
     },
     userData(data) {
         console.log(data)
-        return axios.put("/api/profile", data)
+        return axios.put("/api/profile", data).then((res)=>{
+            console.log(res);
+                return res;
+        })
     },
-    //Find Nearby 
+    //Find Nearby
     findNear(zipcode, email) {
         axios.get('/api/users/nearby', {
             params: {
@@ -41,7 +44,6 @@ const helpers = {
                 return response;
             });
     }
-
 };
 
 

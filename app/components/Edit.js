@@ -4,6 +4,8 @@ import ReactDOM from "react-dom";
 import helpers from "../utils/helpers.js";
 
 var Link = require("react-router").Link;
+var router = require("react-router");
+var browserHistory = router.browserHistory;
 
 // Create the Main component
 class Edit extends React.Component{

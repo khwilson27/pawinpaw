@@ -8,6 +8,11 @@ var navStyle = {
   backgroundColor: "#009191"
 }
 
+var logoStyle = {
+  height: "60px",
+  position: "absolute", 
+}
+
 // Create the Main component
 class Main extends React.Component {
 
@@ -60,6 +65,8 @@ class Main extends React.Component {
                 <span className="icon-bar"></span>
               </button>
             </div>
+            {/* Logo Image */}
+            <img style={logoStyle} src= "./img/pawinpaw-logo.png"/>
             <div className="collapse navbar-collapse navbar-ex1-collapse">
               <ul className="nav navbar-nav navbar-right">
                 {/* Using <Link> in place of <a> and "to" in place of "href" */}

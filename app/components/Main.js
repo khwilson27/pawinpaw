@@ -4,6 +4,9 @@ import helpers from "../utils/helpers.js";
 
 var Link = require("react-router").Link;
 
+var navStyle = {
+  backgroundColor: "#009191"
+}
 
 // Create the Main component
 class Main extends React.Component {
@@ -42,7 +45,7 @@ class Main extends React.Component {
     return (
       // We can only render a single div. So we need to group everything inside of this main-container one
       <div className="main-container">
-        <nav className="navbar navbar-default" role="navigation">
+        <nav className="navbar navbar-default" role="navigation" style={navStyle}>
           <div className="container-fluid">
             <div className="navbar-header">
               <button

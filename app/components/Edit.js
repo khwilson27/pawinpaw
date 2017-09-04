@@ -2,6 +2,8 @@
 import React from "react";
 import helpers from "../utils/helpers.js";
 import Dropzone from 'react-dropzone';
+import sha1 from "sha1";
+import axios from "axios"; 
 
 var Link = require("react-router").Link;
 
@@ -34,7 +36,7 @@ class Edit extends React.Component {
     // this.displayForm  = this.displayForm.bind(this);
   }
 
-  handleChange(event) { 
+  handleChange(event) {
     let state = {};
     state[event.target.id] = $.trim(event.target.value);
     this.setState(state);
@@ -62,21 +64,43 @@ class Edit extends React.Component {
         editClicked: false
       });
     });
+
+    this.cloudinaryAxios();
+
   }
 
   onDrop(files) {
 
-    // console.log("files: ");
-    // console.log(this.state.accepted[0]);
+    console.log("dropped files");
 
-    // // data = {
-    // //   photo: files
-    // // }
+  }
 
-    // // helpers.userData(data).then(() => {
-    // //   console.log("saved image");
-    // // });
+  cloudinaryAxios() {
+    const image = this.state.accepted[0];
 
+    const url = "https://api.cloudinary.com/v1_1/khwilsoncloudinary/image/upload";
+    const uploadPreset = 'bohjunrg';
+
+    const fd = new FormData();
+    fd.append("upload_preset", uploadPreset);
+    // fd.append("tags", "browser_upload"); // Optional - add tag for image admin in Cloudinary
+    fd.append("file", image);
+
+    const config = {
+      headers: { "X-Requested-With": "XMLHttpRequest" },
+      onUploadProgress: function (progressEvent) {
+        // Do something with the native progress event
+      }
+    };
+
+    axios.post(url, fd, config)
+      .then(function (res) {
+        // File uploaded successfully
+        console.log(res.data);
+      })
+      .catch(function (err) {
+        console.error('err', err);
+      });
 
   }
 
@@ -138,7 +162,7 @@ class Edit extends React.Component {
 
   renderData() {
 
-    
+
 
     return (
       <form>

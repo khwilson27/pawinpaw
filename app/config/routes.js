@@ -31,7 +31,7 @@ module.exports = (
       <Route path="Login" component={Login} />
       <Route path="Registration" component={Registration} />
       <Route path="Edit" component={Edit} />
-      {/* <Route path="Nearby" component={Nearby} /> */}
+      <Route path="Nearby" component={Nearby} />
 
      
 

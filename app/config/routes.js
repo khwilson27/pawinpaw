@@ -36,7 +36,7 @@ module.exports = (
      
 
       {/* If user selects any other path... we get the Home Route */}
-      <IndexRoute component={Login} />
+      <IndexRoute component={Edit} />
 
     </Route>
   </Router>

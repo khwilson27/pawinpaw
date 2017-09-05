@@ -10,6 +10,20 @@ var Link = require("react-router").Link;
 
 var router = require("react-router");
 var browserHistory = router.browserHistory;
+
+var inputStyle = {
+  borderColor: "#FFB74D",
+  borderWidth: "2px",
+  borderStyle: "solid"
+}
+
+var buttonStyle = {
+  height: "60px",
+  // position: "relative",
+  // left: "300px" 
+
+}
+
 // Create the Main component
 class Login extends React.Component {
 
@@ -113,29 +127,33 @@ class Login extends React.Component {
         <div className="container">
           {/* Login fields */}
           <div className="row">
-            <div className="col-sm-8 col-xs-8">
+            <div className="col-sm-8 col-xs-8 col-sm-offset-2 col-xs-offset-2">
               <form onSubmit={this.handleSignin}>
                 <div className="form-group">
                   <label htmlFor="email">Email address</label>
-                  <input type="email" value={this.state.email} className="form-control" id="email" placeholder="Email" onChange={this.handleChange} />
+                  <input type="email" value={this.state.email} className="form-control" id="email" placeholder="Email" style={inputStyle} onChange={this.handleChange} />
                 </div>
                 <div className="form-group">
                   <label htmlFor="password">Password</label>
-                  <input type="password" className="form-control" id="password" placeholder="Password" onChange={this.handleChange} />
+                  <input type="password" className="form-control" id="password" placeholder="Password" style={inputStyle} onChange={this.handleChange} />
                   {/*error message*/}
                   {this.handelErrors()}
                 </div>
-                <button type="submit" onClick={this.handleSignin} className="btn btn-default">Login</button>
+                {/* Regular Login Button */}
+                <input type="image" onClick={this.handleSignin} style={buttonStyle} src="./img/Login.png"/>
                 <br />
+
                 {/*Google LogIn*/}
                 <GoogleLogin clientId="280548920560-u13cbso5e0b21ouc0aqokmf7rlfvt4po.apps.googleusercontent.com"
                   buttonText="Continue With Google"
                   onSuccess={this.responseGoogle}
                   onFailure={this.responseGoogle}
                 ></GoogleLogin>
-                <br />
+                <br /><br/>
                 <p>Don't have an account?</p>
-                <button type="submit" className="btn btn-default">Register</button>
+
+                {/* Register Button */}
+                <input type="image" style={buttonStyle} src="./img/Register.png"/>
                 <br />
               </form>
             </div>

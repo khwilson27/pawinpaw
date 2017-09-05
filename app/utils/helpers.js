@@ -24,6 +24,7 @@ const helpers = {
                 return response;
             });
     },
+    // Edit user's info
     userData(data) {
         console.log(data)
         return axios.put("/api/profile", data)
@@ -40,6 +41,44 @@ const helpers = {
                 console.log(response);
                 return response;
             });
+    },
+    // Uploads an image to cloudinary
+    cloudinaryUpload(image) {
+        const url = "https://api.cloudinary.com/v1_1/khwilsoncloudinary/image/upload";
+        const uploadPreset = 'bohjunrg';
+
+        const fd = new FormData();
+        fd.append("upload_preset", uploadPreset);
+        fd.append("file", image);
+
+        const config = {
+            headers: { "X-Requested-With": "XMLHttpRequest" }
+        };
+
+        axios.post(url, fd, config)
+            .then(function (res) {
+                // File uploaded successfully
+                console.log(res.data);
+            })
+            .catch(function (err) {
+                console.error('err', err);
+            });
+
+    },
+
+    // Delete an image to cloudinary
+    cloudinaryDelete (publicid) {
+        const url = "https://api.cloudinary.com/v1_1/khwilsoncloudinary/resources/image/upload?public_ids[]="+publicid;
+
+        axios.delete(url, config)
+            .then(function (res) {
+                // File deleted successfully
+                console.log(res.data);
+            })
+            .catch(function (err) {
+                console.error('err', err);
+            });
+
     }
 
 };

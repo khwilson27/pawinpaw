@@ -65,42 +65,13 @@ class Edit extends React.Component {
       });
     });
 
-    this.cloudinaryAxios();
+    helpers.cloudinaryUpload(this.state.accepted[0]);
 
   }
 
   onDrop(files) {
 
     console.log("dropped files");
-
-  }
-
-  cloudinaryAxios() {
-    const image = this.state.accepted[0];
-
-    const url = "https://api.cloudinary.com/v1_1/khwilsoncloudinary/image/upload";
-    const uploadPreset = 'bohjunrg';
-
-    const fd = new FormData();
-    fd.append("upload_preset", uploadPreset);
-    // fd.append("tags", "browser_upload"); // Optional - add tag for image admin in Cloudinary
-    fd.append("file", image);
-
-    const config = {
-      headers: { "X-Requested-With": "XMLHttpRequest" },
-      onUploadProgress: function (progressEvent) {
-        // Do something with the native progress event
-      }
-    };
-
-    axios.post(url, fd, config)
-      .then(function (res) {
-        // File uploaded successfully
-        console.log(res.data);
-      })
-      .catch(function (err) {
-        console.error('err', err);
-      });
 
   }
 
@@ -140,9 +111,11 @@ class Edit extends React.Component {
           <Dropzone
             accept="image/jpeg, image/png"
             onDrop={(accepted, rejected) => { this.setState({ accepted, rejected }); }}
+            maxSize={500000}
           >
             <p>Try dropping some files here, or click to select files to upload.</p>
-            <p>Only *.jpeg and *.png images will be accepted</p>
+            <p>Only *.jpeg and *.png images will be accepted.</p>
+            <p>Max image size is 500kb.</p>
           </Dropzone>
         </div>
 

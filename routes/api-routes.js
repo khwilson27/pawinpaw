@@ -1,13 +1,6 @@
 var db = require("../models");
 var crypto = require("crypto");
 var Passsalthash = require("./passsalthash.js");
-// import cloudinary from 'cloudinary';
-
-// cloudinary.config({ 
-//   cloud_name: 'sample', 
-//   api_key: '874837483274837', 
-//   api_secret: 'a676b67565c6767a6767d6767f676fe1' 
-// });
 
 module.exports = function (app) {
     //Reg Route
@@ -105,7 +98,6 @@ module.exports = function (app) {
 
     //Edit user profile
     app.put("/api/profile", function (req, res) {
-
         db.User.update({
             name: req.body.name,
             age: req.body.age,
@@ -114,8 +106,7 @@ module.exports = function (app) {
             dislikes: req.body.dislikes,
             favTreat: req.body.favTreat,
             zipcode: req.body.zipcode,
-            photo_url: req.body.photo_url,
-            photo_publicid: req.body.photo_publicid
+            photo: req.body.photo,
         }, {
                 where: {
                     id: req.body.id

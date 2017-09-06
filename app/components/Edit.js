@@ -1,10 +1,24 @@
 // Include React as a dependency
 import React from "react";
+import ReactDOM from "react-dom";
 import helpers from "../utils/helpers.js";
-import Dropzone from 'react-dropzone';
-import axios from "axios";
 
 var Link = require("react-router").Link;
+var router = require("react-router");
+var browserHistory = router.browserHistory;
+
+var inputStyle = {
+  borderColor: "#FFB74D",
+  borderWidth: "2px",
+  borderStyle: "solid"
+}
+
+var buttonStyle = {
+  height: "60px",
+  // position: "relative",
+  // left: "300px" 
+
+}
 
 // Create the Main component
 class Edit extends React.Component {
@@ -20,13 +34,8 @@ class Edit extends React.Component {
       dislikes: " ",
       favTreat: " ",
       zipcode: " ",
-      photo: " ",
       editClicked: true,
-      saveClicked: false,
-
-      // blob files accepted and rejected from file upload dropzone
-      accepted: [],
-      rejected: []
+      saveClicked: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -44,38 +53,6 @@ class Edit extends React.Component {
 
   handleUpdate(event) {
     event.preventDefault();
-<<<<<<< HEAD
-
-    helpers.cloudinaryUpload(this.state.accepted[0])
-      .then((res) => {
-        // File uploaded successfully
-        console.log(res.data);
-        const data = {
-          // id: this.props.id,
-          id: 1,
-          name: this.state.name,
-          age: this.state.age,
-          breed: this.state.breed,
-          likes: this.state.likes,
-          dislikes: this.state.dislikes,
-          favTreat: this.state.favTreat,
-          zipcode: this.state.zipcode,
-          photo_url: res.data.secure_url,
-          photo_publicid: res.data.public_id
-        }
-
-        console.log(data);
-
-        helpers.userData(data).then(() => {
-          this.setState({
-            saveClicked: true,
-            editClicked: false
-          });
-        });
-      })
-      .catch(function (err) {
-        console.error('err', err);
-=======
     const data = {
       // id: this.props.id,
       id: 1,
@@ -92,12 +69,8 @@ class Edit extends React.Component {
       this.setState({
         saveClicked: true,
         editClicked: false
->>>>>>> eaafca23afe310683d1b3ed8dffa18aaab847303
       });
-  }
-
-  onDrop(files) {
-    console.log("dropped files");
+    });
   }
 
   renderForm() {
@@ -105,91 +78,66 @@ class Edit extends React.Component {
       <form onSubmit={this.handleUpdate}>
         <div className="form-group">
           <label htmlFor="name">Name</label>
-          <input type="email" value={this.state.name} className="form-control" id="name" placeholder="Enter Name" onChange={this.handleChange} />
+          <input type="email" value={this.state.name} style={inputStyle} className="form-control" id="name" placeholder="Enter Name" onChange={this.handleChange} />
         </div>
         <div className="form-group">
           <label htmlFor="age">Age</label>
-          <input type="text" value={this.state.age} className="form-control" id="age" placeholder="Age" onChange={this.handleChange} />
+          <input type="text" value={this.state.age} style={inputStyle} className="form-control" id="age" placeholder="Age" onChange={this.handleChange} />
         </div>
         <div className="form-group">
           <label htmlFor="breed"> Breed</label>
-          <input type="text" value={this.state.breed} className="form-control" id="breed" placeholder="Breed" onChange={this.handleChange} />
+          <input type="text" value={this.state.breed} style={inputStyle} className="form-control" id="breed" placeholder="Breed" onChange={this.handleChange} />
         </div>
         <div className="form-group">
           <label htmlFor="likes"> Likes</label>
-          <input type="text" value={this.state.likes} className="form-control" id="likes" placeholder="Likes" onChange={this.handleChange} />
+          <input type="text" value={this.state.likes} style={inputStyle} className="form-control" id="likes" placeholder="Likes" onChange={this.handleChange} />
         </div>
         <div className="form-group">
           <label htmlFor="dislikes"> Dislikes</label>
-          <input type="text" value={this.state.dislikes} className="form-control" id="dislikes" placeholder="Dislikes" onChange={this.handleChange} />
+          <input type="text" value={this.state.dislikes} style={inputStyle} className="form-control" id="dislikes" placeholder="Dislikes" onChange={this.handleChange} />
         </div>
         <div className="form-group">
           <label htmlFor="favTreat"> Favorite Treats</label>
-          <input type="text" value={this.state.favTreat} className="form-control" id="favTreat" placeholder="Favorite Treats" onChange={this.handleChange} />
+          <input type="text" value={this.state.favTreat} style={inputStyle} className="form-control" id="favTreat" placeholder="Favorite Treats" onChange={this.handleChange} />
         </div>
         <div className="form-group">
           <label htmlFor="zipcode"> Zip Code</label>
-          <input type="text" value={this.state.zipcode} className="form-control" id="zipcode" placeholder="Zip Code" onChange={this.handleChange} />
+          <input type="text" value={this.state.zipcode} style={inputStyle} className="form-control" id="zipcode" placeholder="Zip Code" onChange={this.handleChange} />
         </div>
-
-        <div className="dropzone">
-          <Dropzone
-            accept="image/jpeg, image/png"
-            onDrop={(accepted, rejected) => { this.setState({ accepted, rejected }); }}
-            maxSize={500000}
-          >
-            <p>Try dropping some files here, or click to select files to upload.</p>
-            <p>Only *.jpeg and *.png images will be accepted.</p>
-            <p>Max image size is 500kb.</p>
-          </Dropzone>
-        </div>
-
-        <aside>
-          <h2>Dropped files</h2>
-          <ul>
-            {
-              this.state.accepted.map(f => <li key={f.name}>{f.name} - {f.size} bytes</li>)
-            }
-          </ul>
-        </aside>
-
 
       </form>
     )
   }
 
   renderData() {
-
-
-
     return (
       <form>
         <div className="form-group">
-          <label htmlFor="name">Name: </label>
+          <label htmlFor="name" style={inputStyle}>Name: </label>
           {this.state.name}
         </div>
         <div className="form-group">
-          <label htmlFor="age">Age: </label>
+          <label htmlFor="age" style={inputStyle}>Age: </label>
           {this.state.age}
         </div>
         <div className="form-group">
-          <label htmlFor="breed"> Breed: </label>
+          <label htmlFor="breed" style={inputStyle}> Breed: </label>
           {this.state.breed}
         </div>
         <div className="form-group">
-          <label htmlFor="likes"> Likes: </label>
+          <label htmlFor="likes" style={inputStyle}> Likes: </label>
           {this.state.likes}
         </div>
         <div className="form-group">
-          <label htmlFor="dislikes"> Dislikes: </label>
+          <label htmlFor="dislikes" style={inputStyle}> Dislikes: </label>
           {this.state.dislikes}
         </div>
         <div className="form-group">
-          <label htmlFor="favTreat"> Favorite Treats: </label>
+          <label htmlFor="favTreat" style={inputStyle}> Favorite Treats: </label>
           {this.state.favTreat}
         </div>
         <div className="form-group">
-          <label htmlFor="zipcode"> Zip Code: </label>
+          <label htmlFor="zipcode" style={inputStyle}> Zip Code: </label>
           {this.state.zipcode}
         </div>
 
@@ -226,13 +174,10 @@ class Edit extends React.Component {
             </div>
           </div>
           <div>
-            <button type="submit" onClick={this.handleClick} className="btn btn-default">Edit</button>
+
+            <input type="image" onClick={this.handleClick} style={buttonStyle} src="./img/Edit.png" />
             <br />
-<<<<<<< HEAD
-            <button type="submit" onClick={this.handleUpdate} className="btn btn-default">Save</button>
-=======
             <input type="image" onClick={this.handleUpdate} style={buttonStyle} src="./img/Save.png" />
->>>>>>> eaafca23afe310683d1b3ed8dffa18aaab847303
             <br />
             <button type="submit" onClick={this.handleRedirect} className="btn btn-default">Done</button>
           </div>

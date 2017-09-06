@@ -6,6 +6,21 @@ import sha1 from "sha1";
 import axios from "axios"; 
 
 var Link = require("react-router").Link;
+var router = require("react-router");
+var browserHistory = router.browserHistory;
+
+var inputStyle = {
+  borderColor: "#FFB74D",
+  borderWidth: "2px",
+  borderStyle: "solid"
+}
+
+var buttonStyle = {
+  height: "60px",
+  // position: "relative",
+  // left: "300px" 
+
+}
 
 // Create the Main component
 class Edit extends React.Component {
@@ -201,9 +216,10 @@ class Edit extends React.Component {
             </div>
           </div>
           <div>
-            <button type="submit" onClick={this.handleClick} className="btn btn-default">Edit</button>
+
+            <input type="image" onClick={this.handleClick} style={buttonStyle} src="./img/Edit.png" />
             <br />
-            <button type="submit" onClick={this.handleUpdate} className="btn btn-default">Save</button>
+            <input type="image" onClick={this.handleSignUpdate} style={buttonStyle} src="./img/Save.png" />
             <br />
             <button type="submit" onClick={this.handleRedirect} className="btn btn-default">Done</button>
           </div>

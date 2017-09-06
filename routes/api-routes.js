@@ -3,12 +3,15 @@ var crypto = require("crypto");
 var Passsalthash = require("./passsalthash.js");
 // import cloudinary from 'cloudinary';
 
+<<<<<<< HEAD
 // cloudinary.config({ 
 //   cloud_name: 'sample', 
 //   api_key: '874837483274837', 
 //   api_secret: 'a676b67565c6767a6767d6767f676fe1' 
 // });
 
+=======
+>>>>>>> a36f6e7fbe6ec3d4ea54d09f6a6e0f644ca877fa
 module.exports = function (app) {
     //Reg Route
     app.post("/api/register", function (req, res) {

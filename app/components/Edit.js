@@ -1,7 +1,7 @@
 // Include React as a dependency
 import React from "react";
-import ReactDOM from "react-dom";
 import helpers from "../utils/helpers.js";
+import Dropzone from 'react-dropzone';
 
 var Link = require("react-router").Link;
 var router = require("react-router");
@@ -34,8 +34,13 @@ class Edit extends React.Component {
       dislikes: " ",
       favTreat: " ",
       zipcode: " ",
+      photoUrl: "",
       editClicked: true,
-      saveClicked: false
+      saveClicked: false,
+
+      // image files accepted and rejected from file upload dropzone
+      accepted: [],
+      rejected: []
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -53,24 +58,43 @@ class Edit extends React.Component {
 
   handleUpdate(event) {
     event.preventDefault();
-    const data = {
-      // id: this.props.id,
-      id: 1,
-      name: this.state.name,
-      age: this.state.age,
-      breed: this.state.breed,
-      likes: this.state.likes,
-      dislikes: this.state.dislikes,
-      favTreat: this.state.favTreat,
-      zipcode: this.state.zipcode
-    }
-    console.log(data);
-    helpers.userData(data).then(() => {
-      this.setState({
-        saveClicked: true,
-        editClicked: false
+
+    helpers.cloudinaryUpload(this.state.accepted[0])
+      .then((res) => {
+        // File uploaded successfully
+        this.state.photoUrl = res.data.secure_url;
+
+        console.log(res.data);
+        const data = {
+          // id: this.props.id,
+          id: 1,
+          name: this.state.name,
+          age: this.state.age,
+          breed: this.state.breed,
+          likes: this.state.likes,
+          dislikes: this.state.dislikes,
+          favTreat: this.state.favTreat,
+          zipcode: this.state.zipcode,
+          photo_url: res.data.secure_url,
+          photo_publicid: res.data.public_id
+        }
+
+        console.log(data);
+
+        helpers.userData(data).then(() => {
+          this.setState({
+            saveClicked: true,
+            editClicked: false
+          });
+        });
+      })
+      .catch(function (err) {
+        console.error('err', err);
       });
-    });
+  }
+
+  onDrop(files) {
+    console.log("dropped files");
   }
 
   renderForm() {
@@ -105,6 +129,27 @@ class Edit extends React.Component {
           <input type="text" value={this.state.zipcode} style={inputStyle} className="form-control" id="zipcode" placeholder="Zip Code" onChange={this.handleChange} />
         </div>
 
+        <div className="dropzone">
+          <Dropzone
+            accept="image/jpeg, image/png"
+            onDrop={(accepted, rejected) => { this.setState({ accepted, rejected }); }}
+            maxSize={500000}
+          >
+            <p>Try dropping some files here, or click to select files to upload.</p>
+            <p>Only *.jpeg and *.png images will be accepted.</p>
+            <p>Max image size is 500kb.</p>
+          </Dropzone>
+        </div>
+
+        <aside>
+          <h2>Dropped files</h2>
+          <ul>
+            {
+              this.state.accepted.map(f => <li key={f.name}>{f.name} - {f.size} bytes</li>)
+            }
+          </ul>
+        </aside>
+
       </form>
     )
   }
@@ -112,6 +157,9 @@ class Edit extends React.Component {
   renderData() {
     return (
       <form>
+
+        <img src={this.state.photoUrl} />
+
         <div className="form-group">
           <label htmlFor="name" style={inputStyle}>Name: </label>
           {this.state.name}

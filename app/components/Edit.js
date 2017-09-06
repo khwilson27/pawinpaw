@@ -44,6 +44,7 @@ class Edit extends React.Component {
 
   handleUpdate(event) {
     event.preventDefault();
+<<<<<<< HEAD
 
     helpers.cloudinaryUpload(this.state.accepted[0])
       .then((res) => {
@@ -74,6 +75,24 @@ class Edit extends React.Component {
       })
       .catch(function (err) {
         console.error('err', err);
+=======
+    const data = {
+      // id: this.props.id,
+      id: 1,
+      name: this.state.name,
+      age: this.state.age,
+      breed: this.state.breed,
+      likes: this.state.likes,
+      dislikes: this.state.dislikes,
+      favTreat: this.state.favTreat,
+      zipcode: this.state.zipcode
+    }
+    console.log(data);
+    helpers.userData(data).then(() => {
+      this.setState({
+        saveClicked: true,
+        editClicked: false
+>>>>>>> eaafca23afe310683d1b3ed8dffa18aaab847303
       });
   }
 
@@ -209,7 +228,11 @@ class Edit extends React.Component {
           <div>
             <button type="submit" onClick={this.handleClick} className="btn btn-default">Edit</button>
             <br />
+<<<<<<< HEAD
             <button type="submit" onClick={this.handleUpdate} className="btn btn-default">Save</button>
+=======
+            <input type="image" onClick={this.handleUpdate} style={buttonStyle} src="./img/Save.png" />
+>>>>>>> eaafca23afe310683d1b3ed8dffa18aaab847303
             <br />
             <button type="submit" onClick={this.handleRedirect} className="btn btn-default">Done</button>
           </div>

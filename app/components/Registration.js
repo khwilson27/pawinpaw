@@ -11,19 +11,7 @@ import GoogleLogin from 'react-google-login';
 
 var Link = require("react-router").Link;
 
-// styling for input fields
-var inputStyle = {
-  borderColor: "#FFB74D",
-  borderWidth: "2px",
-  borderStyle: "solid"
-}
 
-var buttonStyle = {
-  height: "60px",
-  // position: "relative",
-  // left: "300px" 
-
-}
 
 // Create the Main component
 class Registration extends React.Component {
@@ -146,33 +134,24 @@ class Registration extends React.Component {
         <div className="container">
           {/* Login fields */}
           <div className="row">
-<<<<<<< HEAD
             <div className="col-sm-8 col-xs-8">
-=======
-            <div className="col-sm-8 col-xs-8 col-sm-offset-2 col-xs-offset-2">
->>>>>>> a36f6e7fbe6ec3d4ea54d09f6a6e0f644ca877fa
               {/*error message*/}
               {this.handelErrors()}
               <form onSubmit={this.handleSignup}>
                 <div className="form-group">
                   <label htmlFor="email">Email address</label>
-<<<<<<< HEAD
                   <input type="email" value={this.state.email} className="form-control" id="email" placeholder="Email" onChange={this.handleChange} />
-=======
-                  <input type="email" value={this.state.email} style={inputStyle} className="form-control" id="email" placeholder="Email" onChange={this.handleChange} />
->>>>>>> a36f6e7fbe6ec3d4ea54d09f6a6e0f644ca877fa
                 </div>
                 <div className="form-group">
                   <label htmlFor="password">Password</label>
-                  <input type="password" value={this.state.password} style={inputStyle} className="form-control" id="password" placeholder="Password" onChange={this.handleChange} />
+                  <input type="password" value={this.state.password} className="form-control" id="password" placeholder="Password" onChange={this.handleChange} />
                 </div>
                 <div className="form-group">
                   <label htmlFor="Repassword"> Re-enter Password</label>
-                  <input type="password" value={this.state.repassword} style={inputStyle} className="form-control" id="repassword" placeholder="Password" onChange={this.handleChange} />
+                  <input type="password" value={this.state.repassword} className="form-control" id="repassword" placeholder="Password" onChange={this.handleChange} />
                 </div>
-                {/* <button onClick={this.handleSignup} className="btn btn-default">Register</button> */}
-                <input type="image" onClick={this.handleSignup} style={buttonStyle} src="./img/Register.png"/>
-                <br/><br/>
+                <button onClick={this.handleSignup} className="btn btn-default">Register</button>
+                <br></br>
                 {/*Google LogIn*/}
                 <GoogleLogin clientId="280548920560-u13cbso5e0b21ouc0aqokmf7rlfvt4po.apps.googleusercontent.com"
                   buttonText="Continue With Google"
@@ -181,8 +160,9 @@ class Registration extends React.Component {
                 ></GoogleLogin>
                 <br />
                 <br />
+                <br />
                 <p>Already have an account?</p>
-                <input type="image" style={buttonStyle} src="./img/Login.png"/>
+                <a className="btn btn-default">Login</a>
               </form>
             </div>
           </div>

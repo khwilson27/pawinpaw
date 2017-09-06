@@ -2,98 +2,15 @@
 import React from "react";
 import ReactDOM from "react-dom"; 
 import helpers from "../utils/helpers.js";
-import {PhotoSwipe} from 'react-photoswipe';
-import {PhotoSwipeGallery} from 'react-photoswipe';
+
 var Link = require("react-router").Link;
 
-var buttonStyle = {
-  height: "60px",
-  whitespace:"pre",
-  // position: "relative",
-  // left: "300px" 
+// Create the Main component
+class Nearby extends React.Component{
 
-}
-import PropTypes from 'prop-types';
-class Nearby extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-
-    this.openPhotoSwipe = this.openPhotoSwipe.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-  this.state = {
-    isOpen: false,
-    items: [
-      {
-        src: 'https://www.organicfacts.net/wp-content/uploads/candogseatfigs.jpg',
-        w: 1200,
-        h: 900,
-        title: 'Image 1'
-      },
-      {
-        src: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_normal-abnormalities-in-dogs179216570.jpg',
-        w: 1200,
-        h: 900,
-        title: 'Image 2'
-      },
-      {
-        src: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_normal-abnormalities-in-dogs179216570.jpg',
-        w: 1200,
-        h: 900,
-        title: 'Image 3'
-      }
-    ],
-    galleryItems: [
-      {
-        src: 'https://www.organicfacts.net/wp-content/uploads/candogseatfigs.jpg',
-        thumbnail: 'https://www.organicfacts.net/wp-content/uploads/candogseatfigs.jpg',
-        w: 1200,
-        h: 900,
-        title: 'Image 1'
-      },
-      {
-        src: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_normal-abnormalities-in-dogs179216570.jpg',
-        thumbnail: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_normal-abnormalities-in-dogs179216570.jpg',
-        w: 1200,
-        h: 900,
-        title: 'Image 2'
-      },
-      {
-        src: 'https://canna-pet.com/wp-content/uploads/2017/08/impetigo-in-dogs_canna-pet-e1501630812568.jpg',
-        thumbnail: 'https://canna-pet.com/wp-content/uploads/2017/08/impetigo-in-dogs_canna-pet-e1501630812568.jpg',
-        w: 1200,
-        h: 900,
-        title: 'Image 3'
-      },
-      {
-        src: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_thyroid-dogs177494230.jpg',
-        thumbnail: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_thyroid-dogs177494230.jpg',
-        w: 1200,
-        h: 900,
-        title: 'Image 4'
-      }
-    ],
-    options: {}
-  };
-}
-  openPhotoSwipe (e){
-    e.preventDefault();
-    this.setState({
-      isOpen: true,
-      options: {
-        closeOnScroll: false
-      }
-    });
-  };
-
-  handleClose (){
-    this.setState({
-      isOpen: false
-    });
-  };
-
-  getThumbnailContent(item) {
+  // Our render method. Utilizing a few helper methods to keep this logic clean
+  render() {
     return (
-<<<<<<< HEAD
       <div className="mainContainer">
         {/* Navigation bar */}
         <div className="row">
@@ -127,45 +44,13 @@ class Nearby extends React.Component {
                 Paw in Paw &copy; 2017
             </p>
             </footer>
-=======
-      <img src={item.thumbnail} width={120} height={90}/>
-    );
-  };
-  render() {
-    return ( 
-      <div className='layout-page'>
-        <main className='layout-main'>
-          <div className='container'>
-            <h2>Hold my Paw?</h2>
-            <hr/>
-            {/* <button className='btn btn-primary' onClick={this.openPhotoSwipe}>
-              Click me
-            </button> */}
-            {/*Frame with Picture*/}
-            <iframe src="http://tailandfur.com/wp-content/uploads/2017/04/Why-do-dogs-have-different-Ear-Shapes00002.jpg" width="600" height="450" allowFullScreen="" frameBorder="0"></iframe>
-            <hr/>
-            {/* Pass Button */}
-              <input type="image" style={buttonStyle} src="./img/Pass.png"/>
-
-            {/* Like Button */}
-                <input type="image" style={buttonStyle} src="./img/Like.png"/>
-            
-            <PhotoSwipe isOpen={this.state.isOpen} items={this.state.items}
-              options={this.state.options}
-              onClose={this.handleClose}/>
-            <hr/>
-            <h2>Who barks nearby?</h2>
-            <hr/>
-            <PhotoSwipeGallery items={this.state.galleryItems}
-              thumbnailContent={this.getThumbnailContent}/>
-            
->>>>>>> a36f6e7fbe6ec3d4ea54d09f6a6e0f644ca877fa
           </div>
-        </main>
+        </div>
+        </div>
       </div>
-    );
+    )
   }
-}
+};
 
 // Export the module back to the route
 export default Nearby;

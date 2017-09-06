@@ -2,25 +2,9 @@
 import React from "react";
 import helpers from "../utils/helpers.js";
 import Dropzone from 'react-dropzone';
-import sha1 from "sha1";
-import axios from "axios"; 
+import axios from "axios";
 
 var Link = require("react-router").Link;
-var router = require("react-router");
-var browserHistory = router.browserHistory;
-
-var inputStyle = {
-  borderColor: "#FFB74D",
-  borderWidth: "2px",
-  borderStyle: "solid"
-}
-
-var buttonStyle = {
-  height: "60px",
-  // position: "relative",
-  // left: "300px" 
-
-}
 
 // Create the Main component
 class Edit extends React.Component {
@@ -60,34 +44,41 @@ class Edit extends React.Component {
 
   handleUpdate(event) {
     event.preventDefault();
-    const data = {
-      // id: this.props.id,
-      id: 1,
-      name: this.state.name,
-      age: this.state.age,
-      breed: this.state.breed,
-      likes: this.state.likes,
-      dislikes: this.state.dislikes,
-      favTreat: this.state.favTreat,
-      zipcode: this.state.zipcode,
-      photo: this.state.accepted[0]
-    }
-    console.log(data);
-    helpers.userData(data).then(() => {
-      this.setState({
-        saveClicked: true,
-        editClicked: false
+
+    helpers.cloudinaryUpload(this.state.accepted[0])
+      .then((res) => {
+        // File uploaded successfully
+        console.log(res.data);
+        const data = {
+          // id: this.props.id,
+          id: 1,
+          name: this.state.name,
+          age: this.state.age,
+          breed: this.state.breed,
+          likes: this.state.likes,
+          dislikes: this.state.dislikes,
+          favTreat: this.state.favTreat,
+          zipcode: this.state.zipcode,
+          photo_url: res.data.secure_url,
+          photo_publicid: res.data.public_id
+        }
+
+        console.log(data);
+
+        helpers.userData(data).then(() => {
+          this.setState({
+            saveClicked: true,
+            editClicked: false
+          });
+        });
+      })
+      .catch(function (err) {
+        console.error('err', err);
       });
-    });
-
-    helpers.cloudinaryUpload(this.state.accepted[0]);
-
   }
 
   onDrop(files) {
-
     console.log("dropped files");
-
   }
 
   renderForm() {
@@ -216,10 +207,9 @@ class Edit extends React.Component {
             </div>
           </div>
           <div>
-
-            <input type="image" onClick={this.handleClick} style={buttonStyle} src="./img/Edit.png" />
+            <button type="submit" onClick={this.handleClick} className="btn btn-default">Edit</button>
             <br />
-            <input type="image" onClick={this.handleSignUpdate} style={buttonStyle} src="./img/Save.png" />
+            <button type="submit" onClick={this.handleUpdate} className="btn btn-default">Save</button>
             <br />
             <button type="submit" onClick={this.handleRedirect} className="btn btn-default">Done</button>
           </div>

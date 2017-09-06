@@ -24,10 +24,7 @@ const helpers = {
                 return response;
             });
     },
-<<<<<<< HEAD
     // Edit user's info
-=======
->>>>>>> a36f6e7fbe6ec3d4ea54d09f6a6e0f644ca877fa
     userData(data) {
         console.log(data)
         return axios.put("/api/profile", data)
@@ -58,15 +55,7 @@ const helpers = {
             headers: { "X-Requested-With": "XMLHttpRequest" }
         };
 
-        axios.post(url, fd, config)
-            .then(function (res) {
-                // File uploaded successfully
-                console.log(res.data);
-            })
-            .catch(function (err) {
-                console.error('err', err);
-            });
-
+        return axios.post(url, fd, config)
     },
 
     // Delete an image to cloudinary

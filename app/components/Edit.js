@@ -66,8 +66,8 @@ class Edit extends React.Component {
 
         console.log(res.data);
         const data = {
-          // id: this.props.id,
-          id: 1,
+          id: this.props.id,
+          // id: 1,
           name: this.state.name,
           age: this.state.age,
           breed: this.state.breed,

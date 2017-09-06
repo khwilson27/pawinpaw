@@ -33,10 +33,8 @@ module.exports = (
       <Route path="Edit" component={Edit} />
       <Route path="Nearby" component={Nearby} />
 
-     
-
       {/* If user selects any other path... we get the Home Route */}
-      <IndexRoute component={Edit} />
+      <IndexRoute component={Login} />
 
     </Route>
   </Router>

@@ -20,8 +20,13 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.TEXT,
             len: [1]
         },
-        photo: {
-            type: DataTypes.BLOB
+        photo_url: {
+            type: DataTypes.TEXT,
+            len: [1]
+        },
+        photo_publicid: {
+            type: DataTypes.TEXT,
+            len: [1]
         },
         age: {
             type: DataTypes.INTEGER,

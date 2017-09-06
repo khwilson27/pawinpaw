@@ -54,7 +54,8 @@ class Edit extends React.Component {
   handleUpdate(event) {
     event.preventDefault();
     const data = {
-      id: this.props.id,
+      // id: this.props.id,
+      id: 1,
       name: this.state.name,
       age: this.state.age,
       breed: this.state.breed,
@@ -176,7 +177,7 @@ class Edit extends React.Component {
 
             <input type="image" onClick={this.handleClick} style={buttonStyle} src="./img/Edit.png" />
             <br />
-            <input type="image" onClick={this.handleSignUpdate} style={buttonStyle} src="./img/Save.png" />
+            <input type="image" onClick={this.handleUpdate} style={buttonStyle} src="./img/Save.png" />
             <br />
             <button type="submit" onClick={this.handleRedirect} className="btn btn-default">Done</button>
           </div>

@@ -5,6 +5,14 @@ import helpers from "../utils/helpers.js";
 import {PhotoSwipe} from 'react-photoswipe';
 import {PhotoSwipeGallery} from 'react-photoswipe';
 var Link = require("react-router").Link;
+
+var buttonStyle = {
+  height: "60px",
+  whitespace:"pre",
+  // position: "relative",
+  // left: "300px" 
+
+}
 import PropTypes from 'prop-types';
 class Nearby extends React.Component {
   constructor(props, context) {
@@ -16,19 +24,19 @@ class Nearby extends React.Component {
     isOpen: false,
     items: [
       {
-        src: 'http://lorempixel.com/1200/900/sports/1',
+        src: 'https://www.organicfacts.net/wp-content/uploads/candogseatfigs.jpg',
         w: 1200,
         h: 900,
         title: 'Image 1'
       },
       {
-        src: 'http://lorempixel.com/1200/900/sports/2',
+        src: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_normal-abnormalities-in-dogs179216570.jpg',
         w: 1200,
         h: 900,
         title: 'Image 2'
       },
       {
-        src: 'http://lorempixel.com/1200/900/sports/3',
+        src: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_normal-abnormalities-in-dogs179216570.jpg',
         w: 1200,
         h: 900,
         title: 'Image 3'
@@ -36,29 +44,29 @@ class Nearby extends React.Component {
     ],
     galleryItems: [
       {
-        src: 'http://lorempixel.com/1200/900/nightlife/1',
-        thumbnail: 'http://lorempixel.com/120/90/nightlife/1',
+        src: 'https://www.organicfacts.net/wp-content/uploads/candogseatfigs.jpg',
+        thumbnail: 'https://www.organicfacts.net/wp-content/uploads/candogseatfigs.jpg',
         w: 1200,
         h: 900,
         title: 'Image 1'
       },
       {
-        src: 'http://lorempixel.com/1200/900/nightlife/2',
-        thumbnail: 'http://lorempixel.com/120/90/nightlife/2',
+        src: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_normal-abnormalities-in-dogs179216570.jpg',
+        thumbnail: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_normal-abnormalities-in-dogs179216570.jpg',
         w: 1200,
         h: 900,
         title: 'Image 2'
       },
       {
-        src: 'http://lorempixel.com/1200/900/nightlife/3',
-        thumbnail: 'http://lorempixel.com/120/90/nightlife/3',
+        src: 'https://canna-pet.com/wp-content/uploads/2017/08/impetigo-in-dogs_canna-pet-e1501630812568.jpg',
+        thumbnail: 'https://canna-pet.com/wp-content/uploads/2017/08/impetigo-in-dogs_canna-pet-e1501630812568.jpg',
         w: 1200,
         h: 900,
         title: 'Image 3'
       },
       {
-        src: 'http://lorempixel.com/1200/900/nightlife/4',
-        thumbnail: 'http://lorempixel.com/120/90/nightlife/4',
+        src: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_thyroid-dogs177494230.jpg',
+        thumbnail: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_thyroid-dogs177494230.jpg',
         w: 1200,
         h: 900,
         title: 'Image 4'
@@ -93,19 +101,29 @@ class Nearby extends React.Component {
       <div className='layout-page'>
         <main className='layout-main'>
           <div className='container'>
-            <h2>PhotoSwipe</h2>
+            <h2>Hold my Paw?</h2>
             <hr/>
-            <button className='btn btn-primary' onClick={this.openPhotoSwipe}>
+            {/* <button className='btn btn-primary' onClick={this.openPhotoSwipe}>
               Click me
-            </button>
+            </button> */}
+            {/*Frame with Picture*/}
+            <iframe src="http://tailandfur.com/wp-content/uploads/2017/04/Why-do-dogs-have-different-Ear-Shapes00002.jpg" width="600" height="450" allowFullScreen="" frameBorder="0"></iframe>
+            <hr/>
+            {/* Pass Button */}
+              <input type="image" style={buttonStyle} src="./img/Pass.png"/>
+
+            {/* Like Button */}
+                <input type="image" style={buttonStyle} src="./img/Like.png"/>
+            
             <PhotoSwipe isOpen={this.state.isOpen} items={this.state.items}
               options={this.state.options}
               onClose={this.handleClose}/>
             <hr/>
-            <h2>PhotoSwipeGallery</h2>
+            <h2>Who barks nearby?</h2>
             <hr/>
             <PhotoSwipeGallery items={this.state.galleryItems}
               thumbnailContent={this.getThumbnailContent}/>
+            
           </div>
         </main>
       </div>

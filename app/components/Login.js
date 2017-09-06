@@ -142,19 +142,19 @@ class Login extends React.Component {
                 {/* Regular Login Button */}
                 <input type="image" onClick={this.handleSignin} style={buttonStyle} src="./img/Login.png"/>
                 <br />
+                <h4>Don't have an account?</h4>
 
-                {/*Google LogIn*/}
+                {/* Register Button */}
+                <input type="image" style={buttonStyle} src="./img/Register.png"/>
+                <br />
+                <h4>Or</h4>
+                 {/*Google LogIn*/}
                 <GoogleLogin clientId="280548920560-u13cbso5e0b21ouc0aqokmf7rlfvt4po.apps.googleusercontent.com"
                   buttonText="Continue With Google"
                   onSuccess={this.responseGoogle}
                   onFailure={this.responseGoogle}
                 ></GoogleLogin>
                 <br /><br/>
-                <p>Don't have an account?</p>
-
-                {/* Register Button */}
-                <input type="image" style={buttonStyle} src="./img/Register.png"/>
-                <br />
               </form>
             </div>
           </div>

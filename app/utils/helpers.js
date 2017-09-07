@@ -42,6 +42,24 @@ const helpers = {
                 return response;
             });
     },
+
+    //Find user's matches 
+    findMatches(userid) {
+
+        return axios.get(`/api/users/matches/${userid}`);
+        
+        // axios.get(`/api/users/matches/${userid}`)
+        //     .then((response) => {
+        //         console.log(response);
+        //         return response;
+        //     });
+    },
+
+    //Find a single user's match profile info
+    findMatchProfile(matchId) {
+        return axios.get(`/api/users/${matchId}`)
+    },
+
     // Uploads an image to cloudinary
     cloudinaryUpload(image) {
         const url = "https://api.cloudinary.com/v1_1/khwilsoncloudinary/image/upload";
@@ -58,9 +76,9 @@ const helpers = {
         return axios.post(url, fd, config)
     },
 
-    // Delete an image to cloudinary
-    cloudinaryDelete (publicid) {
-        const url = "https://api.cloudinary.com/v1_1/khwilsoncloudinary/resources/image/upload?public_ids[]="+publicid;
+    // Delete an image to cloudinary (not yet working)
+    cloudinaryDelete(publicid) {
+        const url = "https://api.cloudinary.com/v1_1/khwilsoncloudinary/resources/image/upload?public_ids[]=" + publicid;
 
         axios.delete(url, config)
             .then(function (res) {

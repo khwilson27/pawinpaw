@@ -1,13 +1,6 @@
 var db = require("../models");
 var crypto = require("crypto");
 var Passsalthash = require("./passsalthash.js");
-// import cloudinary from 'cloudinary';
-
-// cloudinary.config({ 
-//   cloud_name: 'sample', 
-//   api_key: '874837483274837', 
-//   api_secret: 'a676b67565c6767a6767d6767f676fe1' 
-// });
 
 module.exports = function (app) {
     //Reg Route
@@ -66,6 +59,20 @@ module.exports = function (app) {
             res.json(data);
         });
     });
+
+    //Get user info to display in Matches 
+    app.get("/api/users/:id", function (req, res) {
+        db.User.findOne({
+            where: {
+                id: req.params.id,
+            },
+            attributes: { exclude: ['password', 'salt'] }
+        }).then(function (data) {
+            console.log(data);
+            res.json(data);
+        });
+    });
+
     // Get all existing matches for user to view
     // 1. Query all matches where the logged-in user is the UserId (author of it)
     // 2. Query all of the matches where the logged-in user is the matchId (receiver of a request)
@@ -95,10 +102,16 @@ module.exports = function (app) {
                         }
                     }
                 }
-                var data = {
-                    matchId: matchArr
-                };
-                res.json(data);
+
+                db.User.findAll({
+                    where: {
+                        id: matchArr,
+                    },
+                    attributes: { exclude: ['password', 'salt', 'email'] }
+                }).then(function (data) {
+                    console.log(data);
+                    res.json(data);
+                });
             });
         });
     });

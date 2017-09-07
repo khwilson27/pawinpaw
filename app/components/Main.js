@@ -76,7 +76,7 @@ class Main extends React.Component {
             </div>
           </div>
         </nav>
-        {/* Here we will deploy the sub components (Search or Saved */}
+        {/* Here we will deploy the sub components */}
         {/* These sub-components are getting passed as this.props.children */}
         {/* {this.props.children} */}
         {childrenWithProps}

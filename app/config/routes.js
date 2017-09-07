@@ -19,6 +19,7 @@ import Main from "../components/Main";
 import Registration from "../components/Registration.js";
 import Nearby from "../components/Nearby.js";
 import Edit from "../components/Edit.js";
+import Match from "../components/Match.js";
 
 
 // Export the Routes
@@ -27,14 +28,15 @@ module.exports = (
   <Router history={browserHistory}>
     <Route path="/" component={Main}>
     
-      {/* If user selects Search or Saved show the appropriate component */}
+      {/* Routes show the appropriate component */}
       <Route path="Login" component={Login} />
       <Route path="Registration" component={Registration} />
       <Route path="Edit" component={Edit} />
       <Route path="Nearby" component={Nearby} />
+      <Route path="Match" component={Match} />
 
       {/* If user selects any other path... we get the Home Route */}
-      <IndexRoute component={Login} />
+      <IndexRoute component={Match} />
 
     </Route>
   </Router>

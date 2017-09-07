@@ -13,18 +13,17 @@ class Match extends React.Component {
         super(props);
 
         this.state = {
-            matchIds: null,
             matchProfiles: []
         };
     }
 
     // When this component mounts, get all user's matches and set it to state
     componentDidMount() {
-        // helpers.findMatches(this.props.id)
-        helpers.findMatches(1)
-            .then((matchIds) => {
-                this.setState({ matchIds: matchIds.data.matchId });
-                // console.log("matches", matchIds);
+        helpers.findMatches(this.props.id)
+        // helpers.findMatches(1)
+            .then((matchProfiles) => {
+                this.setState({ matchProfiles: matchProfiles.data });
+                console.log("matches", matchProfiles);
             })
             .catch(function (err) {
                 console.error('err', err);
@@ -36,6 +35,8 @@ class Match extends React.Component {
     }
 
     renderEmpty() {
+        console.log("empty");
+
         return (
             <div>
                 <h1>No matches yet...</h1>
@@ -44,17 +45,16 @@ class Match extends React.Component {
     }
 
     renderMatches() {
-        // console.log(this.state.matchIds);
-        this.state.matchIds.map((currentValue, index) => {
+        // console.log("full");
+
+        return this.state.matchProfiles.map((currentValue, index) => {
             // console.log(currentValue);
-
-            helpers.findMatchProfile(currentValue)
-                .then(matchProfile => {
-                    console.log(matchProfile);
-                })
-
+            return <p>{currentValue.name}</p>
 
         })
+
+
+
 
     }
 
@@ -63,7 +63,7 @@ class Match extends React.Component {
         return (
             <div>
                 <h1>Matches Page</h1>
-                {this.state.matchIds ? this.renderMatches() : this.renderEmpty()}
+                {this.state.matchProfiles ? this.renderMatches() : this.renderEmpty()}
             </div>
         )
     }

@@ -46,7 +46,8 @@ const helpers = {
     //Find user's matches 
     findMatches(userid) {
 
-        return axios.get(`/api/users/matches/${userid}`)
+        return axios.get(`/api/users/matches/${userid}`);
+        
         // axios.get(`/api/users/matches/${userid}`)
         //     .then((response) => {
         //         console.log(response);

@@ -102,10 +102,16 @@ module.exports = function (app) {
                         }
                     }
                 }
-                var data = {
-                    matchId: matchArr
-                };
-                res.json(data);
+
+                db.User.findAll({
+                    where: {
+                        id: matchArr,
+                    },
+                    attributes: { exclude: ['password', 'salt', 'email'] }
+                }).then(function (data) {
+                    console.log(data);
+                    res.json(data);
+                });
             });
         });
     });

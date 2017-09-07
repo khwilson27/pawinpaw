@@ -14,8 +14,7 @@ var logoStyle = {
 }
 
 // Create the Main component
-class Maintwo extends React.Component {
-
+class MainLogin extends React.Component {
 
   constructor(props, context) {
     super(props, context);
@@ -70,14 +69,13 @@ class Maintwo extends React.Component {
             <div className="collapse navbar-collapse navbar-ex1-collapse">
               <ul className="nav navbar-nav navbar-right">
                 {/* Using <Link> in place of <a> and "to" in place of "href" */}
-                <li><Link to="/Edit">Profile</Link></li>
-                <li><Link to="/Registration">Matches</Link></li>
-                <li><Link to="/Nearby">Nearby</Link></li>
+                <li><Link to="/Login">Login</Link></li>
+                <li><Link to="/Registration">Register</Link></li>
               </ul>
             </div>
           </div>
         </nav>
-        {/* Here we will deploy the sub components (Search or Saved */}
+        {/* Here we will deploy the sub components */}
         {/* These sub-components are getting passed as this.props.children */}
         {/* {this.props.children} */}
         {childrenWithProps}
@@ -96,4 +94,4 @@ class Maintwo extends React.Component {
 };
 
 // Export the module back to the route
-export default Maintwo;
+export default MainLogin;

@@ -229,18 +229,7 @@ class Edit extends React.Component {
             <br />
             <button type="submit" onClick={this.handleRedirect} className="btn btn-default">Done</button>
           </div>
-          {/* Footer */}
-          <div className="row">
-            <div className="col-sm-12 col-xs-12">
-              <footer>
-                <hr />
-                <p className="pull-right">
-                  <i className="fa fa-github" aria-hidden="true"></i>
-                  Paw in Paw &copy; 2017
-            </p>
-              </footer>
-            </div>
-          </div>
+
         </div>
       </div>
     )

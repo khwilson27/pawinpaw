@@ -28,7 +28,7 @@ module.exports = (
   <Router history={browserHistory}>
     <Route path="/" component={Main}>
     
-      {/* If user selects Search or Saved show the appropriate component */}
+      {/* Routes show the appropriate component */}
       <Route path="Login" component={Login} />
       <Route path="Registration" component={Registration} />
       <Route path="Edit" component={Edit} />

@@ -45,11 +45,18 @@ const helpers = {
 
     //Find user's matches 
     findMatches(userid) {
-        axios.get(`/api/users/matches/${userid}`)
-            .then((response) => {
-                console.log(response);
-                return response;
-            });
+
+        return axios.get(`/api/users/matches/${userid}`)
+        // axios.get(`/api/users/matches/${userid}`)
+        //     .then((response) => {
+        //         console.log(response);
+        //         return response;
+        //     });
+    },
+
+    //Find a single user's match profile info
+    findMatchProfile(matchId) {
+        return axios.get(`/api/users/${matchId}`)
     },
 
     // Uploads an image to cloudinary
@@ -69,8 +76,8 @@ const helpers = {
     },
 
     // Delete an image to cloudinary (not yet working)
-    cloudinaryDelete (publicid) {
-        const url = "https://api.cloudinary.com/v1_1/khwilsoncloudinary/resources/image/upload?public_ids[]="+publicid;
+    cloudinaryDelete(publicid) {
+        const url = "https://api.cloudinary.com/v1_1/khwilsoncloudinary/resources/image/upload?public_ids[]=" + publicid;
 
         axios.delete(url, config)
             .then(function (res) {

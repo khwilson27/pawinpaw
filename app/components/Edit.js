@@ -15,8 +15,8 @@ var inputStyle = {
 
 var buttonStyle = {
   height: "60px",
-  position: "relative",
-  left: "100px" 
+  display: "inline-block", 
+  margin: "5px 10px 10px 5px"
 }
 
 var textStyle = {
@@ -202,31 +202,31 @@ class Edit extends React.Component {
 
         <img src={this.state.photoUrl} />
 
-        <div className="form-group">
+        <div className="form-group" style={inputStyle}>
           <label htmlFor="name" style={textStyle}>Name: </label>
           {this.state.name}
         </div>
-        <div className="form-group">
+        <div className="form-group" style={inputStyle}>
           <label htmlFor="age" style={textStyle}>Age: </label>
           {this.state.age}
         </div>
-        <div className="form-group">
+        <div className="form-group" style={inputStyle}>
           <label htmlFor="breed" style={textStyle}> Breed: </label>
           {this.state.breed}
         </div>
-        <div className="form-group">
+        <div className="form-group" style={inputStyle}>
           <label htmlFor="likes" style={textStyle}> Likes: </label>
           {this.state.likes}
         </div>
-        <div className="form-group">
+        <div className="form-group" style={inputStyle}>
           <label htmlFor="dislikes" style={textStyle}> Dislikes: </label>
           {this.state.dislikes}
         </div>
-        <div className="form-group">
+        <div className="form-group" style={inputStyle}>
           <label htmlFor="favTreat" style={textStyle}> Favorite Treats: </label>
           {this.state.favTreat}
         </div>
-        <div className="form-group">
+        <div className="form-group" style={inputStyle}>
           <label htmlFor="zipcode" style={textStyle}> Zip Code: </label>
           {this.state.zipcode}
         </div>
@@ -261,10 +261,10 @@ class Edit extends React.Component {
           <div className="col-sm-8 col-xs-8 col-sm-offset-2 col-xs-offset-2">
 
             <input type="image" onClick={this.handleClick} style={buttonStyle} src="./img/Edit.png" />
-            <br />
+        
             <input type="image" onClick={this.handleUpdate} style={buttonStyle} src="./img/Save.png" />
-            <br />
-            <button type="submit" onClick={this.handleRedirect} className="btn btn-default">Done</button>
+           
+            <input type="image" onClick={this.handleRedirect} style={buttonStyle} src="./img/Done.png" />
           </div>
         </div>
       </div>

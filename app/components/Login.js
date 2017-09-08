@@ -19,8 +19,11 @@ var inputStyle = {
 
 var buttonStyle = {
   height: "60px",
-  position: "relative",
-  left: "38%" 
+  // position: "relative",
+  // left: "38%" 
+  display: "block",
+  margin: "auto",
+ 
 }
 
 var headingStyle = {
@@ -33,8 +36,10 @@ var textStyle = {
 }
 
 var gloginStyle = {
-  position: "relative",
-  left: "35px",
+  // position: "relative",
+  // left: "35px",
+  display: "block",
+  margin: "auto",
   backgroundColor: "#4cb2b2", 
   border: "none", 
   height: "40px",
@@ -241,7 +246,7 @@ class Login extends React.Component {
                   onSuccess={this.responseGoogle}
                   onFailure={this.responseGoogle}
                 ></GoogleLogin>
-                <br/><br/><br/>
+                <br/><br/>
                 <h4 style={textStyle}>Don't have an account?</h4>
 
                 {/* Register Button */}

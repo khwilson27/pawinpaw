@@ -20,8 +20,8 @@ var inputStyle = {
 
 var buttonStyle = {
   height: "60px",
-  position: "relative",
-  left: "38%" 
+  display: "block",
+  margin: "auto",
 
 }
 
@@ -35,8 +35,8 @@ var textStyle = {
 }
 
 var gloginStyle = {
-  position: "relative",
-  left: "35px",
+  display: "block",
+  margin: "auto",
   backgroundColor: "#4cb2b2", 
   border: "none", 
   height: "40px",
@@ -197,7 +197,7 @@ class Registration extends React.Component {
                 {/* <button onClick={this.handleSignup} className="btn btn-default">Register</button> */}
                 <input type="image" onClick={this.handleSignup} style={buttonStyle} src="./img/Register.png"/>
                 <br/><br/>
-                <br />
+             
                 <h4 style={textStyle}>Already have an account?</h4>
                 <input type="image" onClick={this.handleLoginBtn} style={buttonStyle} src="./img/Login.png"/>
                 <h4 style={textStyle}>Or</h4>

@@ -37,8 +37,8 @@ class Edit extends React.Component {
       photoUrl: this.props.photo_url,
       photo_publicid: this.props.photo_publicid,
 
-      editClicked: false,
-      saveClicked: true,
+      editClicked: true,
+      saveClicked: false,
 
       // image files accepted and rejected from file upload dropzone
       accepted: [],

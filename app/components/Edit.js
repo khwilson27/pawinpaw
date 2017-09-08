@@ -37,8 +37,8 @@ class Edit extends React.Component {
       photoUrl: this.props.photo_url,
       photo_publicid: this.props.photo_publicid,
 
-      editClicked: true,
-      saveClicked: false,
+      editClicked: false,
+      saveClicked: true,
 
       // image files accepted and rejected from file upload dropzone
       accepted: [],
@@ -59,65 +59,65 @@ class Edit extends React.Component {
   }
 
   handleUpdate(event) {
-    // event.preventDefault();
+    event.preventDefault();
 
-    // if (this.state.accepted) {
-    //   helpers.cloudinaryUpload(this.state.accepted[0])
-    //     .then((res) => {
-    //       // File uploaded successfully
-    //       this.state.photoUrl = res.data.secure_url;
+    if (this.state.accepted[0]) {
+      helpers.cloudinaryUpload(this.state.accepted[0])
+        .then((res) => {
+          // File uploaded successfully
+          this.state.photoUrl = res.data.secure_url;
 
-    //       console.log(res.data);
-    //       const data = {
-    //         id: this.props.id,
-    //         // id: 1,
-    //         name: this.state.name,
-    //         age: this.state.age,
-    //         breed: this.state.breed,
-    //         likes: this.state.likes,
-    //         dislikes: this.state.dislikes,
-    //         favTreat: this.state.favTreat,
-    //         zipcode: this.state.zipcode,
-    //         photo_url: res.data.secure_url,
-    //         photo_publicid: res.data.public_id
-    //       }
+          console.log(res.data);
+          const data = {
+            id: this.props.id,
+            // id: 1,
+            name: this.state.name,
+            age: this.state.age,
+            breed: this.state.breed,
+            likes: this.state.likes,
+            dislikes: this.state.dislikes,
+            favTreat: this.state.favTreat,
+            zipcode: this.state.zipcode,
+            photo_url: res.data.secure_url,
+            photo_publicid: res.data.public_id
+          }
 
-    //       console.log(data);
+          console.log(data);
 
-    //       helpers.userData(data).then(() => {
-    //         this.setState({
-    //           saveClicked: true,
-    //           editClicked: false
-    //         });
-    //       });
-    //     })
-    //     .catch(function (err) {
-    //       console.error('err', err);
-    //     });
-    // } else {
-    //   const data = {
-    //     id: this.props.id,
-    //     // id: 1,
-    //     name: this.state.name,
-    //     age: this.state.age,
-    //     breed: this.state.breed,
-    //     likes: this.state.likes,
-    //     dislikes: this.state.dislikes,
-    //     favTreat: this.state.favTreat,
-    //     zipcode: this.state.zipcode,
-    //     photo_url: this.state.photo_url,
-    //     photo_publicid: this.state.photo_publicid
-    //   }
+          helpers.userData(data).then(() => {
+            this.setState({
+              saveClicked: false,
+              editClicked: true
+            });
+          });
+        })
+        .catch(function (err) {
+          console.error('err', err);
+        });
+    } else {
+      const data = {
+        id: this.props.id,
+        // id: 1,
+        name: this.state.name,
+        age: this.state.age,
+        breed: this.state.breed,
+        likes: this.state.likes,
+        dislikes: this.state.dislikes,
+        favTreat: this.state.favTreat,
+        zipcode: this.state.zipcode,
+        photo_url: this.state.photo_url,
+        photo_publicid: this.state.photo_publicid
+      }
 
-    //   console.log(data);
+      console.log(data);
 
-    //   helpers.userData(data).then(() => {
-    //     this.setState({
-    //       saveClicked: true,
-    //       editClicked: false
-    //     });
-    //   });
-    // }
+      helpers.userData(data).then(() => {
+        this.setState({
+          saveClicked: true,
+          editClicked: false
+        });
+      });
+    }
 
   }
 
@@ -228,8 +228,8 @@ class Edit extends React.Component {
 
   handleClick() {
     this.setState({
-      editClicked: false,
-      saveClicked: true
+      editClicked: true,
+      saveClicked: false
     })
   }
 

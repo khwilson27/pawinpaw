@@ -17,17 +17,28 @@ var inputStyle = {
   borderStyle: "solid"
 }
 
+var logoStyle = {
+  display: "block",
+  margin: "auto"
+}
+
 var buttonStyle = {
-  height: "60px",
-  // position: "relative",
-  // left: "38%" 
   display: "block",
   margin: "auto",
- 
+  backgroundColor: "#009191", 
+  border: "none", 
+  height: "40px",
+  width: "180px",
+  color: "white",
+  borderRadius: "5px",
+  fontFamily: "Roboto Condensed",
+  letterSpacing: "1px",
+  marginBottom: "5px"
 }
 
 var headingStyle = {
   fontFamily: "Roboto Condensed",
+  textAlign: "center"
 }
 
 var textStyle = {
@@ -36,19 +47,23 @@ var textStyle = {
 }
 
 var gloginStyle = {
-  // position: "relative",
-  // left: "35px",
   display: "block",
   margin: "auto",
-  backgroundColor: "#4cb2b2", 
+  backgroundColor: "#F46C6C", 
   border: "none", 
   height: "40px",
+  width: "180px",
   color: "white",
   borderRadius: "5px",
   fontFamily: "Roboto Condensed",
   letterSpacing: "1px"
 }
-  
+
+var glyphiconStyle = {
+  backgroundColor: "#F79898",
+  width: "16px",
+  height: "20px"
+}
 
 // Create the Main component
 class Login extends React.Component {
@@ -223,6 +238,8 @@ class Login extends React.Component {
           {/* Login fields */}
           <div className="row">
             <div className="col-sm-8 col-xs-8 col-sm-offset-2 col-xs-offset-2">
+               {/* Logo Image */}
+            <img style={logoStyle} src="./img/pawinpaw-logo.png" />
               <h2 style={headingStyle}>LOG IN</h2>
               <br/>
               <form onSubmit={this.handleSignin}>
@@ -238,8 +255,8 @@ class Login extends React.Component {
                 </div>
                 <br/>
                 {/* Regular Login Button */}
-                <input type="image" onClick={this.handleSignin} style={buttonStyle} src="./img/Login.png"/>
-               <h4 style={textStyle}>Or</h4>
+                {/* <input type="image" onClick={this.handleSignin} style={buttonStyle} src="./img/Login.png"/> */}
+                <button type="submit" onClick={this.handleSignin} style={buttonStyle}>LOG IN</button>
                  {/*Google LogIn*/}
                 <GoogleLogin style={gloginStyle} clientId="280548920560-u13cbso5e0b21ouc0aqokmf7rlfvt4po.apps.googleusercontent.com"
                   buttonText="Continue With Google"
@@ -250,7 +267,8 @@ class Login extends React.Component {
                 <h4 style={textStyle}>Don't have an account?</h4>
 
                 {/* Register Button */}
-                <input type="image" onClick={this.handleRegisterBtn} style={buttonStyle} src="./img/Register.png"/>
+                {/* <input type="image" onClick={this.handleRegisterBtn} style={buttonStyle} src="./img/Register.png"/> */}
+                <button type="submit" onClick={this.handleRegisterBtn} style={buttonStyle}>Register</button>
                 <br />
                 
                 <br /><br/>

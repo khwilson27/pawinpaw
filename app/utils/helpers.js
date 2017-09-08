@@ -60,6 +60,10 @@ const helpers = {
         return axios.get(`/api/users/${matchId}`)
     },
 
+    unmatchUser(userId, matchId) {
+        return axios.put(`/api/unmatch/${userId}/${matchId}`)
+    },
+
     // Uploads an image to cloudinary
     cloudinaryUpload(image) {
         const url = "https://api.cloudinary.com/v1_1/khwilsoncloudinary/image/upload";

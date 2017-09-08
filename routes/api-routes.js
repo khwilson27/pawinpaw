@@ -73,6 +73,8 @@ module.exports = function (app) {
         });
     });
 
+
+
     // Get all existing matches for user to view
     // 1. Query all matches where the logged-in user is the UserId (author of it)
     // 2. Query all of the matches where the logged-in user is the matchId (receiver of a request)
@@ -107,13 +109,32 @@ module.exports = function (app) {
                     where: {
                         id: matchArr,
                     },
-                    attributes: { exclude: ['password', 'salt', 'email'] }
+                    attributes: { exclude: ['password', 'salt'] }
                 }).then(function (data) {
                     console.log(data);
                     res.json(data);
                 });
             });
         });
+    });
+
+    //Unmatch a user
+    app.put("/api/unmatch/:userid/:matchid", function (req, res) {
+
+        db.Match.update({
+            request: false
+        }, {
+                where: {
+                    UserId: req.params.userid,
+                    matchId: req.params.matchid
+                }
+            }).then(function (data) {
+                if (data) {
+                    res.json({ message: "Successful update!" });
+                } else {
+                    res.json({ message: "Unsuccessful..." });
+                }
+            });
     });
 
     //Edit user profile
@@ -141,6 +162,7 @@ module.exports = function (app) {
                 }
             });
     });
+
     //Post like or pass data
     app.post("/api/match/post", function (req, res) {
         db.Match.create({

@@ -12,12 +12,8 @@ var Router = router.Router;
 // https://github.com/ReactTraining/react-router/blob/master/docs/guides/Histories.md#browserhistory
 var browserHistory = router.browserHistory;
 // Reference the high-level components
-
 import Login from "../components/Login.js";
-import EditProfile from "../components/Edit.js";
 import Main from "../components/Main";
-import MainHome from "../components/MainHome";
-import MainLogin from "../components/MainLogin";
 import Registration from "../components/Registration.js";
 import Nearby from "../components/Nearby.js";
 import Edit from "../components/Edit.js";
@@ -29,28 +25,16 @@ module.exports = (
   // High level component is the Router component.
   <Router history={browserHistory}>
     <Route path="/" component={Main}>
-
-      <Route path="/" component={MainLogin}>
-        {/* Routes show the appropriate component */}
-        <Route path="Login" component={Login} />
-        <Route path="Registration" component={Registration} />
-
-        <IndexRoute component={Login} />
-
-      </Route>
-
-      <Route path="" component={MainHome}>
-
-        <Route path="Edit" component={Edit} />
-        <Route path="Nearby" component={Nearby} />
-        <Route path="Match" component={Match} />
-
-        <IndexRoute component={Nearby} />
-
-      </Route>
+    
+      {/* Routes show the appropriate component */}
+      <Route path="Login" component={Login} />
+      <Route path="Registration" component={Registration} />
+      <Route path="Edit" component={Edit} />
+      <Route path="Nearby" component={Nearby} />
+      <Route path="Match" component={Match} />
 
       {/* If user selects any other path... we get the Home Route */}
-      <IndexRoute component={MainLogin} />
+      <IndexRoute component={Login} />
 
     </Route>
   </Router>

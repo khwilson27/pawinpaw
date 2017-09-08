@@ -13,14 +13,14 @@ class Match extends React.Component {
         super(props);
 
         this.state = {
-            matchProfiles: []
+            matchProfiles: null
         };
     }
 
     // When this component mounts, get all user's matches and set it to state
     componentDidMount() {
-        // helpers.findMatches(this.props.id)
-        helpers.findMatches(1)
+        helpers.findMatches(this.props.id)
+        // helpers.findMatches(1)
             .then((matchProfiles) => {
                 this.setState({ matchProfiles: matchProfiles.data });
                 console.log("matches", matchProfiles);

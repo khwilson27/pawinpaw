@@ -32,9 +32,10 @@ class Registration extends React.Component {
     super(props, context);
 
     this.state = {
-      email: " ",
-      password: " ",
-      registered: false
+      email: "",
+      password: "",
+      registered: false,
+      isAuth: this.props.isAuth
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -67,7 +68,8 @@ class Registration extends React.Component {
           this.setState({
             id: Response.data.id,
             email: Response.data.email,
-            registered: true
+            registered: true,
+            isAuth: true
 
           });
           this.props.setParent(this.state);
@@ -80,6 +82,10 @@ class Registration extends React.Component {
       console.log("The password not matches please try again");
       this.setState({ error: "The password not matches please try again" })
     }
+  }
+
+  handleLoginBtn() {
+    browserHistory.replace("/Login");
   }
 
   //Google Response Here!!!
@@ -174,7 +180,7 @@ class Registration extends React.Component {
                 <br />
                 <br />
                 <p>Already have an account?</p>
-                <input type="image" style={buttonStyle} src="./img/Login.png"/>
+                <input type="image" onClick={this.handleLoginBtn} style={buttonStyle} src="./img/Login.png"/>
               </form>
             </div>
           </div>

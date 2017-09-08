@@ -27,14 +27,16 @@ class Edit extends React.Component {
     super(props);
 
     this.state = {
-      name: " ",
-      age: " ",
-      breed: " ",
-      likes: " ",
-      dislikes: " ",
-      favTreat: " ",
-      zipcode: " ",
-      photoUrl: "",
+      name: this.props.name,
+      age: this.props.age,
+      breed: this.props.breed,
+      likes: this.props.likes,
+      dislikes: this.props.dislikes,
+      favTreat: this.props.favTreat,
+      zipcode: this.props.zipcode,
+      photoUrl: this.props.photo_url,
+      photo_publicid: this.props.photo_publicid,
+
       editClicked: true,
       saveClicked: false,
 
@@ -57,40 +59,66 @@ class Edit extends React.Component {
   }
 
   handleUpdate(event) {
-    event.preventDefault();
+    // event.preventDefault();
 
-    helpers.cloudinaryUpload(this.state.accepted[0])
-      .then((res) => {
-        // File uploaded successfully
-        this.state.photoUrl = res.data.secure_url;
+    // if (this.state.accepted) {
+    //   helpers.cloudinaryUpload(this.state.accepted[0])
+    //     .then((res) => {
+    //       // File uploaded successfully
+    //       this.state.photoUrl = res.data.secure_url;
 
-        console.log(res.data);
-        const data = {
-          id: this.props.id,
-          // id: 1,
-          name: this.state.name,
-          age: this.state.age,
-          breed: this.state.breed,
-          likes: this.state.likes,
-          dislikes: this.state.dislikes,
-          favTreat: this.state.favTreat,
-          zipcode: this.state.zipcode,
-          photo_url: res.data.secure_url,
-          photo_publicid: res.data.public_id
-        }
+    //       console.log(res.data);
+    //       const data = {
+    //         id: this.props.id,
+    //         // id: 1,
+    //         name: this.state.name,
+    //         age: this.state.age,
+    //         breed: this.state.breed,
+    //         likes: this.state.likes,
+    //         dislikes: this.state.dislikes,
+    //         favTreat: this.state.favTreat,
+    //         zipcode: this.state.zipcode,
+    //         photo_url: res.data.secure_url,
+    //         photo_publicid: res.data.public_id
+    //       }
 
-        console.log(data);
+    //       console.log(data);
 
-        helpers.userData(data).then(() => {
-          this.setState({
-            saveClicked: true,
-            editClicked: false
-          });
-        });
-      })
-      .catch(function (err) {
-        console.error('err', err);
-      });
+    //       helpers.userData(data).then(() => {
+    //         this.setState({
+    //           saveClicked: true,
+    //           editClicked: false
+    //         });
+    //       });
+    //     })
+    //     .catch(function (err) {
+    //       console.error('err', err);
+    //     });
+    // } else {
+    //   const data = {
+    //     id: this.props.id,
+    //     // id: 1,
+    //     name: this.state.name,
+    //     age: this.state.age,
+    //     breed: this.state.breed,
+    //     likes: this.state.likes,
+    //     dislikes: this.state.dislikes,
+    //     favTreat: this.state.favTreat,
+    //     zipcode: this.state.zipcode,
+    //     photo_url: this.state.photo_url,
+    //     photo_publicid: this.state.photo_publicid
+    //   }
+
+    //   console.log(data);
+
+    //   helpers.userData(data).then(() => {
+    //     this.setState({
+    //       saveClicked: true,
+    //       editClicked: false
+    //     });
+    //   });
+    // }
+
   }
 
   onDrop(files) {
@@ -99,7 +127,11 @@ class Edit extends React.Component {
 
   renderForm() {
     return (
+
       <form onSubmit={this.handleUpdate}>
+
+        <img src={this.state.photoUrl} />
+
         <div className="form-group">
           <label htmlFor="name">Name</label>
           <input type="email" value={this.state.name} style={inputStyle} className="form-control" id="name" placeholder="Enter Name" onChange={this.handleChange} />
@@ -138,6 +170,7 @@ class Edit extends React.Component {
             <p>Try dropping some files here, or click to select files to upload.</p>
             <p>Only *.jpeg and *.png images will be accepted.</p>
             <p>Max image size is 500kb.</p>
+            <p>Aspect ratio of 1:1 recommended.</p>
           </Dropzone>
         </div>
 
@@ -195,8 +228,8 @@ class Edit extends React.Component {
 
   handleClick() {
     this.setState({
-      editClicked: true,
-      saveClicked: false
+      editClicked: false,
+      saveClicked: true
     })
   }
 
@@ -229,7 +262,18 @@ class Edit extends React.Component {
             <br />
             <button type="submit" onClick={this.handleRedirect} className="btn btn-default">Done</button>
           </div>
-
+          {/* Footer */}
+          <div className="row">
+            <div className="col-sm-12 col-xs-12">
+              <footer>
+                <hr />
+                <p className="pull-right">
+                  <i className="fa fa-github" aria-hidden="true"></i>
+                  Paw in Paw &copy; 2017
+            </p>
+              </footer>
+            </div>
+          </div>
         </div>
       </div>
     )

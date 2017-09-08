@@ -13,6 +13,9 @@ var buttonStyle = {
   // left: "300px" 
 
 }
+
+var count = 0;
+
 import PropTypes from 'prop-types';
 class Nearby extends React.Component {
   constructor(props, context) {
@@ -20,8 +23,14 @@ class Nearby extends React.Component {
 
     this.openPhotoSwipe = this.openPhotoSwipe.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handelMoving = this.handelMoving.bind(this);
+    this.handelLikeclick = this.handelLikeclick.bind(this);
+    this.handelPassclick = this.handelPassclick.bind(this);
+    this.handleMatchreq = this.handleMatchreq.bind(this);
   this.state = {
     isOpen: false,
+    likeClicked: false,
+    passClicked: false,
     items: [
       {
         src: 'https://www.organicfacts.net/wp-content/uploads/candogseatfigs.jpg',
@@ -96,8 +105,78 @@ class Nearby extends React.Component {
       <img src={item.thumbnail} width={120} height={90}/>
     );
   };
+
+  componentDidMount(){
+    helpers.findNear(this.props.zipcode, this.props.id).then((res)=>{
+console.log(res)
+this.setState({
+  users: res.data
+})
+    })
+    
+  }
+
+  handelLikeclick() {
+    this.setState({
+      likeClicked: true,
+      passClicked: false
+    })
+    this.handleMatchreq()
+  }
+  handelPassclick() {
+    this.setState({
+      likeClicked: false,
+      passClicked: true
+    })
+    this.handleMatchreq()
+  }
+
+  handelMoving(){
+    let usersArr = this.state.users;
+    if (count >= usersArr.length ){
+      count = 0;
+      this.handelMoving()
+    }else{
+
+console.log(count) 
+
+console.log(usersArr[count])
+this.setState({
+  thisuserdata : usersArr[count]
+})
+count++
+    }
+  }
+
+  renderMatces(){
+    console.log(this.state.thisuserdata)
+return(
+            <div>
+             <iframe src={this.state.thisuserdata.photo_url} width="600" height="450" allowFullScreen="" frameBorder="0"></iframe>
+              <p>{this.state.thisuserdata.name}</p>
+              <p>{this.state.thisuserdata.age}</p>
+              <p>{this.state.thisuserdata.email}</p>
+              <p>{this.state.thisuserdata.breed}</p>
+              <p>{this.state.thisuserdata.likes}</p>
+              <p>{this.state.thisuserdata.dislikes}</p>
+              <p>{this.state.thisuserdata.favTreat}</p>
+              <p>{this.state.thisuserdata.zipcode}</p>
+             </div>
+)
+  }
+
+  handleMatchreq(){
+    if(this.state.likeClicked){
+      helpers.matchRequest(this.props.id, this.state.thisuserdata.id, true )
+    }else if(this.state.passClicked){
+      helpers.matchRequest(this.props.id, this.state.thisuserdata.id, false )
+    }
+  }
+
   render() {
+    console.log(this.props.zipcode+" "+this.props.id)
     return ( 
+      
       <div className='layout-page'>
         <main className='layout-main'>
           <div className='container'>
@@ -106,14 +185,15 @@ class Nearby extends React.Component {
             {/* <button className='btn btn-primary' onClick={this.openPhotoSwipe}>
               Click me
             </button> */}
+            {this.state.likeClicked || this.state.passClicked ? this.renderMatces() : "any "}
             {/*Frame with Picture*/}
-            <iframe src="http://tailandfur.com/wp-content/uploads/2017/04/Why-do-dogs-have-different-Ear-Shapes00002.jpg" width="600" height="450" allowFullScreen="" frameBorder="0"></iframe>
-            <hr/>
+             {/* <iframe src="http://tailandfur.com/wp-content/uploads/2017/04/Why-do-dogs-have-different-Ear-Shapes00002.jpg" width="600" height="450" allowFullScreen="" frameBorder="0"></iframe>
+            <hr/> */}
             {/* Pass Button */}
-              <input type="image" style={buttonStyle} src="./img/Pass.png"/>
+              <input type="image" onClick={()=>{this.handelMoving(); this.handelPassclick(); }} style={buttonStyle} src="./img/Pass.png"/>
 
             {/* Like Button */}
-                <input type="image" style={buttonStyle} src="./img/Like.png"/>
+                <input type="image" onClick={()=>{this.handelMoving(); this.handelLikeclick(); }} style={buttonStyle} src="./img/Like.png"/>
             
             <PhotoSwipe isOpen={this.state.isOpen} items={this.state.items}
               options={this.state.options}

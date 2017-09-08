@@ -46,6 +46,7 @@ class Edit extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleRedirect = this.handleRedirect.bind(this)
     // this.displayForm  = this.displayForm.bind(this);
   }
 
@@ -87,10 +88,13 @@ class Edit extends React.Component {
             editClicked: false
           });
         });
+       
       })
       .catch(function (err) {
         console.error('err', err);
       });
+      console.log(this.state.zipcode)
+      
   }
 
   onDrop(files) {
@@ -201,6 +205,11 @@ class Edit extends React.Component {
   }
 
   handleRedirect() {
+    console.log(this.state.zipcode+"Here Zipcode!!!!!!!!!!!!!!!!")
+    this.props.setParent({zipcode:this.state.zipcode,
+    id:this.props.id,
+  email:this.props.email
+});
     browserHistory.replace("/Nearby")
   }
   // Our render method. Utilizing a few helper methods to keep this logic clean

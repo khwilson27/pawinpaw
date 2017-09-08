@@ -22,7 +22,8 @@ class Main extends React.Component {
 
     this.state = {
       email: " ",
-      id: " "
+      id: " ",
+      zipcode: " "
     };
 
     this.setParent = this.setParent.bind(this);
@@ -33,20 +34,22 @@ class Main extends React.Component {
     console.log(props.email + " " + props.id)
     this.setState({
       id: props.id,
-      email: props.email
+      email: props.email,
+      zipcode:props.zipcode
     });
   }
   render() {
-
+console.log(this.state.zipcode+"  "+this.state.email + "  " + this.state.id)
     const childrenWithProps = React.Children.map(this.props.children,
       (child) => React.cloneElement(child, {
         setParent: this.setParent,
         id: this.state.id,
-        email: this.state.email
+        email: this.state.email,
+        zipcode:this.state.zipcode
       })
     );
 
-    console.log(this.state.email + "  " + this.state.id)
+
     return (
       // We can only render a single div. So we need to group everything inside of this main-container one
       <div className="main-container">

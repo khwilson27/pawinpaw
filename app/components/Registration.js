@@ -9,6 +9,7 @@ import helpers from "../utils/helpers.js";
 import GoogleLogin from 'react-google-login';
 
 
+
 var Link = require("react-router").Link;
 
 // styling for input fields
@@ -113,7 +114,11 @@ class Registration extends React.Component {
             email: logResponse.data.email,
             loggedin: true
           });
-          this.props.setParent(this.state)
+          
+          this.props.setParent({
+            id:this.state.id,
+            email:this.state.email
+          })
           this.handleRedirect();
 
         });

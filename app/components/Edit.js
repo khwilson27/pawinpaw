@@ -243,7 +243,7 @@ class Edit extends React.Component {
   }
 
   handleRedirect() {
-    browserHistory.replace("/Nearby")
+    browserHistory.replace("/Nearby");
   }
   // Our render method. Utilizing a few helper methods to keep this logic clean
   render() {

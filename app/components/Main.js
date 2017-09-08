@@ -103,7 +103,7 @@ class Main extends React.Component {
         <li><Link to="/Edit">Profile</Link></li>
         <li><Link to="/Match">Matches</Link></li>
         <li><Link to="/Nearby">Nearby</Link></li>
-        <li><p onClick={this.handleLogout}>Logout</p></li>
+        <li><Link to="/Login" onClick={this.handleLogout}>Logout</Link></li>
       </ul>
     )
   }

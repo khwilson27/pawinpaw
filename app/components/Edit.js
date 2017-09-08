@@ -85,10 +85,15 @@ class Edit extends React.Component {
           console.log(data);
 
           helpers.userData(data).then(() => {
-            this.setState({
-              saveClicked: false,
-              editClicked: true
-            });
+
+            data.id = this.props.id;
+            data.email = this.props.email;
+            data.isAuth = this.props.isAuth;
+
+            this.state.saveClicked = true;
+            this.state.editClicked = false;
+            this.props.setParent(data);
+
           });
         })
         .catch(function (err) {

@@ -36,7 +36,6 @@ class Main extends React.Component {
       dislikes: "",
       favTreat: ""
 
-
     };
 
     this.setParent = this.setParent.bind(this);
@@ -68,7 +67,17 @@ class Main extends React.Component {
     this.setState({
       id: "",
       email: "",
-      isAuth: false
+      isAuth: false,
+
+      name: "",
+      photo_url: "",
+      photo_publicid: "",
+      age: "",
+      zipcode: "",
+      breed: "",
+      likes: "",
+      dislikes: "",
+      favTreat: ""
     })
     browserHistory.replace("/Login")
   }

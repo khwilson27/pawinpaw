@@ -55,10 +55,33 @@ class Login extends React.Component {
       //Getting the new user data through the Response & Use It To Update The State.
       console.log(Response);
       if (Response.data.message) {
-        this.setState({
-          message: Response.data.message,
-          loggedin: false
-        });
+        // this.setState({
+        //   message: Response.data.message,
+        //   loggedin: false
+        // });
+
+        const newState = {
+          id: Response.data.id,
+          email: Response.data.email,
+
+          name: Response.data.name,
+          photo_url: Response.data.photo_url,
+          photo_publicid: Response.data.photo_publicid,
+          age: Response.data.age,
+          zipcode: Response.data.zipcode,
+          breed: Response.data.breed,
+          likes: Response.data.likes,
+          dislikes: Response.data.dislikes,
+          favTreat: Response.data.favTreat,
+
+          loggedin: true,
+          isAuth: true
+        };
+
+        this.props.setParent(newState);
+        this.setState(newState);
+        this.handleRedirect();
+        
       } else if (Response.data.id) {
 
         console.log(Response.data);
@@ -119,14 +142,37 @@ class Login extends React.Component {
         helpers.userLogin(response.profileObj.email, response.profileObj.googleId).then((logResponse) => {
           //Getting the new user data through the Response & Use It To Update The State.
           console.log(logResponse);
-          this.setState({
+          // this.setState({
+          //   id: logResponse.data.id,
+          //   email: logResponse.data.email,
+          //   loggedin: true
+          // });
+          // this.props.setParent(this.state)
+          // //redirect to Nearby
+          // this.handleRedirect()
+
+          const newState = {
             id: logResponse.data.id,
             email: logResponse.data.email,
-            loggedin: true
-          });
-          this.props.setParent(this.state)
-          //redirect to Nearby
-          this.handleRedirect()
+  
+            name: logResponse.data.name,
+            photo_url: logResponse.data.photo_url,
+            photo_publicid: logResponse.data.photo_publicid,
+            age: logResponse.data.age,
+            zipcode: logResponse.data.zipcode,
+            breed: logResponse.data.breed,
+            likes: logResponse.data.likes,
+            dislikes: logResponse.data.dislikes,
+            favTreat: logResponse.data.favTreat,
+  
+            loggedin: true,
+            isAuth: true
+          };
+  
+          this.props.setParent(newState);
+          this.setState(newState);
+          this.handleRedirect();
+
         });
       }
     });

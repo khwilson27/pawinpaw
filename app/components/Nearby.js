@@ -13,6 +13,9 @@ var buttonStyle = {
   // left: "300px" 
 
 }
+
+
+
 import PropTypes from 'prop-types';
 class Nearby extends React.Component {
   constructor(props, context) {
@@ -20,8 +23,21 @@ class Nearby extends React.Component {
 
     this.openPhotoSwipe = this.openPhotoSwipe.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handelMoving = this.handelMoving.bind(this);
+    this.handelLikeclick = this.handelLikeclick.bind(this);
+    this.handelPassclick = this.handelPassclick.bind(this);
+    this.handleMatchreq = this.handleMatchreq.bind(this);
+this.randerAlldata = this.randerAlldata.bind(this);
+this.backHandle = this.backHandle.bind(this);
   this.state = {
+    count : 0,
     isOpen: false,
+    likeClicked: false,
+    passClicked: false,
+    photoClicked: false,
+    backClicked:false,
+    users:[],
+    thisuserdata:{},
     items: [
       {
         src: 'https://www.organicfacts.net/wp-content/uploads/candogseatfigs.jpg',
@@ -96,24 +112,70 @@ class Nearby extends React.Component {
       <img src={item.thumbnail} width={120} height={90}/>
     );
   };
-  render() {
-    return ( 
-      <div className='layout-page'>
-        <main className='layout-main'>
-          <div className='container'>
-            <h2>Hold my Paw?</h2>
+
+  componentDidMount() {
+    helpers.findNear(this.props.zipcode, this.props.id).then((res) => {
+      console.log(res)
+      this.setState({
+        users: res.data
+      })
+    })
+  }
+
+  handelLikeclick() {
+    this.setState({
+      likeClicked: true,
+      passClicked: false
+    })
+    this.handleMatchreq()
+  }
+  handelPassclick() {
+    this.setState({
+      likeClicked: false,
+      passClicked: true
+    })
+    // this.handleMatchreq()
+  }
+
+  handelMoving(){
+    let usersArr = this.state.users;
+if (this.state.count >= usersArr.length-2 ){
+      this.setState({count : 0});
+      this.handelMoving()
+    }else{
+
+console.log(this.state.count) 
+
+console.log(usersArr[this.state.count])
+this.setState({
+  thisuserdata : usersArr[this.state.count]
+})
+this.setState({count : this.state.count + 1})
+    }
+  }
+
+  randPhotolink(){
+    return(
+      <div>
+      <h2>Hold my Paw?</h2>
             <hr/>
             {/* <button className='btn btn-primary' onClick={this.openPhotoSwipe}>
               Click me
             </button> */}
+            {this.state.likeClicked || this.state.passClicked ?  (<div>
+              <a href="#" onClick={this.randerAlldata}>
+      <img src={this.state.thisuserdata.photo_url} width="600" height="450" allowFullScreen="" frameBorder="0" />
+        </a>
+      </div> ): "any "}
+
             {/*Frame with Picture*/}
-            <iframe src="http://tailandfur.com/wp-content/uploads/2017/04/Why-do-dogs-have-different-Ear-Shapes00002.jpg" width="600" height="450" allowFullScreen="" frameBorder="0"></iframe>
-            <hr/>
+             {/* <iframe src="http://tailandfur.com/wp-content/uploads/2017/04/Why-do-dogs-have-different-Ear-Shapes00002.jpg" width="600" height="450" allowFullScreen="" frameBorder="0"></iframe>
+            <hr/> */}
             {/* Pass Button */}
-              <input type="image" style={buttonStyle} src="./img/Pass.png"/>
+              <input type="image" onClick={()=>{this.handelMoving(); this.handelPassclick(); }} style={buttonStyle} src="./img/Pass.png"/>
 
             {/* Like Button */}
-                <input type="image" style={buttonStyle} src="./img/Like.png"/>
+                <input type="image" onClick={()=>{this.handelMoving(); this.handelLikeclick(); }} style={buttonStyle} src="./img/Like.png"/>
             
             <PhotoSwipe isOpen={this.state.isOpen} items={this.state.items}
               options={this.state.options}
@@ -123,12 +185,65 @@ class Nearby extends React.Component {
             <hr/>
             <PhotoSwipeGallery items={this.state.galleryItems}
               thumbnailContent={this.getThumbnailContent}/>
-            
+              </div>
+
+    )
+  }
+randerAlldata(event){
+event.preventDefault();
+this.setState({photoClicked:true,
+  backClicked:false
+})
+}
+  renderMatces(){
+    console.log(this.state.thisuserdata)
+return(
+            <div>
+             <iframe src={this.state.thisuserdata.photo_url} width="600" height="450" allowFullScreen="" frameBorder="0"></iframe>
+              <p>Name : {this.state.thisuserdata.name}</p>
+              <p>Age : {this.state.thisuserdata.age}</p>
+              <p>Email : {this.state.thisuserdata.email}</p>
+              <p>Breed : {this.state.thisuserdata.breed}</p>
+              <p>Like : {this.state.thisuserdata.likes}</p>
+              <p>Dislikes : {this.state.thisuserdata.dislikes}</p>
+              <p>Favouret Treat : {this.state.thisuserdata.favTreat}</p>
+              <p>ZipCode : {this.state.thisuserdata.zipcode}</p>
+              <button type="submit" onClick={this.backHandle}>Back</button>
+             </div>
+)
+  }
+
+  backHandle(event){
+event.preventDefault();
+this.setState({backClicked:true,
+  photoClicked:false
+})
+}
+
+  handleMatchreq(){
+    console.log( this.props.id + "matches id here!!!!!!!!!!!!!")
+    if(this.state.likeClicked){
+      helpers.matchRequest(this.props.id, this.state.thisuserdata.id, true )
+    }else if(this.state.passClicked){
+      helpers.matchRequest(this.props.id, this.state.thisuserdata.id, false )
+    }
+  }
+
+  render() {
+    console.log(this.props.zipcode+" "+this.props.id)
+
+    return ( 
+      
+      <div className='layout-page'>
+        <main className='layout-main'>
+          <div className='container'>
+            {this.state.photoClicked ? this.renderMatces() : this.randPhotolink() }
           </div>
         </main>
       </div>
     );
   }
+
 }
 
 // Export the module back to the route

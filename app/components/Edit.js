@@ -15,10 +15,11 @@ var inputStyle = {
 
 var buttonStyle = {
   height: "60px",
-  // position: "relative",
-  // left: "300px" 
-
+  position: "relative",
+  left: "100px" 
 }
+
+
 
 // Create the Main component
 class Edit extends React.Component {

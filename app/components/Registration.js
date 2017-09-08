@@ -150,6 +150,7 @@ class Registration extends React.Component {
     return (
       <div className="mainContainer">
         <div className="container">
+          <h2>Registration</h2>
           {/* Login fields */}
           <div className="row">
             <div className="col-sm-8 col-xs-8 col-sm-offset-2 col-xs-offset-2">

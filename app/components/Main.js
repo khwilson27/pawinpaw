@@ -6,12 +6,18 @@ var router = require("react-router");
 var browserHistory = router.browserHistory;
 
 var navStyle = {
-  backgroundColor: "#009191"
+  backgroundColor: "#009191",
 }
 
 var logoStyle = {
-  height: "60px",
+  height: "55px",
   position: "absolute",
+  top: "5%",
+  left: "45%"
+}
+
+var footerStyle = {
+  textAlign: "center"
 }
 
 // Create the Main component
@@ -155,14 +161,15 @@ class Main extends React.Component {
         {/* These sub-components are getting passed as this.props.children */}
         {/* {this.props.children} */}
         {childrenWithProps}
-
-        <footer>
-          <hr />
-          <p className="pull-right">
-            <i className="fa fa-github" aria-hidden="true"></i>
-            Paw in Paw &copy; 2017
+        <div className="container">
+          <footer>
+            <hr />
+            <p style={footerStyle}>
+              <i className="fa fa-github" aria-hidden="true"></i>
+               Paw in Paw &copy; 2017
             </p>
-        </footer>
+          </footer>
+        </div>
 
       </div>
     );

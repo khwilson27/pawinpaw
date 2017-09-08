@@ -30,9 +30,10 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: " ",
-      password: " ",
-      loggedin: false
+      email: "",
+      password: "",
+      loggedin: false,
+      isAuth: this.props.isAuth
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSignin = this.handleSignin.bind(this);
@@ -59,15 +60,37 @@ class Login extends React.Component {
           loggedin: false
         });
       } else if (Response.data.id) {
-        this.setState({
+
+        console.log(Response.data);
+        // alert(JSON.stringify(Response.data));
+
+        const newState = {
           id: Response.data.id,
           email: Response.data.email,
-          loggedin: true
-        });
-        this.props.setParent(this.state)
+
+          name: Response.data.name,
+          photo_url: Response.data.photo_url,
+          photo_publicid: Response.data.photo_publicid,
+          age: Response.data.age,
+          zipcode: Response.data.zipcode,
+          breed: Response.data.breed,
+          likes: Response.data.likes,
+          dislikes: Response.data.dislikes,
+          favTreat: Response.data.favTreat,
+
+          loggedin: true,
+          isAuth: true
+        };
+
+        this.props.setParent(newState);
+        this.setState(newState);
         this.handleRedirect();
       }
     });
+  }
+
+  handleRegisterBtn() {
+    browserHistory.replace("/Registration");
   }
 
   //Google Response Here!!!
@@ -145,7 +168,7 @@ class Login extends React.Component {
                 <h4>Don't have an account?</h4>
 
                 {/* Register Button */}
-                <input type="image" style={buttonStyle} src="./img/Register.png"/>
+                <input type="image" onClick={this.handleRegisterBtn} style={buttonStyle} src="./img/Register.png"/>
                 <br />
                 <h4>Or</h4>
                  {/*Google LogIn*/}

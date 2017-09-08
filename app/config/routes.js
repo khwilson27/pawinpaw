@@ -12,9 +12,7 @@ var Router = router.Router;
 // https://github.com/ReactTraining/react-router/blob/master/docs/guides/Histories.md#browserhistory
 var browserHistory = router.browserHistory;
 // Reference the high-level components
-// var Main = require("../components/Main");
 import Login from "../components/Login.js";
-import EditProfile from "../components/Edit.js";
 import Main from "../components/Main";
 import Registration from "../components/Registration.js";
 import Nearby from "../components/Nearby.js";
@@ -36,7 +34,7 @@ module.exports = (
       <Route path="Match" component={Match} />
 
       {/* If user selects any other path... we get the Home Route */}
-      <IndexRoute component={Match} />
+      <IndexRoute component={Login} />
 
     </Route>
   </Router>

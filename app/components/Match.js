@@ -13,7 +13,7 @@ class Match extends React.Component {
         super(props);
 
         this.state = {
-            matchProfiles: []
+            matchProfiles: null
         };
     }
 

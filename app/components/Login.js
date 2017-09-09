@@ -151,7 +151,8 @@ class Login extends React.Component {
         this.setState({
           id: Response.data.id,
           email: Response.data.email,
-          registered: true
+          registered: true,
+          isAuth: true
         });
         this.props.setParent(this.state)
         //redirect to "EditProfile"

@@ -7,11 +7,9 @@ import { PhotoSwipeGallery } from 'react-photoswipe';
 var Link = require("react-router").Link;
 
 var buttonStyle = {
-  height: "60px",
-  whitespace: "pre",
-  // position: "relative",
-  // left: "300px" 
-
+  height: "100px",
+  // whitespace: "pre",
+  marginBottom: "20px"
 }
 
 var textStyle = {
@@ -22,12 +20,24 @@ var textStyle = {
 
 var infoStyle = {
   fontFamily: "Roboto Condensed",
-  fontWeight: "italic",
-
-
+  fontWeight: "italic"
 }
 
+var displayStyle = {
+  display: "inline",
+}
 
+var floatRight={
+  float: "right"
+}
+
+var floatLeft={
+  float: "left"
+}
+
+var clearFloats={
+  clear: "both"
+}
 
 
 import PropTypes from 'prop-types';
@@ -171,28 +181,25 @@ class Nearby extends React.Component {
   randPhotolink() {
     return (
       <div>
-        <h2 style={textStyle}>Hold my Paw?</h2>
-        <hr />
-        {/* <button className='btn btn-primary' onClick={this.openPhotoSwipe}>
-              Click me
-            </button> */}
+        <h2 style={textStyle}>Hold My Paw?</h2>
         {this.state.likeClicked || this.state.passClicked ? (<div>
           <a href="#" onClick={this.randerAlldata}>
-            <img src={this.state.thisuserdata.photo_url} width="600" height="450" allowFullScreen="" frameBorder="0" />
+            <img src={this.state.thisuserdata.photo_url} />
           </a>
         </div>) : "any "}
 
+
+        <h3 style={textStyle}>{this.state.thisuserdata.name}, {this.state.thisuserdata.age} </h3>
         {/* Pass Button */}
-        <input type="image" onClick={() => { this.handelMoving(); this.handelPassclick(); }} style={buttonStyle} src="./img/Pass.png" />
-        <h2 style={textStyle}>{this.state.thisuserdata.name}, {this.state.thisuserdata.age} </h2>
+        <input type="image" onClick={() => { this.handelMoving(); this.handelPassclick(); }} style={Object.assign({}, buttonStyle, floatLeft)} src="./img/Pass.png" />
         {/* Like Button */}
-        <input type="image" onClick={() => { this.handelMoving(); this.handelLikeclick(); }} style={buttonStyle} src="./img/Like.png" />
+        <input type="image" onClick={() => { this.handelMoving(); this.handelLikeclick(); }} style={Object.assign({}, buttonStyle, floatRight)} src="./img/Like.png" />
 
         <PhotoSwipe isOpen={this.state.isOpen} items={this.state.items}
           options={this.state.options}
           onClose={this.handleClose} />
-        <hr />
-        <h2>Who barks nearby?</h2>
+        <hr style={clearFloats}/>
+        <h2  >Who barks nearby?</h2>
         <hr />
         <PhotoSwipeGallery items={this.state.galleryItems}
           thumbnailContent={this.getThumbnailContent} />
@@ -212,7 +219,7 @@ class Nearby extends React.Component {
     return (
       <div>
         <img src={this.state.thisuserdata.photo_url} />
-        <h2 style={textStyle}>{this.state.thisuserdata.name}, {this.state.thisuserdata.age} </h2>
+        <h2 style={[textStyle, displayStyle]}>{this.state.thisuserdata.name}, {this.state.thisuserdata.age} </h2>
         <hr />
         <div className="form-group">
           <label htmlFor="breed" style={textStyle}> Breed: </label>

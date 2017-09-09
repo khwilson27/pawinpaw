@@ -165,7 +165,7 @@ module.exports = function(app) {
 
     //Post like or pass data
     app.post("/api/match/post", function(req, res) {
-        db.Match.create({
+        db.Match.upsert({
             UserId: req.body.id,
             matchId: req.body.matchId,
             request: req.body.request

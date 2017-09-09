@@ -64,6 +64,8 @@ var uploadStyle = {
 }
 
 
+var count = 1;
+
 import PropTypes from 'prop-types';
 class Nearby extends React.Component {
   constructor(props, context) {
@@ -78,12 +80,12 @@ class Nearby extends React.Component {
     this.randerAlldata = this.randerAlldata.bind(this);
     this.backHandle = this.backHandle.bind(this);
     this.state = {
-      count: 0,
       isOpen: false,
       likeClicked: false,
       passClicked: false,
       photoClicked: false,
       backClicked: false,
+      empty: false,
       users: [],
       thisuserdata: {},
       items: [
@@ -159,14 +161,22 @@ class Nearby extends React.Component {
     return (
       <img src={item.thumbnail} width={120} height={90} />
     );
-  };
+   };
 
-  componentDidMount() {
+  componentWillMount() {
     helpers.findNear(this.props.zipcode, this.props.id).then((res) => {
       console.log(res)
+      if(res.data.length === 0){
+        this.setState({
+          empty: true
+        })
+      }else{
       this.setState({
-        users: res.data
+        users: res.data,
+        thisuserdata: res.data[0],
+        empty: false
       })
+    }
     })
   }
 
@@ -187,22 +197,26 @@ class Nearby extends React.Component {
 
   handelMoving() {
     let usersArr = this.state.users;
-    if (this.state.count >= usersArr.length - 2) {
-      this.setState({ count: 0 });
+    if (count >= usersArr.length ) {
+      count = 1;
+      // this.setState({ count: 0 });
       this.handelMoving()
     } else {
 
-      console.log(this.state.count)
+      console.log(count)
 
-      console.log(usersArr[this.state.count])
+      console.log(usersArr[count])
       this.setState({
-        thisuserdata: usersArr[this.state.count]
+        thisuserdata: usersArr[count]
       })
-      this.setState({ count: this.state.count + 1 })
+      // this.setState({ count: this.state.count + 1 })
+      count++
     }
   }
 
   randPhotolink() {
+ let firstUser = this.state.users;
+ console.log(firstUser[0])
     return (
       <div>
         <h2 style={Object.assign({}, textStyle, paddingStyle)}>Hold My Paw?</h2>
@@ -210,7 +224,11 @@ class Nearby extends React.Component {
           <a href="#" onClick={this.randerAlldata}>
             <img style={uploadStyle} src={this.state.thisuserdata.photo_url} />
           </a>
-        </div>) : "any "}
+        </div>) : (<div>
+          <a href="#" onClick={this.randerAlldata}>
+            <img src={this.state.thisuserdata.photo_url} />
+          </a>
+        </div>)}
 
 
         <h3 style={textStyle}>{this.state.thisuserdata.name}, {this.state.thisuserdata.age} </h3>
@@ -289,8 +307,8 @@ class Nearby extends React.Component {
   }
 
   render() {
-    console.log(this.props.zipcode + " " + this.props.id)
-
+    console.log(this.props.zipcode + " " + this.props.id + " "+this.state.empty)
+if(this.state.empty){ return(<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/UK_traffic_sign_PROHIBIT.svg/1024px-UK_traffic_sign_PROHIBIT.svg.png"/>)}else{
     return (
 
       <div className='layout-page'>
@@ -302,7 +320,7 @@ class Nearby extends React.Component {
       </div>
     );
   }
-
+  }
 }
 
 // Export the module back to the route

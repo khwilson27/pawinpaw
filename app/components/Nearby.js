@@ -20,7 +20,6 @@ var textStyle = {
 
 var infoStyle = {
   fontFamily: "Roboto Condensed",
-  fontWeight: "italic"
 }
 
 var displayStyle = {
@@ -242,7 +241,7 @@ class Nearby extends React.Component {
           options={this.state.options}
           onClose={this.handleClose} />
         <hr style={clearFloats}/>
-        <h2  >Who barks nearby?</h2>
+        <h2 style={infoStyle}>Who barks nearby?</h2>
         <hr />
         <PhotoSwipeGallery items={this.state.galleryItems}
           thumbnailContent={this.getThumbnailContent} />

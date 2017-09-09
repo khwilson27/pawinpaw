@@ -208,7 +208,7 @@ class Registration extends React.Component {
                   <input type="password" value={this.state.repassword} style={inputStyle} className="form-control" id="repassword" placeholder="Password" onChange={this.handleChange} />
                 </div>
                 <br/>
-                <button type="submit" onClick={this.handleSignun} style={buttonStyle}>REGISTER</button>
+                <button type="submit" onClick={this.handleSignup} style={buttonStyle}>REGISTER</button>
                 {/* <input type="image" onClick={this.handleSignup} style={buttonStyle} src="./img/Register.png"/> */}
                 <br/><br/>
              

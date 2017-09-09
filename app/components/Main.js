@@ -101,6 +101,7 @@ class Main extends React.Component {
       </ul>
     )
   }
+  
   render() {
 
     const childrenWithProps = React.Children.map(this.props.children,

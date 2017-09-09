@@ -53,7 +53,7 @@ module.exports = function(app) {
                 zipcode: req.body.zipcode,
                 id: { $ne: req.body.id }
             },
-            attributes: { exclude: ['password', 'salt'] }
+            attributes: { exclude: ['password', 'salt', 'email'] }
         }).then(function(data) {
             console.log("Here Data!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + data);
             res.json(data);

@@ -96,32 +96,10 @@ class Login extends React.Component {
       //Getting the new user data through the Response & Use It To Update The State.
       console.log(Response);
       if (Response.data.message) {
-        // this.setState({
-        //   message: Response.data.message,
-        //   loggedin: false
-        // });
-
-        const newState = {
-          id: Response.data.id,
-          email: Response.data.email,
-
-          name: Response.data.name,
-          photo_url: Response.data.photo_url,
-          photo_publicid: Response.data.photo_publicid,
-          age: Response.data.age,
-          zipcode: Response.data.zipcode,
-          breed: Response.data.breed,
-          likes: Response.data.likes,
-          dislikes: Response.data.dislikes,
-          favTreat: Response.data.favTreat,
-
-          loggedin: true,
-          isAuth: true
-        };
-
-        this.props.setParent(newState);
-        this.setState(newState);
-        this.handleRedirect();
+        this.setState({
+          message: Response.data.message,
+          loggedin: false
+        });
         
       } else if (Response.data.id) {
 

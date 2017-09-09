@@ -21,7 +21,33 @@ var buttonStyle = {
 
 var textStyle = {
   fontFamily: "Roboto Condensed",
+  textAlign:"center",
+  paddingRight: "5px"
 }
+
+var dropzoneStyle = {
+  display: "block",
+  margin: "auto",
+  width: "220px",
+  height: "220px",
+  borderColor: "black",
+  borderStyle: "dashed",
+  borderWidth: "2px"
+}
+
+var uploadStyle = {
+  display: "block", 
+  margin: "auto",
+  width: "200px",
+  height: "150px"
+}
+
+var infoStyle = {
+  fontFamily: "Roboto Condensed",
+  fontWeight: "bold",
+
+}
+
 
 
 // Create the Main component
@@ -137,10 +163,26 @@ class Edit extends React.Component {
   renderForm() {
     return (
 
+      
+
       <form onSubmit={this.handleUpdate}>
 
-        <img src={this.state.photoUrl} />
+        <img style={uploadStyle} src={this.state.photoUrl}/>
 
+        <div  className="dropzone">
+          <Dropzone
+            style={dropzoneStyle}
+            accept="image/jpeg, image/png"
+            onDrop={(accepted, rejected) => { this.setState({ accepted, rejected }); }}
+            maxSize={500000}
+          >
+            <p>Try dropping some files here, or click to select files to upload.</p>
+            <p>Only *.jpeg and *.png images will be accepted.</p>
+            <p>Max image size is 500kb.</p>
+          </Dropzone>
+        </div>
+
+        
         <div className="form-group">
           <label style={textStyle} htmlFor="name">Name</label>
           <input type="email" value={this.state.name} style={inputStyle} className="form-control" id="name" placeholder="Enter Name" onChange={this.handleChange} />
@@ -170,21 +212,10 @@ class Edit extends React.Component {
           <input type="text" value={this.state.zipcode} style={inputStyle} className="form-control" id="zipcode" placeholder="Zip Code" onChange={this.handleChange} />
         </div>
 
-        <div className="dropzone">
-          <Dropzone
-            accept="image/jpeg, image/png"
-            onDrop={(accepted, rejected) => { this.setState({ accepted, rejected }); }}
-            maxSize={500000}
-          >
-            <p>Try dropping some files here, or click to select files to upload.</p>
-            <p>Only *.jpeg and *.png images will be accepted.</p>
-            <p>Max image size is 500kb.</p>
-            <p>Aspect ratio of 1:1 recommended.</p>
-          </Dropzone>
-        </div>
+        
 
         <aside>
-          <h2>Dropped files</h2>
+          <h5 style={infoStyle}>Dropped files</h5>
           <ul>
             {
               this.state.accepted.map(f => <li key={f.name}>{f.name} - {f.size} bytes</li>)
@@ -200,33 +231,29 @@ class Edit extends React.Component {
     return (
       <form>
 
-        <img src={this.state.photoUrl} />
+        <img style={uploadStyle} src={this.state.photoUrl} />
 
-        <div className="form-group" style={inputStyle}>
-          <label htmlFor="name" style={textStyle}>Name: </label>
-          {this.state.name}
-        </div>
-        <div className="form-group" style={inputStyle}>
-          <label htmlFor="age" style={textStyle}>Age: </label>
-          {this.state.age}
-        </div>
-        <div className="form-group" style={inputStyle}>
+        <hr/>
+        <h2 style={infoStyle}>{this.state.name}, {this.state.age}</h2>
+        
+        <hr/>
+        <div className="form-group">
           <label htmlFor="breed" style={textStyle}> Breed: </label>
           {this.state.breed}
         </div>
-        <div className="form-group" style={inputStyle}>
+        <div className="form-group">
           <label htmlFor="likes" style={textStyle}> Likes: </label>
           {this.state.likes}
         </div>
-        <div className="form-group" style={inputStyle}>
+        <div className="form-group">
           <label htmlFor="dislikes" style={textStyle}> Dislikes: </label>
           {this.state.dislikes}
         </div>
-        <div className="form-group" style={inputStyle}>
+        <div className="form-group">
           <label htmlFor="favTreat" style={textStyle}> Favorite Treats: </label>
           {this.state.favTreat}
         </div>
-        <div className="form-group" style={inputStyle}>
+        <div className="form-group">
           <label htmlFor="zipcode" style={textStyle}> Zip Code: </label>
           {this.state.zipcode}
         </div>
@@ -252,8 +279,9 @@ class Edit extends React.Component {
 
       <div className="mainContainer">
         <div className="container">
-          {/* Login fields */}
           <div className="row">
+            <h1 style={textStyle}>Edit Your Pup's Profile</h1>
+            <br/>
             <div className="col-sm-8 col-xs-8 col-sm-offset-2 col-xs-offset-2">
               {this.state.saveClicked ? this.renderData() : this.state.editClicked ? this.renderForm() : "Some Thing Wrong"}
             </div>

@@ -14,11 +14,46 @@ var inputStyle = {
 }
 
 var buttonStyle = {
-  height: "60px",
-  // position: "relative",
-  // left: "300px" 
+  height: "50px",
+  display: "inline-block", 
+  margin: "10px"
+}
+
+var centerImages = {
+  textAlign: "center"
+}
+
+var textStyle = {
+  fontFamily: "Roboto Condensed",
+  textAlign:"center",
+  paddingRight: "5px"
+}
+
+var dropzoneStyle = {
+  display: "block",
+  margin: "auto",
+  width: "220px",
+  height: "220px",
+  borderColor: "black",
+  borderStyle: "dashed",
+  borderWidth: "2px"
+}
+
+var uploadStyle = {
+  display: "block", 
+  margin: "auto",
+  height: "200px",
+  border: "none"
+}
+
+var infoStyle = {
+  fontFamily: "Roboto Condensed",
+  fontWeight: "bold",
+  textAlign: "center"
 
 }
+
+
 
 // Create the Main component
 class Edit extends React.Component {
@@ -133,41 +168,15 @@ class Edit extends React.Component {
   renderForm() {
     return (
 
+      
+
       <form onSubmit={this.handleUpdate}>
 
-        <img src={this.state.photoUrl} />
+        {/* <img style={uploadStyle} src={this.state.photoUrl}/> */}
 
-        <div className="form-group">
-          <label htmlFor="name">Name</label>
-          <input type="email" value={this.state.name} style={inputStyle} className="form-control" id="name" placeholder="Enter Name" onChange={this.handleChange} />
-        </div>
-        <div className="form-group">
-          <label htmlFor="age">Age</label>
-          <input type="text" value={this.state.age} style={inputStyle} className="form-control" id="age" placeholder="Age" onChange={this.handleChange} />
-        </div>
-        <div className="form-group">
-          <label htmlFor="breed"> Breed</label>
-          <input type="text" value={this.state.breed} style={inputStyle} className="form-control" id="breed" placeholder="Breed" onChange={this.handleChange} />
-        </div>
-        <div className="form-group">
-          <label htmlFor="likes"> Likes</label>
-          <input type="text" value={this.state.likes} style={inputStyle} className="form-control" id="likes" placeholder="Likes" onChange={this.handleChange} />
-        </div>
-        <div className="form-group">
-          <label htmlFor="dislikes"> Dislikes</label>
-          <input type="text" value={this.state.dislikes} style={inputStyle} className="form-control" id="dislikes" placeholder="Dislikes" onChange={this.handleChange} />
-        </div>
-        <div className="form-group">
-          <label htmlFor="favTreat"> Favorite Treats</label>
-          <input type="text" value={this.state.favTreat} style={inputStyle} className="form-control" id="favTreat" placeholder="Favorite Treats" onChange={this.handleChange} />
-        </div>
-        <div className="form-group">
-          <label htmlFor="zipcode"> Zip Code</label>
-          <input type="text" value={this.state.zipcode} style={inputStyle} className="form-control" id="zipcode" placeholder="Zip Code" onChange={this.handleChange} />
-        </div>
-
-        <div className="dropzone">
+        <div  className="dropzone">
           <Dropzone
+            style={dropzoneStyle}
             accept="image/jpeg, image/png"
             onDrop={(accepted, rejected) => { this.setState({ accepted, rejected }); }}
             maxSize={500000}
@@ -175,18 +184,47 @@ class Edit extends React.Component {
             <p>Try dropping some files here, or click to select files to upload.</p>
             <p>Only *.jpeg and *.png images will be accepted.</p>
             <p>Max image size is 500kb.</p>
-            <p>Aspect ratio of 1:1 recommended.</p>
           </Dropzone>
         </div>
 
         <aside>
-          <h2>Dropped files</h2>
+          <h5 style={infoStyle}>Dropped files</h5>
           <ul>
             {
               this.state.accepted.map(f => <li key={f.name}>{f.name} - {f.size} bytes</li>)
             }
           </ul>
         </aside>
+
+        
+        <div className="form-group">
+          <label style={textStyle} htmlFor="name">Name</label>
+          <input type="email" value={this.state.name} style={inputStyle} className="form-control" id="name" placeholder="Enter Name" onChange={this.handleChange} />
+        </div>
+        <div className="form-group">
+          <label style={textStyle} htmlFor="age">Age</label>
+          <input type="text" value={this.state.age} style={inputStyle} className="form-control" id="age" placeholder="Age" onChange={this.handleChange} />
+        </div>
+        <div className="form-group">
+          <label style={textStyle} htmlFor="breed"> Breed</label>
+          <input type="text" value={this.state.breed} style={inputStyle} className="form-control" id="breed" placeholder="Breed" onChange={this.handleChange} />
+        </div>
+        <div className="form-group">
+          <label style={textStyle} htmlFor="likes"> Likes</label>
+          <input type="text" value={this.state.likes} style={inputStyle} className="form-control" id="likes" placeholder="Likes" onChange={this.handleChange} />
+        </div>
+        <div className="form-group">
+          <label style={textStyle} htmlFor="dislikes"> Dislikes</label>
+          <input type="text" value={this.state.dislikes} style={inputStyle} className="form-control" id="dislikes" placeholder="Dislikes" onChange={this.handleChange} />
+        </div>
+        <div className="form-group">
+          <label style={textStyle} htmlFor="favTreat"> Favorite Treats</label>
+          <input type="text" value={this.state.favTreat} style={inputStyle} className="form-control" id="favTreat" placeholder="Favorite Treats" onChange={this.handleChange} />
+        </div>
+        <div className="form-group">
+          <label style={textStyle} htmlFor="zipcode"> Zip Code</label>
+          <input type="text" value={this.state.zipcode} style={inputStyle} className="form-control" id="zipcode" placeholder="Zip Code" onChange={this.handleChange} />
+        </div>
 
       </form>
     )
@@ -196,34 +234,30 @@ class Edit extends React.Component {
     return (
       <form>
 
-        <img src={this.state.photoUrl} />
+        <img style={uploadStyle} src={this.state.photoUrl} />
 
+        <hr/>
+        <h2 style={infoStyle}>{this.state.name}, {this.state.age}</h2>
+        
+        <hr/>
         <div className="form-group">
-          <label htmlFor="name" style={inputStyle}>Name: </label>
-          {this.state.name}
-        </div>
-        <div className="form-group">
-          <label htmlFor="age" style={inputStyle}>Age: </label>
-          {this.state.age}
-        </div>
-        <div className="form-group">
-          <label htmlFor="breed" style={inputStyle}> Breed: </label>
+          <label htmlFor="breed" style={textStyle}> Breed: </label>
           {this.state.breed}
         </div>
         <div className="form-group">
-          <label htmlFor="likes" style={inputStyle}> Likes: </label>
+          <label htmlFor="likes" style={textStyle}> Likes: </label>
           {this.state.likes}
         </div>
         <div className="form-group">
-          <label htmlFor="dislikes" style={inputStyle}> Dislikes: </label>
+          <label htmlFor="dislikes" style={textStyle}> Dislikes: </label>
           {this.state.dislikes}
         </div>
         <div className="form-group">
-          <label htmlFor="favTreat" style={inputStyle}> Favorite Treats: </label>
+          <label htmlFor="favTreat" style={textStyle}> Favorite Treats: </label>
           {this.state.favTreat}
         </div>
         <div className="form-group">
-          <label htmlFor="zipcode" style={inputStyle}> Zip Code: </label>
+          <label htmlFor="zipcode" style={textStyle}> Zip Code: </label>
           {this.state.zipcode}
         </div>
 
@@ -247,37 +281,20 @@ class Edit extends React.Component {
     return (
 
       <div className="mainContainer">
-        <div className="row">
-          <div className="col-sm-12 col-xs-12">
-            <div className="navBar">navBar here</div>
-          </div>
-        </div>
         <div className="container">
-          {/* Login fields */}
           <div className="row">
-            <div className="col-sm-8 col-xs-8">
+            <h1 style={textStyle}>Edit Your Pup's Profile</h1>
+            <br/>
+            <div className="col-sm-8 col-xs-8 col-sm-offset-2 col-xs-offset-2">
               {this.state.saveClicked ? this.renderData() : this.state.editClicked ? this.renderForm() : "Some Thing Wrong"}
             </div>
           </div>
-          <div>
-
+          <div style={centerImages} className="col-sm-8 col-xs-8 col-sm-offset-2 col-xs-offset-2">
             <input type="image" onClick={this.handleClick} style={buttonStyle} src="./img/Edit.png" />
-            <br />
+        
             <input type="image" onClick={this.handleUpdate} style={buttonStyle} src="./img/Save.png" />
-            <br />
-            <button type="submit" onClick={this.handleRedirect} className="btn btn-default">Done</button>
-          </div>
-          {/* Footer */}
-          <div className="row">
-            <div className="col-sm-12 col-xs-12">
-              <footer>
-                <hr />
-                <p className="pull-right">
-                  <i className="fa fa-github" aria-hidden="true"></i>
-                  Paw in Paw &copy; 2017
-            </p>
-              </footer>
-            </div>
+           
+            <input type="image" onClick={this.handleRedirect} style={buttonStyle} src="./img/Done.png" />
           </div>
         </div>
       </div>

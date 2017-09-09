@@ -6,12 +6,12 @@ var router = require("react-router");
 var browserHistory = router.browserHistory;
 
 var navStyle = {
-  backgroundColor: "#009191"
+  backgroundColor: "#009191",
 }
 
-var logoStyle = {
-  height: "60px",
-  position: "absolute",
+
+var footerStyle = {
+  textAlign: "center"
 }
 
 // Create the Main component
@@ -93,14 +93,23 @@ class Main extends React.Component {
 
   renderNavHome() {
     return (
+      
       <ul className="nav navbar-nav navbar-right">
         <li><Link to="/Edit">Profile</Link></li>
         <li><Link to="/Match">Matches</Link></li>
         <li><Link to="/Nearby">Nearby</Link></li>
         <li><Link to="/Login" onClick={this.handleLogout}>Logout</Link></li>
+        
       </ul>
     )
   }
+
+  renderLogo() {
+    return (
+      <img height="55px" src="./img/pawinpaw-logo.png"/>
+    )
+  }
+  
   render() {
 
     const childrenWithProps = React.Children.map(this.props.children,
@@ -129,20 +138,22 @@ class Main extends React.Component {
         <nav className="navbar navbar-default" role="navigation" style={navStyle}>
           <div className="container-fluid">
             <div className="navbar-header">
+            {this.state.isAuth ? this.renderLogo() : null}
               <button
                 type="button"
                 className="navbar-toggle"
                 data-toggle="collapse"
                 data-target=".navbar-ex1-collapse"
               >
+              
+
                 <span className="sr-only">Toggle navigation</span>
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </button>
             </div>
-            {/* Logo Image */}
-            <img style={logoStyle} src="./img/pawinpaw-logo.png" />
+           
             <div className="collapse navbar-collapse navbar-ex1-collapse">
 
               {/* Using <Link> in place of <a> and "to" in place of "href" */}
@@ -155,14 +166,6 @@ class Main extends React.Component {
         {/* These sub-components are getting passed as this.props.children */}
         {/* {this.props.children} */}
         {childrenWithProps}
-
-        <footer>
-          <hr />
-          <p className="pull-right">
-            <i className="fa fa-github" aria-hidden="true"></i>
-            Paw in Paw &copy; 2017
-            </p>
-        </footer>
 
       </div>
     );

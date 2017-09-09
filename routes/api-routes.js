@@ -53,7 +53,7 @@ module.exports = function(app) {
                 zipcode: req.body.zipcode,
                 id: { $ne: req.body.id }
             },
-            attributes: { exclude: ['password', 'salt'] }
+            attributes: { exclude: ['password', 'salt', 'email'] }
         }).then(function(data) {
             console.log("Here Data!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + data);
             res.json(data);
@@ -109,13 +109,8 @@ module.exports = function(app) {
                     where: {
                         id: matchArr,
                     },
-<<<<<<< HEAD
                     attributes: { exclude: ['password', 'salt'] }
-                }).then(function (data) {
-=======
-                    attributes: { exclude: ['password', 'salt', 'email'] }
                 }).then(function(data) {
->>>>>>> d07b0e43bbff7abcc5b1d058dad2403bcd3305ba
                     console.log(data);
                     res.json(data);
                 });
@@ -124,22 +119,22 @@ module.exports = function(app) {
     });
 
     //Unmatch a user
-    app.put("/api/unmatch/:userid/:matchid", function (req, res) {
+    app.put("/api/unmatch/:userid/:matchid", function(req, res) {
 
         db.Match.update({
             request: false
         }, {
-                where: {
-                    UserId: req.params.userid,
-                    matchId: req.params.matchid
-                }
-            }).then(function (data) {
-                if (data) {
-                    res.json({ message: "Successful update!" });
-                } else {
-                    res.json({ message: "Unsuccessful..." });
-                }
-            });
+            where: {
+                UserId: req.params.userid,
+                matchId: req.params.matchid
+            }
+        }).then(function(data) {
+            if (data) {
+                res.json({ message: "Successful update!" });
+            } else {
+                res.json({ message: "Unsuccessful..." });
+            }
+        });
     });
 
     //Edit user profile
@@ -170,7 +165,7 @@ module.exports = function(app) {
 
     //Post like or pass data
     app.post("/api/match/post", function(req, res) {
-        db.Match.create({
+        db.Match.upsert({
             UserId: req.body.id,
             matchId: req.body.matchId,
             request: req.body.request

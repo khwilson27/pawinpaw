@@ -17,11 +17,52 @@ var inputStyle = {
   borderStyle: "solid"
 }
 
-var buttonStyle = {
-  height: "60px",
-  // position: "relative",
-  // left: "300px" 
+var logoStyle = {
+  display: "block",
+  margin: "auto"
+}
 
+var buttonStyle = {
+  display: "block",
+  margin: "auto",
+  backgroundColor: "#009191", 
+  border: "none", 
+  height: "40px",
+  width: "180px",
+  color: "white",
+  borderRadius: "5px",
+  fontFamily: "Roboto Condensed",
+  letterSpacing: "1px",
+  marginBottom: "5px"
+}
+
+var headingStyle = {
+  fontFamily: "Roboto Condensed",
+  textAlign: "center"
+}
+
+var textStyle = {
+  fontFamily: "Roboto Condensed",
+  textAlign: "center"
+}
+
+var gloginStyle = {
+  display: "block",
+  margin: "auto",
+  backgroundColor: "#F46C6C", 
+  border: "none", 
+  height: "40px",
+  width: "180px",
+  color: "white",
+  borderRadius: "5px",
+  fontFamily: "Roboto Condensed",
+  letterSpacing: "1px"
+}
+
+var glyphiconStyle = {
+  backgroundColor: "#F79898",
+  width: "16px",
+  height: "20px"
 }
 
 // Create the Main component
@@ -55,32 +96,10 @@ class Login extends React.Component {
       //Getting the new user data through the Response & Use It To Update The State.
       console.log(Response);
       if (Response.data.message) {
-        // this.setState({
-        //   message: Response.data.message,
-        //   loggedin: false
-        // });
-
-        const newState = {
-          id: Response.data.id,
-          email: Response.data.email,
-
-          name: Response.data.name,
-          photo_url: Response.data.photo_url,
-          photo_publicid: Response.data.photo_publicid,
-          age: Response.data.age,
-          zipcode: Response.data.zipcode,
-          breed: Response.data.breed,
-          likes: Response.data.likes,
-          dislikes: Response.data.dislikes,
-          favTreat: Response.data.favTreat,
-
-          loggedin: true,
-          isAuth: true
-        };
-
-        this.props.setParent(newState);
-        this.setState(newState);
-        this.handleRedirect();
+        this.setState({
+          message: Response.data.message,
+          loggedin: false
+        });
         
       } else if (Response.data.id) {
 
@@ -197,32 +216,39 @@ class Login extends React.Component {
           {/* Login fields */}
           <div className="row">
             <div className="col-sm-8 col-xs-8 col-sm-offset-2 col-xs-offset-2">
+               {/* Logo Image */}
+            <img style={logoStyle} src="./img/pawinpaw-logo.png" />
+              <h2 style={headingStyle}>LOG IN</h2>
+              <br/>
               <form onSubmit={this.handleSignin}>
                 <div className="form-group">
-                  <label htmlFor="email">Email address</label>
+                  <label style={textStyle} htmlFor="email">Email address</label>
                   <input type="email" value={this.state.email} className="form-control" id="email" placeholder="Email" style={inputStyle} onChange={this.handleChange} />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="password">Password</label>
+                  <label  style={textStyle} htmlFor="password">Password</label>
                   <input type="password" className="form-control" id="password" placeholder="Password" style={inputStyle} onChange={this.handleChange} />
                   {/*error message*/}
                   {this.handelErrors()}
                 </div>
+                <br/>
                 {/* Regular Login Button */}
-                <input type="image" onClick={this.handleSignin} style={buttonStyle} src="./img/Login.png"/>
-                <br />
-                <h4>Don't have an account?</h4>
-
-                {/* Register Button */}
-                <input type="image" onClick={this.handleRegisterBtn} style={buttonStyle} src="./img/Register.png"/>
-                <br />
-                <h4>Or</h4>
+                {/* <input type="image" onClick={this.handleSignin} style={buttonStyle} src="./img/Login.png"/> */}
+                <button type="submit" onClick={this.handleSignin} style={buttonStyle}>LOG IN</button>
                  {/*Google LogIn*/}
-                <GoogleLogin clientId="280548920560-u13cbso5e0b21ouc0aqokmf7rlfvt4po.apps.googleusercontent.com"
+                <GoogleLogin style={gloginStyle} clientId="280548920560-u13cbso5e0b21ouc0aqokmf7rlfvt4po.apps.googleusercontent.com"
                   buttonText="Continue With Google"
                   onSuccess={this.responseGoogle}
                   onFailure={this.responseGoogle}
                 ></GoogleLogin>
+                <br/><br/>
+                <h4 style={textStyle}>Don't have an account?</h4>
+
+                {/* Register Button */}
+                {/* <input type="image" onClick={this.handleRegisterBtn} style={buttonStyle} src="./img/Register.png"/> */}
+                <button type="submit" onClick={this.handleRegisterBtn} style={buttonStyle}>Register</button>
+                <br />
+                
                 <br /><br/>
               </form>
             </div>

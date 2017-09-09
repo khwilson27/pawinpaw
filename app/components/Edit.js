@@ -14,9 +14,13 @@ var inputStyle = {
 }
 
 var buttonStyle = {
-  height: "60px",
+  height: "50px",
   display: "inline-block", 
-  margin: "5px 10px 10px 5px"
+  margin: "10px"
+}
+
+var centerImages = {
+  textAlign: "center"
 }
 
 var textStyle = {
@@ -285,8 +289,7 @@ class Edit extends React.Component {
               {this.state.saveClicked ? this.renderData() : this.state.editClicked ? this.renderForm() : "Some Thing Wrong"}
             </div>
           </div>
-          <div className="col-sm-8 col-xs-8 col-sm-offset-2 col-xs-offset-2">
-
+          <div style={centerImages} className="col-sm-8 col-xs-8 col-sm-offset-2 col-xs-offset-2">
             <input type="image" onClick={this.handleClick} style={buttonStyle} src="./img/Edit.png" />
         
             <input type="image" onClick={this.handleUpdate} style={buttonStyle} src="./img/Save.png" />

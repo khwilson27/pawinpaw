@@ -35,8 +35,33 @@ var floatLeft={
   float: "left"
 }
 
-var clearFloats={
+var clearFloats= {
   clear: "both"
+}
+
+var paddingStyle= {
+  paddingBottom: "10px",
+  marginTop: "0px"
+
+}
+
+var backButton= {
+  display: "block",
+  margin: "auto",
+  backgroundColor: "#009191", 
+  border: "none", 
+  height: "40px",
+  width: "180px",
+  color: "white",
+  borderRadius: "5px",
+  fontFamily: "Roboto Condensed",
+  letterSpacing: "1px",
+  marginBottom: "5px"
+}
+
+var uploadStyle = {
+  display: "block", 
+  margin: "auto",
 }
 
 
@@ -181,10 +206,10 @@ class Nearby extends React.Component {
   randPhotolink() {
     return (
       <div>
-        <h2 style={textStyle}>Hold My Paw?</h2>
+        <h2 style={Object.assign({}, textStyle, paddingStyle)}>Hold My Paw?</h2>
         {this.state.likeClicked || this.state.passClicked ? (<div>
           <a href="#" onClick={this.randerAlldata}>
-            <img src={this.state.thisuserdata.photo_url} />
+            <img style={uploadStyle} src={this.state.thisuserdata.photo_url} />
           </a>
         </div>) : "any "}
 
@@ -219,7 +244,7 @@ class Nearby extends React.Component {
     return (
       <div>
         <img src={this.state.thisuserdata.photo_url} />
-        <h2 style={[textStyle, displayStyle]}>{this.state.thisuserdata.name}, {this.state.thisuserdata.age} </h2>
+        <h2 style={textStyle}>{this.state.thisuserdata.name}, {this.state.thisuserdata.age} </h2>
         <hr />
         <div className="form-group">
           <label htmlFor="breed" style={textStyle}> Breed: </label>
@@ -242,7 +267,7 @@ class Nearby extends React.Component {
           {this.state.thisuserdata.zipcode}
         </div>
 
-        <button type="submit" onClick={this.backHandle}>Back</button>
+        <button style={backButton} type="submit" onClick={this.backHandle}>Back</button>
       </div>
     )
   }

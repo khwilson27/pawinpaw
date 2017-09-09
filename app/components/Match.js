@@ -6,12 +6,59 @@ var Link = require("react-router").Link;
 var router = require("react-router");
 var browserHistory = router.browserHistory;
 
-var inputStyle = {
-    borderColor: "#FFB74D",
-    borderWidth: "2px",
-    borderStyle: "solid"
-}
 
+var textStyle = {
+    fontFamily: "Roboto Condensed",
+    textAlign: "center", 
+    paddingRight: "5px"
+  }
+
+  var infoStyle = {
+    fontFamily: "Roboto Condensed",
+    fontWeight: "bold",
+    textAlign:"center",
+  
+  }
+
+  var uploadStyle = {
+    display: "block", 
+    margin: "auto",
+    height: "200px",
+    marginTop: "10px"
+  }
+
+  var doneButton = {
+    display: "inline-block",
+    margin: "auto",
+    backgroundColor: "#009191", 
+    border: "none", 
+    height: "40px",
+    width: "180px",
+    color: "white",
+    borderRadius: "5px",
+    fontFamily: "Roboto Condensed",
+    letterSpacing: "1px",
+    marginBottom: "5px",
+    float: "left"
+  }
+
+  var unmatchButton = {
+    display: "inline-block",
+    margin: "auto",
+    backgroundColor: "#D62C1A", 
+    border: "none", 
+    height: "40px",
+    width: "180px",
+    color: "white",
+    borderRadius: "5px",
+    fontFamily: "Roboto Condensed",
+    letterSpacing: "1px",
+    marginBottom: "5px",
+    float: "right"
+
+  }
+
+  
 // Create the Main component
 class Match extends React.Component {
 
@@ -114,14 +161,16 @@ class Match extends React.Component {
 
     renderMatches() {
         // console.log("full");
-
+        
         return this.state.matchProfiles.map((currentValue, index) => {
             console.log(currentValue);
             return (
+               
                 <div className="row" key={currentValue.id}>
-                    <div className="col-sm-12" onClick={this.showMatchInfo} data-name={currentValue.name} data-age={currentValue.age} data-breed={currentValue.breed} data-likes={currentValue.likes} data-dislikes={currentValue.dislikes} data-favTreat={currentValue.favTreat} data-zipcode={currentValue.zipcode} data-photourl={currentValue.photo_url} data-email={currentValue.email} data-id={currentValue.id} >
-                        <img src={currentValue.photo_url} width={150} height={150} />
-                        <p>{currentValue.name}</p>
+                    <div className="col-sm-12">
+                        <img style={uploadStyle} src={currentValue.photo_url} onClick={this.showMatchInfo} data-name={currentValue.name} data-age={currentValue.age} data-breed={currentValue.breed} data-likes={currentValue.likes} data-dislikes={currentValue.dislikes} data-favTreat={currentValue.favTreat} data-zipcode={currentValue.zipcode} data-photourl={currentValue.photo_url} data-email={currentValue.email} data-id={currentValue.id} />
+                        <h3 style={textStyle}>{currentValue.name}, {currentValue.age}</h3>
+                        <hr/>
                     </div>
                 </div>
 
@@ -137,43 +186,41 @@ class Match extends React.Component {
         return (
             <form>
 
-                <img src={this.state.photoUrl} />
+                <img style={uploadStyle} src={this.state.photoUrl} />
 
+                <h3 style={infoStyle}>
+                    {this.state.name}, {this.state.age}
+                </h3>
+
+                <hr/>
+               
                 <div className="form-group">
-                    <label htmlFor="name" style={inputStyle}>Name: </label>
-                    {this.state.name}
-                </div>
-                <div className="form-group">
-                    <label htmlFor="age" style={inputStyle}>Age: </label>
-                    {this.state.age}
-                </div>
-                <div className="form-group">
-                    <label htmlFor="breed" style={inputStyle}> Breed: </label>
+                    <label htmlFor="breed" style={textStyle}> Breed: </label>
                     {this.state.breed}
                 </div>
                 <div className="form-group">
-                    <label htmlFor="likes" style={inputStyle}> Likes: </label>
+                    <label htmlFor="likes" style={textStyle}> Likes: </label>
                     {this.state.likes}
                 </div>
                 <div className="form-group">
-                    <label htmlFor="dislikes" style={inputStyle}> Dislikes: </label>
+                    <label htmlFor="dislikes" style={textStyle}> Dislikes: </label>
                     {this.state.dislikes}
                 </div>
                 <div className="form-group">
-                    <label htmlFor="favTreat" style={inputStyle}> Favorite Treats: </label>
+                    <label htmlFor="favTreat" style={textStyle}> Favorite Treats: </label>
                     {this.state.favTreat}
                 </div>
                 <div className="form-group">
-                    <label htmlFor="zipcode" style={inputStyle}> Zip Code: </label>
+                    <label htmlFor="zipcode" style={textStyle}> Zip Code: </label>
                     {this.state.zipcode}
                 </div>
                 <div className="form-group">
-                    <label htmlFor="email" style={inputStyle}> Contact Me: </label>
+                    <label htmlFor="email" style={textStyle}> Contact Me: </label>
                     {this.state.email}
                 </div>
 
-                <button onClick={this.handleDoneBtn} type="button" className="btn btn-primary">Done</button>
-                <button onClick={this.handleUnmatch} type="button" className="btn btn-warning">Unmatch</button>
+                <button style={doneButton} onClick={this.handleDoneBtn} type="button">Done</button>
+                <button style={unmatchButton} onClick={this.handleUnmatch} type="button" className="btn btn-danger">Unmatch</button>
             </form>
         )
     }

@@ -93,12 +93,20 @@ class Main extends React.Component {
 
   renderNavHome() {
     return (
+      
       <ul className="nav navbar-nav navbar-right">
         <li><Link to="/Edit">Profile</Link></li>
         <li><Link to="/Match">Matches</Link></li>
         <li><Link to="/Nearby">Nearby</Link></li>
         <li><Link to="/Login" onClick={this.handleLogout}>Logout</Link></li>
+        
       </ul>
+    )
+  }
+
+  renderLogo() {
+    return (
+      <img height="55px" src="./img/pawinpaw-logo.png"/>
     )
   }
   
@@ -130,12 +138,15 @@ class Main extends React.Component {
         <nav className="navbar navbar-default" role="navigation" style={navStyle}>
           <div className="container-fluid">
             <div className="navbar-header">
+            {this.state.isAuth ? this.renderLogo() : null}
               <button
                 type="button"
                 className="navbar-toggle"
                 data-toggle="collapse"
                 data-target=".navbar-ex1-collapse"
               >
+              
+
                 <span className="sr-only">Toggle navigation</span>
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
@@ -155,15 +166,6 @@ class Main extends React.Component {
         {/* These sub-components are getting passed as this.props.children */}
         {/* {this.props.children} */}
         {childrenWithProps}
-        <div className="container">
-          <footer>
-            <hr />
-            <p style={footerStyle}>
-              <i className="fa fa-github" aria-hidden="true"></i>
-               Paw in Paw &copy; 2017
-            </p>
-          </footer>
-        </div>
 
       </div>
     );

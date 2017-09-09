@@ -38,13 +38,14 @@ var dropzoneStyle = {
 var uploadStyle = {
   display: "block", 
   margin: "auto",
-  width: "200px",
-  height: "150px"
+  height: "200px",
+  border: "none"
 }
 
 var infoStyle = {
   fontFamily: "Roboto Condensed",
   fontWeight: "bold",
+  textAlign: "center"
 
 }
 
@@ -167,7 +168,7 @@ class Edit extends React.Component {
 
       <form onSubmit={this.handleUpdate}>
 
-        <img style={uploadStyle} src={this.state.photoUrl}/>
+        {/* <img style={uploadStyle} src={this.state.photoUrl}/> */}
 
         <div  className="dropzone">
           <Dropzone
@@ -181,6 +182,15 @@ class Edit extends React.Component {
             <p>Max image size is 500kb.</p>
           </Dropzone>
         </div>
+
+        <aside>
+          <h5 style={infoStyle}>Dropped files</h5>
+          <ul>
+            {
+              this.state.accepted.map(f => <li key={f.name}>{f.name} - {f.size} bytes</li>)
+            }
+          </ul>
+        </aside>
 
         
         <div className="form-group">
@@ -211,17 +221,6 @@ class Edit extends React.Component {
           <label style={textStyle} htmlFor="zipcode"> Zip Code</label>
           <input type="text" value={this.state.zipcode} style={inputStyle} className="form-control" id="zipcode" placeholder="Zip Code" onChange={this.handleChange} />
         </div>
-
-        
-
-        <aside>
-          <h5 style={infoStyle}>Dropped files</h5>
-          <ul>
-            {
-              this.state.accepted.map(f => <li key={f.name}>{f.name} - {f.size} bytes</li>)
-            }
-          </ul>
-        </aside>
 
       </form>
     )

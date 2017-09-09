@@ -27,7 +27,10 @@ var Passsalthash = {
 
             console.log(data);
 
-            if (!data) { console.log("please check your email and password"); } else {
+            if (!data) {
+                console.log("please check your email and password");
+                res.json({ message: "Wrong Email!" });
+            } else {
                 var hashToCheckAgainst = data.password;
                 var saltToUse = data.salt;
                 var providedHash = crypto.pbkdf2Sync(user.password, saltToUse, 1000, 512, 'sha512').toString('hex');
@@ -39,10 +42,10 @@ var Passsalthash = {
 
                 } else {
                     console.log("Wrong Password!");
-                    res.json({ message: "Wrong Email Or Password!" })
+                    res.json({ message: "Wrong Password!" });
                 }
             }
-        })
+        });
 
     }
 }

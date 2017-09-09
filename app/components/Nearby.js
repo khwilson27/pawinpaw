@@ -226,7 +226,7 @@ class Nearby extends React.Component {
           </a>
         </div>) : (<div>
           <a href="#" onClick={this.randerAlldata}>
-            <img src={this.state.thisuserdata.photo_url} />
+            <img style={uploadStyle} src={this.state.thisuserdata.photo_url} />
           </a>
         </div>)}
 

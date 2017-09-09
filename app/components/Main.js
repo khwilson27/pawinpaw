@@ -9,12 +9,6 @@ var navStyle = {
   backgroundColor: "#009191",
 }
 
-var logoStyle = {
-  height: "55px",
-  position: "absolute",
-  top: "5%",
-  left: "45%"
-}
 
 var footerStyle = {
   textAlign: "center"
@@ -107,6 +101,7 @@ class Main extends React.Component {
       </ul>
     )
   }
+  
   render() {
 
     const childrenWithProps = React.Children.map(this.props.children,
@@ -147,8 +142,7 @@ class Main extends React.Component {
                 <span className="icon-bar"></span>
               </button>
             </div>
-            {/* Logo Image */}
-            <img style={logoStyle} src="./img/pawinpaw-logo.png" />
+           
             <div className="collapse navbar-collapse navbar-ex1-collapse">
 
               {/* Using <Link> in place of <a> and "to" in place of "href" */}

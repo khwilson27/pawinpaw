@@ -19,33 +19,46 @@ var inputStyle = {
 }
 
 var buttonStyle = {
-  height: "60px",
   display: "block",
   margin: "auto",
-
+  backgroundColor: "#009191", 
+  border: "none", 
+  height: "40px",
+  width: "180px",
+  color: "white",
+  borderRadius: "5px",
+  fontFamily: "Roboto Condensed",
+  letterSpacing: "1px",
+  marginBottom: "5px"
 }
+
 
 var headingStyle = {
   fontFamily: "Roboto Condensed",
+  textAlign: "center"
 }
 
 var textStyle = {
   fontFamily: "Roboto Condensed",
-  textAlign: "center"
 }
 
 var gloginStyle = {
   display: "block",
   margin: "auto",
-  backgroundColor: "#4cb2b2", 
+  backgroundColor: "#F46C6C", 
   border: "none", 
   height: "40px",
+  width: "180px",
   color: "white",
   borderRadius: "5px",
   fontFamily: "Roboto Condensed",
   letterSpacing: "1px"
 }
-  
+
+var logoStyle = {
+  display: "block",
+  margin: "auto"
+}
 
 
 // Create the Main component
@@ -173,6 +186,7 @@ class Registration extends React.Component {
     return (
       <div className="mainContainer">
         <div className="container">
+        <img style={logoStyle} src="./img/pawinpaw-logo.png" />
           <h2 style={headingStyle}>REGISTER</h2>
           <br/>
           {/* Login fields */}
@@ -194,13 +208,13 @@ class Registration extends React.Component {
                   <input type="password" value={this.state.repassword} style={inputStyle} className="form-control" id="repassword" placeholder="Password" onChange={this.handleChange} />
                 </div>
                 <br/>
-                {/* <button onClick={this.handleSignup} className="btn btn-default">Register</button> */}
-                <input type="image" onClick={this.handleSignup} style={buttonStyle} src="./img/Register.png"/>
+                <button type="submit" onClick={this.handleSignup} style={buttonStyle}>REGISTER</button>
+                {/* <input type="image" onClick={this.handleSignup} style={buttonStyle} src="./img/Register.png"/> */}
                 <br/><br/>
              
-                <h4 style={textStyle}>Already have an account?</h4>
-                <input type="image" onClick={this.handleLoginBtn} style={buttonStyle} src="./img/Login.png"/>
-                <h4 style={textStyle}>Or</h4>
+                <h4 style={headingStyle}>Already have an account?</h4>
+                {/* <input type="image" onClick={this.handleLoginBtn} style={buttonStyle} src="./img/Login.png"/> */}
+                <button type="submit" onClick={this.handleLoginBtn} style={buttonStyle}>LOG IN</button>
                 {/*Google LogIn*/}
                 <GoogleLogin style={gloginStyle} clientId="280548920560-u13cbso5e0b21ouc0aqokmf7rlfvt4po.apps.googleusercontent.com"
                   buttonText="Continue With Google"

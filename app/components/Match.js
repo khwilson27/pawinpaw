@@ -6,7 +6,7 @@ var Link = require("react-router").Link;
 var router = require("react-router");
 var browserHistory = router.browserHistory;
 
-
+// Styling
 var textStyle = {
     fontFamily: "Roboto Condensed",
     textAlign: "center", 

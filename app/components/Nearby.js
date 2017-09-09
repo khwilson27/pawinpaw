@@ -86,6 +86,7 @@ class Nearby extends React.Component {
       passClicked: false,
       photoClicked: false,
       backClicked: false,
+      empty: false,
       users: [],
       thisuserdata: {},
       items: [
@@ -166,12 +167,17 @@ class Nearby extends React.Component {
   componentWillMount() {
     helpers.findNear(this.props.zipcode, this.props.id).then((res) => {
       console.log(res)
+      if(res.data.length === 0){
+        this.setState({
+          empty: true
+        })
+      }else{
       this.setState({
         users: res.data,
-        thisuserdata: res.data[0]
-        
-        
+        thisuserdata: res.data[0],
+        empty: false
       })
+    }
     })
   }
 
@@ -192,7 +198,7 @@ class Nearby extends React.Component {
 
   handelMoving() {
     let usersArr = this.state.users;
-    if (this.state.count >= usersArr.length ) {
+    if (count >= usersArr.length ) {
       count = 1;
       // this.setState({ count: 0 });
       this.handelMoving()
@@ -302,8 +308,8 @@ class Nearby extends React.Component {
   }
 
   render() {
-    console.log(this.props.zipcode + " " + this.props.id)
-
+    console.log(this.props.zipcode + " " + this.props.id + " "+this.state.empty)
+if(this.state.empty){ return(<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/UK_traffic_sign_PROHIBIT.svg/1024px-UK_traffic_sign_PROHIBIT.svg.png"/>)}else{
     return (
 
       <div className='layout-page'>
@@ -315,7 +321,7 @@ class Nearby extends React.Component {
       </div>
     );
   }
-
+  }
 }
 
 // Export the module back to the route

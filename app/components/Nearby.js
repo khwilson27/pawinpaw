@@ -2,8 +2,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import helpers from "../utils/helpers.js";
-import { PhotoSwipe } from 'react-photoswipe';
-import { PhotoSwipeGallery } from 'react-photoswipe';
+// import { PhotoSwipe } from 'react-photoswipe';
+// import { PhotoSwipeGallery } from 'react-photoswipe';
 var Link = require("react-router").Link;
 
 var buttonStyle = {
@@ -39,14 +39,15 @@ var clearFloats={
   clear: "both"
 }
 
+var count = 1;
 
 import PropTypes from 'prop-types';
 class Nearby extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.openPhotoSwipe = this.openPhotoSwipe.bind(this);
-    this.handleClose = this.handleClose.bind(this);
+    // this.openPhotoSwipe = this.openPhotoSwipe.bind(this);
+    // this.handleClose = this.handleClose.bind(this);
     this.handelMoving = this.handelMoving.bind(this);
     this.handelLikeclick = this.handelLikeclick.bind(this);
     this.handelPassclick = this.handelPassclick.bind(this);
@@ -54,7 +55,6 @@ class Nearby extends React.Component {
     this.randerAlldata = this.randerAlldata.bind(this);
     this.backHandle = this.backHandle.bind(this);
     this.state = {
-      count: 0,
       isOpen: false,
       likeClicked: false,
       passClicked: false,
@@ -62,86 +62,89 @@ class Nearby extends React.Component {
       backClicked: false,
       users: [],
       thisuserdata: {},
-      items: [
-        {
-          src: 'https://www.organicfacts.net/wp-content/uploads/candogseatfigs.jpg',
-          w: 1200,
-          h: 900,
-          title: 'Image 1'
-        },
-        {
-          src: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_normal-abnormalities-in-dogs179216570.jpg',
-          w: 1200,
-          h: 900,
-          title: 'Image 2'
-        },
-        {
-          src: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_normal-abnormalities-in-dogs179216570.jpg',
-          w: 1200,
-          h: 900,
-          title: 'Image 3'
-        }
-      ],
-      galleryItems: [
-        {
-          src: 'https://www.organicfacts.net/wp-content/uploads/candogseatfigs.jpg',
-          thumbnail: 'https://www.organicfacts.net/wp-content/uploads/candogseatfigs.jpg',
-          w: 1200,
-          h: 900,
-          title: 'Image 1'
-        },
-        {
-          src: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_normal-abnormalities-in-dogs179216570.jpg',
-          thumbnail: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_normal-abnormalities-in-dogs179216570.jpg',
-          w: 1200,
-          h: 900,
-          title: 'Image 2'
-        },
-        {
-          src: 'https://canna-pet.com/wp-content/uploads/2017/08/impetigo-in-dogs_canna-pet-e1501630812568.jpg',
-          thumbnail: 'https://canna-pet.com/wp-content/uploads/2017/08/impetigo-in-dogs_canna-pet-e1501630812568.jpg',
-          w: 1200,
-          h: 900,
-          title: 'Image 3'
-        },
-        {
-          src: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_thyroid-dogs177494230.jpg',
-          thumbnail: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_thyroid-dogs177494230.jpg',
-          w: 1200,
-          h: 900,
-          title: 'Image 4'
-        }
-      ],
-      options: {}
+      // items: [
+      //   {
+      //     src: 'https://www.organicfacts.net/wp-content/uploads/candogseatfigs.jpg',
+      //     w: 1200,
+      //     h: 900,
+      //     title: 'Image 1'
+      //   },
+      //   {
+      //     src: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_normal-abnormalities-in-dogs179216570.jpg',
+      //     w: 1200,
+      //     h: 900,
+      //     title: 'Image 2'
+      //   },
+      //   {
+      //     src: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_normal-abnormalities-in-dogs179216570.jpg',
+      //     w: 1200,
+      //     h: 900,
+      //     title: 'Image 3'
+      //   }
+      // ],
+      // galleryItems: [
+      //   {
+      //     src: 'https://www.organicfacts.net/wp-content/uploads/candogseatfigs.jpg',
+      //     thumbnail: 'https://www.organicfacts.net/wp-content/uploads/candogseatfigs.jpg',
+      //     w: 1200,
+      //     h: 900,
+      //     title: 'Image 1'
+      //   },
+      //   {
+      //     src: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_normal-abnormalities-in-dogs179216570.jpg',
+      //     thumbnail: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_normal-abnormalities-in-dogs179216570.jpg',
+      //     w: 1200,
+      //     h: 900,
+      //     title: 'Image 2'
+      //   },
+      //   {
+      //     src: 'https://canna-pet.com/wp-content/uploads/2017/08/impetigo-in-dogs_canna-pet-e1501630812568.jpg',
+      //     thumbnail: 'https://canna-pet.com/wp-content/uploads/2017/08/impetigo-in-dogs_canna-pet-e1501630812568.jpg',
+      //     w: 1200,
+      //     h: 900,
+      //     title: 'Image 3'
+      //   },
+      //   {
+      //     src: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_thyroid-dogs177494230.jpg',
+      //     thumbnail: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_thyroid-dogs177494230.jpg',
+      //     w: 1200,
+      //     h: 900,
+      //     title: 'Image 4'
+      //   }
+      // ],
+      // options: {}
     };
   }
-  openPhotoSwipe(e) {
-    e.preventDefault();
-    this.setState({
-      isOpen: true,
-      options: {
-        closeOnScroll: false
-      }
-    });
-  };
+  // openPhotoSwipe(e) {
+  //   e.preventDefault();
+  //   this.setState({
+  //     isOpen: true,
+  //     options: {
+  //       closeOnScroll: false
+  //     }
+  //   });
+  // };
 
-  handleClose() {
-    this.setState({
-      isOpen: false
-    });
-  };
+  // handleClose() {
+  //   this.setState({
+  //     isOpen: false
+  //   });
+  // };
 
-  getThumbnailContent(item) {
-    return (
-      <img src={item.thumbnail} width={120} height={90} />
-    );
-  };
+  // getThumbnailContent(item) {
+  //   return (
+  //     <img src={item.thumbnail} width={120} height={90} />
+  //   );
+  // };
 
-  componentDidMount() {
+  componentWillMount() {
     helpers.findNear(this.props.zipcode, this.props.id).then((res) => {
       console.log(res)
       this.setState({
-        users: res.data
+        users: res.data,
+        thisuserdata: res.data[0]
+        
+        
       })
     })
   }
@@ -163,22 +166,26 @@ class Nearby extends React.Component {
 
   handelMoving() {
     let usersArr = this.state.users;
-    if (this.state.count >= usersArr.length - 2) {
-      this.setState({ count: 0 });
+    if (this.state.count >= usersArr.length ) {
+      count = 1;
+      // this.setState({ count: 0 });
       this.handelMoving()
     } else {
 
-      console.log(this.state.count)
+      console.log(count)
 
-      console.log(usersArr[this.state.count])
+      console.log(usersArr[count])
       this.setState({
-        thisuserdata: usersArr[this.state.count]
+        thisuserdata: usersArr[count]
       })
-      this.setState({ count: this.state.count + 1 })
+      // this.setState({ count: this.state.count + 1 })
+      count++
     }
   }
 
   randPhotolink() {
+ let firstUser = this.state.users;
+ console.log(firstUser[0])
     return (
       <div>
         <h2 style={textStyle}>Hold My Paw?</h2>
@@ -186,7 +193,11 @@ class Nearby extends React.Component {
           <a href="#" onClick={this.randerAlldata}>
             <img src={this.state.thisuserdata.photo_url} />
           </a>
-        </div>) : "any "}
+        </div>) : (<div>
+          <a href="#" onClick={this.randerAlldata}>
+            <img src={this.state.thisuserdata.photo_url} />
+          </a>
+        </div>)}
 
 
         <h3 style={textStyle}>{this.state.thisuserdata.name}, {this.state.thisuserdata.age} </h3>
@@ -195,14 +206,14 @@ class Nearby extends React.Component {
         {/* Like Button */}
         <input type="image" onClick={() => { this.handelMoving(); this.handelLikeclick(); }} style={Object.assign({}, buttonStyle, floatRight)} src="./img/Like.png" />
 
-        <PhotoSwipe isOpen={this.state.isOpen} items={this.state.items}
+        {/* <PhotoSwipe isOpen={this.state.isOpen} items={this.state.items}
           options={this.state.options}
           onClose={this.handleClose} />
         <hr style={clearFloats}/>
         <h2  >Who barks nearby?</h2>
         <hr />
         <PhotoSwipeGallery items={this.state.galleryItems}
-          thumbnailContent={this.getThumbnailContent} />
+          thumbnailContent={this.getThumbnailContent} /> */}
       </div>
 
     )

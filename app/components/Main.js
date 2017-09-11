@@ -9,8 +9,7 @@ var navStyle = {
   backgroundColor: "#009191",
 }
 
-
-var footerStyle = {
+var centerAlign = {
   textAlign: "center"
 }
 
@@ -85,8 +84,8 @@ class Main extends React.Component {
   renderNavLogin() {
     return (
       <ul className="nav navbar-nav navbar-right">
-        <li><Link to="/Login">Login</Link></li>
-        <li><Link to="/Registration">Register</Link></li>
+        <li><Link to="/Login" data-toggle="collapse" data-target=".navbar-collapse.in" style={centerAlign}>Login</Link></li>
+        <li><Link to="/Registration" data-toggle="collapse" data-target=".navbar-collapse.in" style={centerAlign}>Register</Link></li>
       </ul>
     )
   }
@@ -95,10 +94,10 @@ class Main extends React.Component {
     return (
       
       <ul className="nav navbar-nav navbar-right">
-        <li><Link to="/Edit">Profile</Link></li>
-        <li><Link to="/Match">Matches</Link></li>
-        <li><Link to="/Nearby">Nearby</Link></li>
-        <li><Link to="/Login" onClick={this.handleLogout}>Logout</Link></li>
+        <li><Link to="/Edit" data-toggle="collapse" data-target=".navbar-collapse.in" style={centerAlign}>Profile</Link></li>
+        <li><Link to="/Match" data-toggle="collapse" data-target=".navbar-collapse.in" style={centerAlign}>Matches</Link></li>
+        <li><Link to="/Nearby" data-toggle="collapse" data-target=".navbar-collapse.in" style={centerAlign}>Nearby</Link></li>
+        <li><Link to="/Login" data-toggle="collapse" data-target=".navbar-collapse.in" style={centerAlign} onClick={this.handleLogout}>Logout</Link></li>
         
       </ul>
     )
@@ -135,7 +134,7 @@ class Main extends React.Component {
     return (
       // We can only render a single div. So we need to group everything inside of this main-container one
       <div className="main-container">
-        <nav className="navbar navbar-default" role="navigation" style={navStyle}>
+        <nav className="navbar navbar-default navbar-expand-xxl" role="navigation" style={navStyle}>
           <div className="container-fluid">
             <div className="navbar-header">
             {this.state.isAuth ? this.renderLogo() : null}

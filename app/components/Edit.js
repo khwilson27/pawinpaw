@@ -42,7 +42,7 @@ var dropzoneStyle = {
 var uploadStyle = {
   display: "block", 
   margin: "auto",
-  height: "200px",
+  width: "75%",
   border: "none"
 }
 

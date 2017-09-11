@@ -62,6 +62,7 @@ var backButton = {
 var uploadStyle = {
     display: "block",
     margin: "auto",
+    width: "75%"
 }
 
 class Nearby extends React.Component {

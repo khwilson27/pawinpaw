@@ -213,11 +213,12 @@ class Login extends React.Component {
         {/* Navigation bar */}
         <div className="container">
           {/* Login fields */}
+          {/* Logo Image */}
+          <img style={logoStyle} src="./img/pawinpaw-logo.png" />
+          <h2 style={headingStyle}>LOG IN</h2>
+
           <div className="row">
             <div className="col-sm-8 col-xs-8 col-sm-offset-2 col-xs-offset-2">
-              {/* Logo Image */}
-              <img style={logoStyle} src="./img/pawinpaw-logo.png" />
-              <h2 style={headingStyle}>LOG IN</h2>
               <br />
               <form onSubmit={this.handleSignin}>
                 <div className="form-group">

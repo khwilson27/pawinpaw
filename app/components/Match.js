@@ -23,7 +23,7 @@ var infoStyle = {
 var uploadStyle = {
     display: "block",
     margin: "auto",
-    height: "200px",
+    width: "60%",
     marginTop: "10px"
 }
 

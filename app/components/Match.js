@@ -174,8 +174,8 @@ class Match extends React.Component {
 
                 <div className="row" key={currentValue.id}>
                     <div className="col-sm-12">
-                        <img style={uploadStyle} src={currentValue.photo_url} onClick={this.showMatchInfo} data-name={currentValue.name} data-age={currentValue.age} data-breed={currentValue.breed} data-likes={currentValue.likes} data-dislikes={currentValue.dislikes} data-favTreat={currentValue.favTreat} data-zipcode={currentValue.zipcode} data-photourl={currentValue.photo_url} data-email={currentValue.email} data-id={currentValue.id} />
-                        <h3 style={textStyle}>{currentValue.name}, {currentValue.age}</h3>
+                        <img style={uploadStyle} src={currentValue.photo_url ? currentValue.photo_url : "./img/NoImgAvailable.png"} onClick={this.showMatchInfo} data-name={currentValue.name} data-age={currentValue.age} data-breed={currentValue.breed} data-likes={currentValue.likes} data-dislikes={currentValue.dislikes} data-favTreat={currentValue.favTreat} data-zipcode={currentValue.zipcode} data-photourl={currentValue.photo_url} data-email={currentValue.email} data-id={currentValue.id} />
+                        <h3 style={textStyle}>{currentValue.name ? currentValue.name : "?"}, {currentValue.age ? currentValue.age : "?"}</h3>
                         <hr />
                     </div>
                 </div>
@@ -192,10 +192,10 @@ class Match extends React.Component {
         return (
             <form>
 
-                <img style={uploadStyle} src={this.state.photoUrl} />
+                <img style={uploadStyle} src={this.state.photoUrl ? this.state.photoUrl : "./img/NoImgAvailable.png"} />
 
                 <h3 style={infoStyle}>
-                    {this.state.name}, {this.state.age}
+                    {this.state.name ? this.state.name : "?"}, {this.state.age ? this.state.age : "?"}
                 </h3>
 
                 <hr />

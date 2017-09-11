@@ -124,8 +124,8 @@ class Nearby extends React.Component {
         return (
             <div>
                 <h2 style={Object.assign({}, textStyle, paddingStyle)}>Hold My Paw?</h2>
-                <img style={uploadStyle} src={this.state.nearbyUsers[this.state.count].photo_url} onClick={this.handleImgClick} />
-                <h3 style={textStyle}>{this.state.nearbyUsers[this.state.count].name}, {this.state.nearbyUsers[this.state.count].age} </h3>
+                <img style={uploadStyle} src={this.state.nearbyUsers[this.state.count].photo_url ? this.state.nearbyUsers[this.state.count].photo_url : "./img/NoImgAvailable.png"} onClick={this.handleImgClick} />
+                <h3 style={textStyle}>{this.state.nearbyUsers[this.state.count].name ? this.state.nearbyUsers[this.state.count].name : "?"}, {this.state.nearbyUsers[this.state.count].age ? this.state.nearbyUsers[this.state.count].age : "?"} </h3>
 
                 {/* Pass Button */}
                 <input type="image" onClick={this.handlePassClick} style={Object.assign({}, buttonStyle, floatLeft)} src="./img/Pass.png" />
@@ -187,7 +187,7 @@ class Nearby extends React.Component {
                 <div className='layout-page'>
                     <main className='layout-main'>
                         <div className='container'>
-                            <img width="30%" style={uploadStyle} src="http://www.32ndstreetmarket.org/wp-content/uploads/2016/03/No-dogs-expanded.jpg" />
+                            <img width="30%" style={uploadStyle} src="./img/No-dogs.jpg" />
                             <h2 style={textStyle}>No more nearby users...</h2>
                         </div>
                     </main>

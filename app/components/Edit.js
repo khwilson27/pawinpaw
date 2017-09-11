@@ -62,15 +62,15 @@ class Edit extends React.Component {
     super(props);
 
     this.state = {
-      name: this.props.name || "",
-      age: this.props.age || "",
-      breed: this.props.breed || "",
-      likes: this.props.likes || "",
-      dislikes: this.props.dislikes || "",
-      favTreat: this.props.favTreat || "",
-      zipcode: this.props.zipcode || "",
-      photoUrl: this.props.photo_url || "",
-      photo_publicid: this.props.photo_publicid || "",
+      name: this.props.name,
+      age: this.props.age,
+      breed: this.props.breed,
+      likes: this.props.likes,
+      dislikes: this.props.dislikes,
+      favTreat: this.props.favTreat,
+      zipcode: this.props.zipcode,
+      photoUrl: this.props.photo_url,
+      photo_publicid: this.props.photo_publicid,
 
       missingFields: false,
       editClicked: true,
@@ -97,7 +97,7 @@ class Edit extends React.Component {
   handleUpdate(event) {
     event.preventDefault();
 
-    if (this.state.name === "" || this.state.age === "" || this.state.zipcode == "") {
+    if (!this.state.name || !this.state.age || !this.state.zipcode || this.state.name === "" || this.state.age === "" || this.state.zipcode == "") {
       return this.setState({
         missingFields: true
       })
@@ -250,7 +250,7 @@ class Edit extends React.Component {
     return (
       <form>
 
-        <img style={uploadStyle} src={this.state.photoUrl} />
+        <img style={uploadStyle} src={this.state.photoUrl ? this.state.photoUrl : "./img/NoImgAvailable.png"} />
 
         <hr/>
         <h2 style={infoStyle}>{this.state.name}, {this.state.age}</h2>

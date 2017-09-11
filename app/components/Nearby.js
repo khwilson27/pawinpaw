@@ -185,7 +185,7 @@ class Nearby extends React.Component {
                 <div className='layout-page'>
                     <main className='layout-main'>
                         <div className='container'>
-                            <img width="30%" style={uploadStyle} src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/UK_traffic_sign_PROHIBIT.svg/1024px-UK_traffic_sign_PROHIBIT.svg.png" />
+                            <img width="30%" style={uploadStyle} src="http://www.32ndstreetmarket.org/wp-content/uploads/2016/03/No-dogs-expanded.jpg" />
                             <h2 style={textStyle}>No more nearby users...</h2>
                         </div>
                     </main>

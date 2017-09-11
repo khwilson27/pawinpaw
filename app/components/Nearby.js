@@ -84,11 +84,13 @@ class Nearby extends React.Component {
     }
 
     componentWillMount() {
-        helpers.findNear(this.props.zipcode, this.props.id).then((res) => {
-            this.setState({
-                nearbyUsers: res.data
+        if (this.props.zipcode) {
+            helpers.findNear(this.props.zipcode, this.props.id).then((res) => {
+                this.setState({
+                    nearbyUsers: res.data
+                })
             })
-        })
+        }
     }
 
     handleLikeClick() {

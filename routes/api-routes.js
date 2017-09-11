@@ -56,14 +56,12 @@ module.exports = function (app) {
             where: { UserId: req.body.id },
             attributes: ['matchId']
         }).then(function (matchData) {
-            console.log("Here Data!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + matchData);
+            
             const previouslyActedUsers = [req.body.id];
 
             matchData.map((currentValue, index) => {
                 previouslyActedUsers.push(currentValue.matchId);
             });
-
-            console.log(previouslyActedUsers);
 
             db.User.findAll({
                 where: {
@@ -72,7 +70,6 @@ module.exports = function (app) {
                 },
                 attributes: { exclude: ['password', 'salt', 'email'] }
             }).then(function (data) {
-                console.log("Here Data!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + data);
                 res.json(data);
             });
 

@@ -9,29 +9,29 @@ var browserHistory = router.browserHistory;
 // Styling
 var textStyle = {
     fontFamily: "Roboto Condensed",
-    textAlign: "center", 
+    textAlign: "center",
     paddingRight: "5px"
-  }
+}
 
-  var infoStyle = {
+var infoStyle = {
     fontFamily: "Roboto Condensed",
     fontWeight: "bold",
-    textAlign:"center",
-  
-  }
+    textAlign: "center",
 
-  var uploadStyle = {
-    display: "block", 
+}
+
+var uploadStyle = {
+    display: "block",
     margin: "auto",
     height: "200px",
     marginTop: "10px"
-  }
+}
 
-  var doneButton = {
+var doneButton = {
     display: "inline-block",
     margin: "auto",
-    backgroundColor: "#009191", 
-    border: "none", 
+    backgroundColor: "#009191",
+    border: "none",
     height: "40px",
     width: "180px",
     color: "white",
@@ -40,13 +40,13 @@ var textStyle = {
     letterSpacing: "1px",
     marginBottom: "5px",
     float: "left"
-  }
+}
 
-  var unmatchButton = {
+var unmatchButton = {
     display: "inline-block",
     margin: "auto",
-    backgroundColor: "#D62C1A", 
-    border: "none", 
+    backgroundColor: "#D62C1A",
+    border: "none",
     height: "40px",
     width: "180px",
     color: "white",
@@ -56,9 +56,9 @@ var textStyle = {
     marginBottom: "5px",
     float: "right"
 
-  }
+}
 
-  
+
 // Create the Main component
 class Match extends React.Component {
 
@@ -66,7 +66,7 @@ class Match extends React.Component {
         super(props);
 
         this.state = {
-            matchProfiles: null,
+            matchProfiles: [],
             matchClicked: false,
 
             id: "",
@@ -90,7 +90,7 @@ class Match extends React.Component {
     // When this component mounts, get all user's matches and set it to state
     componentDidMount() {
         helpers.findMatches(this.props.id)
-        // helpers.findMatches(1)
+            // helpers.findMatches(1)
             .then((matchProfiles) => {
                 this.setState({ matchProfiles: matchProfiles.data });
                 console.log("matches", matchProfiles);
@@ -146,7 +146,7 @@ class Match extends React.Component {
     }
 
     renderMatchSwitch() {
-        if (this.state.matchProfiles) {
+        if (this.state.matchProfiles[0]) {
             return this.renderMatches()
         } else {
             return this.renderEmpty()
@@ -155,22 +155,28 @@ class Match extends React.Component {
 
     renderEmpty() {
         return (
-            <h1>No matches yet...</h1>
+            <div className='layout-page'>
+                <main className='layout-main'>
+                    <div className='container'>
+                        <h2 style={textStyle}>No more nearby users...</h2>
+                    </div>
+                </main>
+            </div>
         )
     }
 
     renderMatches() {
         // console.log("full");
-        
+
         return this.state.matchProfiles.map((currentValue, index) => {
             console.log(currentValue);
             return (
-               
+
                 <div className="row" key={currentValue.id}>
                     <div className="col-sm-12">
                         <img style={uploadStyle} src={currentValue.photo_url} onClick={this.showMatchInfo} data-name={currentValue.name} data-age={currentValue.age} data-breed={currentValue.breed} data-likes={currentValue.likes} data-dislikes={currentValue.dislikes} data-favTreat={currentValue.favTreat} data-zipcode={currentValue.zipcode} data-photourl={currentValue.photo_url} data-email={currentValue.email} data-id={currentValue.id} />
                         <h3 style={textStyle}>{currentValue.name}, {currentValue.age}</h3>
-                        <hr/>
+                        <hr />
                     </div>
                 </div>
 
@@ -192,8 +198,8 @@ class Match extends React.Component {
                     {this.state.name}, {this.state.age}
                 </h3>
 
-                <hr/>
-               
+                <hr />
+
                 <div className="form-group">
                     <label htmlFor="breed" style={textStyle}> Breed: </label>
                     {this.state.breed}

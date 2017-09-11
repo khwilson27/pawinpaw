@@ -62,16 +62,17 @@ class Edit extends React.Component {
     super(props);
 
     this.state = {
-      name: this.props.name,
-      age: this.props.age,
-      breed: this.props.breed,
-      likes: this.props.likes,
-      dislikes: this.props.dislikes,
-      favTreat: this.props.favTreat,
-      zipcode: this.props.zipcode,
-      photoUrl: this.props.photo_url,
-      photo_publicid: this.props.photo_publicid,
+      name: this.props.name || "",
+      age: this.props.age || "",
+      breed: this.props.breed || "",
+      likes: this.props.likes || "",
+      dislikes: this.props.dislikes || "",
+      favTreat: this.props.favTreat || "",
+      zipcode: this.props.zipcode || "",
+      photoUrl: this.props.photo_url || "",
+      photo_publicid: this.props.photo_publicid || "",
 
+      missingFields: false,
       editClicked: true,
       saveClicked: false,
 
@@ -96,7 +97,11 @@ class Edit extends React.Component {
   handleUpdate(event) {
     event.preventDefault();
 
-    if (this.state.accepted[0]) {
+    if (this.state.name === "" || this.state.age === "" || this.state.zipcode == "") {
+      return this.setState({
+        missingFields: true
+      })
+    } else if (this.state.accepted[0]) {
       helpers.cloudinaryUpload(this.state.accepted[0])
         .then((res) => {
           // File uploaded successfully
@@ -152,10 +157,13 @@ class Edit extends React.Component {
       console.log(data);
 
       helpers.userData(data).then(() => {
-        this.setState({
-          saveClicked: true,
-          editClicked: false
-        });
+        data.id = this.props.id;
+        data.email = this.props.email;
+        data.isAuth = this.props.isAuth;
+
+        this.state.saveClicked = true;
+        this.state.editClicked = false;
+        this.props.setParent(data);
       });
     }
 
@@ -165,10 +173,12 @@ class Edit extends React.Component {
     console.log("dropped files");
   }
 
+  renderMissingError() {
+    return (<div className="alert alert-danger" role="alert">Required field!</div>)
+  }
+
   renderForm() {
     return (
-
-      
 
       <form onSubmit={this.handleUpdate}>
 
@@ -198,12 +208,14 @@ class Edit extends React.Component {
 
         
         <div className="form-group">
-          <label style={textStyle} htmlFor="name">Name</label>
+          <label style={textStyle} htmlFor="name">*Name</label>
           <input type="email" value={this.state.name} style={inputStyle} className="form-control" id="name" placeholder="Enter Name" onChange={this.handleChange} />
+          {(this.state.missingFields) ? this.renderMissingError() : null}
         </div>
         <div className="form-group">
-          <label style={textStyle} htmlFor="age">Age</label>
+          <label style={textStyle} htmlFor="age">*Age</label>
           <input type="text" value={this.state.age} style={inputStyle} className="form-control" id="age" placeholder="Age" onChange={this.handleChange} />
+          {(this.state.missingFields) ? this.renderMissingError() : null}
         </div>
         <div className="form-group">
           <label style={textStyle} htmlFor="breed"> Breed</label>
@@ -222,9 +234,13 @@ class Edit extends React.Component {
           <input type="text" value={this.state.favTreat} style={inputStyle} className="form-control" id="favTreat" placeholder="Favorite Treats" onChange={this.handleChange} />
         </div>
         <div className="form-group">
-          <label style={textStyle} htmlFor="zipcode"> Zip Code</label>
+          <label style={textStyle} htmlFor="zipcode"> **Zip Code</label>
           <input type="text" value={this.state.zipcode} style={inputStyle} className="form-control" id="zipcode" placeholder="Zip Code" onChange={this.handleChange} />
+          {(this.state.missingFields) ? this.renderMissingError() : null}  
         </div>
+
+        <p>*Required</p>
+        <p>**Local potential matches will be populated based on Zip Code.</p>
 
       </form>
     )

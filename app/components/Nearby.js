@@ -141,7 +141,7 @@ class Nearby extends React.Component {
 
         return (
             <div>
-                <img src={this.state.nearbyUsers[this.state.count].photo_url} />
+                <img style={uploadStyle} src={this.state.nearbyUsers[this.state.count].photo_url} />
                 <h2 style={textStyle}>{this.state.nearbyUsers[this.state.count].name}, {this.state.nearbyUsers[this.state.count].age} </h2>
                 <hr />
                 <div className="form-group">

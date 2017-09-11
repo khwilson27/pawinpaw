@@ -43,7 +43,6 @@ var clearFloats = {
 var paddingStyle = {
     paddingBottom: "10px",
     marginTop: "0px"
-
 }
 
 var backButton = {
@@ -73,99 +72,22 @@ class Nearby extends React.Component {
         this.handleLikeClick = this.handleLikeClick.bind(this);
         this.handlePassClick = this.handlePassClick.bind(this);
         this.handleBackBtn = this.handleBackBtn.bind(this);
-        this.handleImgClick =  this.handleImgClick.bind(this);
+        this.handleImgClick = this.handleImgClick.bind(this);
         this.renderCurrentCard = this.renderCurrentCard.bind(this);
         this.renderProfile = this.renderProfile.bind(this);
 
         this.state = {
             showProfile: false,
             nearbyUsers: [],
-            count: 0,
-
-            //   items: [
-            //     {
-            //       src: 'https://www.organicfacts.net/wp-content/uploads/candogseatfigs.jpg',
-            //       w: 1200,
-            //       h: 900,
-            //       title: 'Image 1'
-            //     },
-            //     {
-            //       src: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_normal-abnormalities-in-dogs179216570.jpg',
-            //       w: 1200,
-            //       h: 900,
-            //       title: 'Image 2'
-            //     },
-            //     {
-            //       src: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_normal-abnormalities-in-dogs179216570.jpg',
-            //       w: 1200,
-            //       h: 900,
-            //       title: 'Image 3'
-            //     }
-            //   ],
-
-            //   galleryItems: [
-            //     {
-            //       src: 'https://www.organicfacts.net/wp-content/uploads/candogseatfigs.jpg',
-            //       thumbnail: 'https://www.organicfacts.net/wp-content/uploads/candogseatfigs.jpg',
-            //       w: 1200,
-            //       h: 900,
-            //       title: 'Image 1'
-            //     },
-            //     {
-            //       src: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_normal-abnormalities-in-dogs179216570.jpg',
-            //       thumbnail: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_normal-abnormalities-in-dogs179216570.jpg',
-            //       w: 1200,
-            //       h: 900,
-            //       title: 'Image 2'
-            //     },
-            //     {
-            //       src: 'https://canna-pet.com/wp-content/uploads/2017/08/impetigo-in-dogs_canna-pet-e1501630812568.jpg',
-            //       thumbnail: 'https://canna-pet.com/wp-content/uploads/2017/08/impetigo-in-dogs_canna-pet-e1501630812568.jpg',
-            //       w: 1200,
-            //       h: 900,
-            //       title: 'Image 3'
-            //     },
-            //     {
-            //       src: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_thyroid-dogs177494230.jpg',
-            //       thumbnail: 'http://www.pethealthnetwork.com/sites/default/files/content/images/prev_thyroid-dogs177494230.jpg',
-            //       w: 1200,
-            //       h: 900,
-            //       title: 'Image 4'
-            //     }
-            //   ],
-            //   options: {}
+            count: 0
         };
     }
-    //   openPhotoSwipe(e) {
-    //     e.preventDefault();
-    //     this.setState({
-    //       isOpen: true,
-    //       options: {
-    //         closeOnScroll: false
-    //       }
-    //     });
-    //   };
-
-    //   handleClose() {
-    //     this.setState({
-    //       isOpen: false
-    //     });
-    //   };
-
-    //   getThumbnailContent(item) {
-    //     return (
-    //       <img src={item.thumbnail} width={120} height={90} />
-    //     );
-    //    };
 
     componentWillMount() {
         helpers.findNear(this.props.zipcode, this.props.id).then((res) => {
-            console.log(res);
-
             this.setState({
                 nearbyUsers: res.data
             })
-
         })
     }
 
@@ -207,27 +129,10 @@ class Nearby extends React.Component {
                 <input type="image" onClick={this.handlePassClick} style={Object.assign({}, buttonStyle, floatLeft)} src="./img/Pass.png" />
                 {/* Like Button */}
                 <input type="image" onClick={this.handleLikeClick} style={Object.assign({}, buttonStyle, floatRight)} src="./img/Like.png" />
-
-                {/* <PhotoSwipe isOpen={this.state.isOpen} items={this.state.items}
-                    options={this.state.options}
-                    onClose={this.handleClose} />
-                <hr style={clearFloats} />
-                <h2 style={infoStyle}>Who barks nearby?</h2>
-                <hr />
-                <PhotoSwipeGallery items={this.state.galleryItems}
-                    thumbnailContent={this.getThumbnailContent} /> */}
             </div>
 
         )
     }
-
-    //   randerAlldata(event) {
-    //     event.preventDefault();
-    //     this.setState({
-    //       photoClicked: true,
-    //       backClicked: false
-    //     })
-    //   }
 
     renderProfile() {
         console.log(this.state.nearbyUsers[this.state.count]);
@@ -280,7 +185,8 @@ class Nearby extends React.Component {
                 <div className='layout-page'>
                     <main className='layout-main'>
                         <div className='container'>
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/UK_traffic_sign_PROHIBIT.svg/1024px-UK_traffic_sign_PROHIBIT.svg.png" />)
+                            <img width="30%" style={uploadStyle} src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/UK_traffic_sign_PROHIBIT.svg/1024px-UK_traffic_sign_PROHIBIT.svg.png" />
+                            <h2 style={textStyle}>No more nearby users...</h2>
                         </div>
                     </main>
                 </div>

@@ -70,14 +70,12 @@ class Nearby extends React.Component {
     constructor(props, context) {
         super(props, context);
 
-        // this.openPhotoSwipe = this.openPhotoSwipe.bind(this);
-        // this.handleClose = this.handleClose.bind(this);
-        // this.handelMoving = this.handelMoving.bind(this);
-        this.handelLikeClick = this.handelLikeClick.bind(this);
-        this.handelPassClick = this.handelPassClick.bind(this);
-        // this.handleMatchreq = this.handleMatchreq.bind(this);
-        // this.randerAlldata = this.randerAlldata.bind(this);
+        this.handleLikeClick = this.handleLikeClick.bind(this);
+        this.handlePassClick = this.handlePassClick.bind(this);
         this.handleBackBtn = this.handleBackBtn.bind(this);
+        this.handleImgClick =  this.handleImgClick.bind(this);
+        this.renderCurrentCard = this.renderCurrentCard.bind(this);
+        this.renderProfile = this.renderProfile.bind(this);
 
         this.state = {
             showProfile: false,
@@ -165,21 +163,21 @@ class Nearby extends React.Component {
             console.log(res);
 
             this.setState({
-                nearbyUsers: res.data,
+                nearbyUsers: res.data
             })
 
         })
     }
 
     handleLikeClick() {
-        helpers.matchRequest(this.props.id, this.state.thisuserdata.id, true);
+        helpers.matchRequest(this.props.id, this.state.nearbyUsers[this.state.count].id, true);
         this.setState({
             count: this.state.count + 1
         });
     }
 
     handlePassClick() {
-        helpers.matchRequest(this.props.id, this.state.thisuserdata.id, false);
+        helpers.matchRequest(this.props.id, this.state.nearbyUsers[this.state.count].id, false);
         this.setState({
             count: this.state.count + 1
         });
@@ -203,13 +201,12 @@ class Nearby extends React.Component {
             <div>
                 <h2 style={Object.assign({}, textStyle, paddingStyle)}>Hold My Paw?</h2>
                 <img style={uploadStyle} src={this.state.nearbyUsers[this.state.count].photo_url} onClick={this.handleImgClick} />
-
                 <h3 style={textStyle}>{this.state.nearbyUsers[this.state.count].name}, {this.state.nearbyUsers[this.state.count].age} </h3>
 
                 {/* Pass Button */}
-                <input type="image" onClick={this.handlePassClick()} style={Object.assign({}, buttonStyle, floatLeft)} src="./img/Pass.png" />
+                <input type="image" onClick={this.handlePassClick} style={Object.assign({}, buttonStyle, floatLeft)} src="./img/Pass.png" />
                 {/* Like Button */}
-                <input type="image" onClick={this.handleLikeClick()} style={Object.assign({}, buttonStyle, floatRight)} src="./img/Like.png" />
+                <input type="image" onClick={this.handleLikeClick} style={Object.assign({}, buttonStyle, floatRight)} src="./img/Like.png" />
 
                 {/* <PhotoSwipe isOpen={this.state.isOpen} items={this.state.items}
                     options={this.state.options}
@@ -267,7 +264,7 @@ class Nearby extends React.Component {
     }
 
     render() {
-        console.log(this.props.zipcode + " " + this.props.id + " " + this.state.empty)
+
         if (this.state.nearbyUsers[this.state.count]) {
             return (
                 <div className='layout-page'>

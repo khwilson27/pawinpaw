@@ -158,7 +158,7 @@ class Match extends React.Component {
             <div className='layout-page'>
                 <main className='layout-main'>
                     <div className='container'>
-                        <h2 style={textStyle}>No more nearby users...</h2>
+                        <h2 style={textStyle}>No matches yet...</h2>
                     </div>
                 </main>
             </div>

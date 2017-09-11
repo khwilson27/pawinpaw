@@ -25,8 +25,8 @@ var logoStyle = {
 var buttonStyle = {
   display: "block",
   margin: "auto",
-  backgroundColor: "#009191", 
-  border: "none", 
+  backgroundColor: "#009191",
+  border: "none",
   height: "40px",
   width: "180px",
   color: "white",
@@ -49,8 +49,8 @@ var textStyle = {
 var gloginStyle = {
   display: "block",
   margin: "auto",
-  backgroundColor: "#F46C6C", 
-  border: "none", 
+  backgroundColor: "#F46C6C",
+  border: "none",
   height: "40px",
   width: "180px",
   color: "white",
@@ -100,7 +100,6 @@ class Login extends React.Component {
           message: Response.data.message,
           loggedin: false
         });
-        
       } else if (Response.data.id) {
 
         console.log(Response.data);
@@ -148,12 +147,13 @@ class Login extends React.Component {
       //Getting the new user data through the Response & Use It To Update The State.
       console.log(Response);
       if (Response.data.id) {
-        this.setState({
-          id: Response.data.id,
-          email: Response.data.email,
-          registered: true
-        });
-        this.props.setParent(this.state)
+
+        this.state.id = Response.data.id;
+        this.state.email = Response.data.email;
+        this.state.registered = true;
+        this.state.isAuth = true;
+
+        this.props.setParent(this.state);
         //redirect to "EditProfile"
         this.handleRedirect();
       } else {
@@ -173,7 +173,6 @@ class Login extends React.Component {
           const newState = {
             id: logResponse.data.id,
             email: logResponse.data.email,
-  
             name: logResponse.data.name,
             photo_url: logResponse.data.photo_url,
             photo_publicid: logResponse.data.photo_publicid,
@@ -183,11 +182,11 @@ class Login extends React.Component {
             likes: logResponse.data.likes,
             dislikes: logResponse.data.dislikes,
             favTreat: logResponse.data.favTreat,
-  
+
             loggedin: true,
             isAuth: true
           };
-  
+
           this.props.setParent(newState);
           this.setState(newState);
           this.handleRedirect();
@@ -216,40 +215,40 @@ class Login extends React.Component {
           {/* Login fields */}
           <div className="row">
             <div className="col-sm-8 col-xs-8 col-sm-offset-2 col-xs-offset-2">
-               {/* Logo Image */}
-            <img style={logoStyle} src="./img/pawinpaw-logo.png" />
+              {/* Logo Image */}
+              <img style={logoStyle} src="./img/pawinpaw-logo.png" />
               <h2 style={headingStyle}>LOG IN</h2>
-              <br/>
+              <br />
               <form onSubmit={this.handleSignin}>
                 <div className="form-group">
                   <label style={textStyle} htmlFor="email">Email address</label>
                   <input type="email" value={this.state.email} className="form-control" id="email" placeholder="Email" style={inputStyle} onChange={this.handleChange} />
                 </div>
                 <div className="form-group">
-                  <label  style={textStyle} htmlFor="password">Password</label>
+                  <label style={textStyle} htmlFor="password">Password</label>
                   <input type="password" className="form-control" id="password" placeholder="Password" style={inputStyle} onChange={this.handleChange} />
                   {/*error message*/}
                   {this.handelErrors()}
                 </div>
-                <br/>
+                <br />
                 {/* Regular Login Button */}
                 {/* <input type="image" onClick={this.handleSignin} style={buttonStyle} src="./img/Login.png"/> */}
                 <button type="submit" onClick={this.handleSignin} style={buttonStyle}>LOG IN</button>
-                 {/*Google LogIn*/}
+                {/*Google LogIn*/}
                 <GoogleLogin style={gloginStyle} clientId="280548920560-u13cbso5e0b21ouc0aqokmf7rlfvt4po.apps.googleusercontent.com"
                   buttonText="Continue With Google"
                   onSuccess={this.responseGoogle}
                   onFailure={this.responseGoogle}
                 ></GoogleLogin>
-                <br/><br/>
+                <br /><br />
                 <h4 style={textStyle}>Don't have an account?</h4>
 
                 {/* Register Button */}
                 {/* <input type="image" onClick={this.handleRegisterBtn} style={buttonStyle} src="./img/Register.png"/> */}
                 <button type="submit" onClick={this.handleRegisterBtn} style={buttonStyle}>Register</button>
                 <br />
-                
-                <br /><br/>
+
+                <br /><br />
               </form>
             </div>
           </div>

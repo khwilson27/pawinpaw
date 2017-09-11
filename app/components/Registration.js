@@ -140,7 +140,8 @@ class Registration extends React.Component {
         this.setState({
           id: Response.data.id,
           email: Response.data.email,
-          registered: true
+          registered: true,
+          isAuth: true
         });
         this.props.setParent(this.state)
         this.handleRedirect();
@@ -153,7 +154,8 @@ class Registration extends React.Component {
           this.setState({
             id: logResponse.data.id,
             email: logResponse.data.email,
-            loggedin: true
+            loggedin: true,
+            isAuth: true
           });
           this.props.setParent(this.state)
           this.handleRedirect();

@@ -46,27 +46,40 @@ module.exports = function (app) {
             return res.json(data);
         });
     });
-    //Get all unmatched potential users for main user to pick from 
+
+    // Get all unmatched potential users for main user to pick from
+    // 1. Query all matchIds of users that the logged-in user has already liked/passed
+    // 2. Put all of their Ids into an array along with the user's id
+    // 3. Query all nearby users that are the same zipcode as the user and whose id is not their own or anybody's who they already liked/passed 
     app.post("/api/users/nearby", function (req, res) {
         db.Match.findAll({
-            where: {id: req.body.id},
+            where: { UserId: req.body.id },
             attributes: ['matchId']
-        }).then(function (data) {
-            console.log("Here Data!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + data);
-            res.json(data);
+        }).then(function (matchData) {
+            console.log("Here Data!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + matchData);
+            const previouslyActedUsers = [req.body.id];
+
+            matchData.map((currentValue, index) => {
+                previouslyActedUsers.push(currentValue.matchId);
+            });
+
+            console.log(previouslyActedUsers);
+
+            db.User.findAll({
+                where: {
+                    zipcode: req.body.zipcode,
+                    id: { $notIn: previouslyActedUsers }
+                },
+                attributes: { exclude: ['password', 'salt', 'email'] }
+            }).then(function (data) {
+                console.log("Here Data!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + data);
+                res.json(data);
+            });
+
         });
 
 
-        // db.User.findAll({
-        //     where: {
-        //         zipcode: req.body.zipcode,
-        //         id: { $ne: req.body.id }
-        //     },
-        //     attributes: { exclude: ['password', 'salt', 'email'] }
-        // }).then(function (data) {
-        //     console.log("Here Data!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + data);
-        //     res.json(data);
-        // });
+
     });
 
     //Get user info to display in Matches 

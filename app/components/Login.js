@@ -100,7 +100,6 @@ class Login extends React.Component {
           message: Response.data.message,
           loggedin: false
         });
-
       } else if (Response.data.id) {
 
         console.log(Response.data);
@@ -174,7 +173,6 @@ class Login extends React.Component {
           const newState = {
             id: logResponse.data.id,
             email: logResponse.data.email,
-
             name: logResponse.data.name,
             photo_url: logResponse.data.photo_url,
             photo_publicid: logResponse.data.photo_publicid,

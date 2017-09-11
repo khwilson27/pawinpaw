@@ -9,7 +9,7 @@ module.exports = function (app) {
             where: {
                 email: req.body.email
             }
-        }).then(function (data) {
+        }).then(function(data) {
             if (data) {
                 console.log("this email is used before do you like to login");
                 res.json({ message: "this email is used before do you like to login" })
@@ -31,7 +31,7 @@ module.exports = function (app) {
         });
     });
     //Login
-    app.post("/api/login", function (req, res) {
+    app.post("/api/login", function(req, res) {
         var logginginUser = {
             email: req.body.email,
             password: req.body.password
@@ -86,7 +86,7 @@ module.exports = function (app) {
                 id: req.params.id,
             },
             attributes: { exclude: ['password', 'salt'] }
-        }).then(function (data) {
+        }).then(function(data) {
             console.log(data);
             res.json(data);
         });
@@ -188,7 +188,7 @@ module.exports = function (app) {
             UserId: req.body.id,
             matchId: req.body.matchId,
             request: req.body.request
-        }).then(function (data) {
+        }).then(function(data) {
             res.json(data);
         });
     });
